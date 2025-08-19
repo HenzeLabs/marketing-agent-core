@@ -32,7 +32,7 @@ A modular Python-based data pipeline for ingesting marketing data from multiple 
 
 ## Usage
 
-Run the pipeline with your desired configuration, brand, and data source:
+### Run the pipeline
 
 ```sh
 python -m src.pipeline --config config.yaml --brand your_brand --source shopify_orders
@@ -43,6 +43,18 @@ python -m src.pipeline --config config.yaml --brand your_brand --source shopify_
 - Replace `shopify_orders` with the desired data source (e.g., `shopify_customers`, `ga4_events`)
 
 **Note:** API credentials are automatically loaded from Google Secret Manager. Ensure your Google Cloud credentials are set up and you have access to the required secrets.
+
+### Create or update Shopify dashboard metrics view in BigQuery
+
+Use the provided script to create or update a BigQuery view for Shopify dashboard metrics:
+
+```sh
+python scripts/create_shopify_dashboard_view.py
+```
+
+This will create or replace the view `v_shopify_dashboard_metrics` in the `labessentials_raw` dataset of the `henzelabs-gpt` project, aggregating Shopify order data for dashboard use.
+
+---
 
 ## Author
 

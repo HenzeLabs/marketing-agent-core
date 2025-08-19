@@ -1,3 +1,13 @@
+# === Clarity Pipeline Scheduler Job ===
+gcloud scheduler jobs create http labessentials__clarity__daily \
+  --location=us-central1 \
+  --project=henzelabs-gpt \
+  --schedule="0 2 * * *" \
+  --time-zone="America/New_York" \
+  --uri="https://us-central1-henzelabs-gpt.cloudfunctions.net/clarity_entrypoint" \
+  --http-method=POST \
+  --headers="Content-Type=application/json,User-Agent=Google-Cloud-Scheduler" \
+  --message-body='{}'
 #!/bin/bash
 # Script to standardize Cloud Scheduler job names to brand__source__frequency format
 # Project: henzelabs-gpt, Location: us-central1
