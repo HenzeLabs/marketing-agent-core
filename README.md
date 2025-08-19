@@ -1,6 +1,10 @@
 # Marketing Agent Core
 
-A modular Python-based data pipeline for ingesting marketing data from multiple sources, including Shopify and Google Analytics 4 (GA4). The project is designed to support brand-based configurations and extensible data sources, with secure credential management via Google Secret Manager.
+![GCP](https://img.shields.io/badge/cloud-GCP-blue)
+![BigQuery](https://img.shields.io/badge/storage-BigQuery-yellow)
+![Python](https://img.shields.io/badge/lang-Python3.11-blue)
+
+A modular Python-based data pipeline for ingesting marketing data from multiple sources, including Shopify and Google Analytics 4 (GA4). Uses the **labessentials_raw** BigQuery dataset as the centralized data warehouse for ingestion and views. The project is designed to support brand-based configurations and extensible data sources, with secure credential management via Google Secret Manager.
 
 ## Features
 
@@ -8,31 +12,48 @@ A modular Python-based data pipeline for ingesting marketing data from multiple 
 - Modular source support (e.g., `shopify_orders`, `shopify_customers`, `ga4_events`)
 - Brand-based configuration for multi-brand support
 - Credentials are securely loaded from Google Secret Manager
+- **Centralized BigQuery dataset:** All data and views are stored in the `labessentials_raw` dataset for analytics and reporting.
+- **AI Summaries:** Generates summaries and recommendations using heuristics, configurable scoring logic, or can generate summaries using rules-based logic or integrate with LLMs (e.g., GPT-4, Gemini) for deeper insights.
+- **Extensible for multiple brands:** Easily templatize ingestion, views, summaries, and UI for multi-brand rollout.
 
-## Setup
+## Getting Started
 
-1. **Clone the repository:**
-
+1. **Clone the repo:**
    ```sh
    git clone <your-repo-url>
    cd marketing-agent-core
    ```
-
-2. **Create and activate a virtual environment:**
-
+2. **Set up `.env` with GCP and API keys** (see `config.yaml` for required variables)
+3. **Install dependencies:**
    ```sh
    python3 -m venv venv
    source venv/bin/activate
-   ```
-
-3. **Install dependencies:**
-   ```sh
    pip install -r requirements.txt
    ```
+4. **Run a pipeline:**
+   ```sh
+   python -m scripts.pipeline_shopify
+   # or
+   python -m scripts.pipeline_clarity
+   ```
+5. **Start the frontend:**
+   ```sh
+   cd ui && npm install && npm run dev
+   ```
+
+---
+
+## Dashboard Screenshot
+
+> _Add a clean JPEG or PNG screenshot of your dashboard here for context._
+>
+> ![Dashboard Screenshot](ui/public/dashboard-sample.png)
+>
+> _Replace `dashboard-sample.png` with your actual dashboard image when available._
 
 ## Usage
 
-### Run the pipeline
+### Run the pipeline (advanced)
 
 ```sh
 python -m src.pipeline --config config.yaml --brand your_brand --source shopify_orders
@@ -59,3 +80,12 @@ This will create or replace the view `v_shopify_dashboard_metrics` in the `labes
 ## Author
 
 - Lauren Henze
+
+---
+
+## Roadmap
+
+- [ ] Add GA4 integration
+- [ ] Implement GPT-powered insights API
+- [ ] UX polish on dashboard charts
+- [ ] Add more extensible connectors (Meta, TikTok, etc.)
