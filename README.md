@@ -31,15 +31,41 @@ A modular Python-based data pipeline for ingesting marketing data from multiple 
    pip install -r requirements.txt
    ```
 4. **Run a pipeline:**
+
    ```sh
    python -m scripts.pipeline_shopify
    # or
    python -m scripts.pipeline_clarity
    ```
-5. **Start the frontend:**
+
+5. **Start the backend API (Flask):**
+
+   ```sh
+   source venv/bin/activate
+   FLASK_APP=app.py flask run --reload --port=5050
+   ```
+
+6. **Start the frontend:**
    ```sh
    cd ui && npm install && npm run dev
    ```
+
+---
+
+## Multi-Brand & New Brand Onboarding
+
+This project supports multi-brand data ingestion, transformation, and dashboarding. To add a new brand (e.g., `hotash`):
+
+1. Add brand-specific config to `config.yaml` and secrets to Google Secret Manager.
+2. Create or update any brand-specific SQL views or schemas as needed.
+3. Run the pipeline with the new brand:
+   ```sh
+   python -m scripts.pipeline_shopify --brand hotash
+   python -m scripts.pipeline_clarity --brand hotash
+   ```
+4. The dashboard will automatically surface new brand data if configured.
+
+---
 
 ---
 
