@@ -1,0 +1,23 @@
+# Ignore macOS and Python cache files
+.DS_Store
+__pycache__/
+*.pyc
+.env
+*.json
+# Ignore secrets and credentials
+*.key
+*.pem
+*.p12
+*.crt
+*.service-account.json
+# Ignore VSCode and editor files
+.vscode/
+*.swp
+*.swo
+node_modules/
+env/
+venv/
+build/
+dist/
+coverage/
+config.yaml

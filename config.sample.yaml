@@ -1,0 +1,18 @@
+# Example config for marketing-agent-core (redacted)
+brands:
+  labessentials:
+    secrets:
+      - labessentials_bigquery_dataset
+      - labessentials_shopify_token
+      - labessentials_ga4_token
+    bigquery:
+      dataset: "labessentials_dataset"
+      table: "pipeline_logs"
+    shopify:
+      store_url: "https://yourstore.myshopify.com"
+      api_key: "REDACTED"
+      password: "REDACTED"
+    ga4:
+      property_id: "REDACTED"
+      credentials: "REDACTED.json"
+# Add additional brands as needed
