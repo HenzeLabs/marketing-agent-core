@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: labessentials_raw # change if your dataset differs
+    tables:
+      - name: shopify_orders # change if your raw table name differs

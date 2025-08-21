@@ -1,0 +1,11 @@
+marketing_agent_core:
+  target: bigquery
+  outputs:
+    bigquery:
+      type: bigquery
+      method: service-account
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      project: "{{ env_var('DBT_PROJECT_ID','henzelabs-gpt') }}"
+      dataset: "{{ env_var('DBT_DATASET','labessentials_raw') }}"
+      location: "{{ env_var('DBT_LOCATION','US') }}"
+      threads: 2

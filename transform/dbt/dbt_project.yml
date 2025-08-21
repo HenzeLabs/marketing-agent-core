@@ -1,0 +1,6 @@
+name: marketing_agent_core
+version: "1.0"
+profile: marketing_agent_core
+model-paths: ["models"]
+models:
+  +materialized: view

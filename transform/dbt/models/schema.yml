@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_orders
+    tests: []
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: order_date
+        tests: [not_null]
+
+  - name: fct_orders_daily
+    columns:
+      - name: order_date
+        tests: [not_null, unique]
+
+  - name: mart_revenue_daily
+    description: "Daily Shopify revenue metrics, chart-ready."
+    columns:
+      - name: date
+        tests: [not_null, unique]

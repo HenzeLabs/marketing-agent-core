@@ -1,0 +1,49 @@
+[0m17:18:22.369721 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1058b7b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106de79d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106de7b10>]}
+
+
+============================== 17:18:22.373490 | 2e1b6c61-3011-4fb7-bbad-df0e0a10c1d4 ==============================
+[0m17:18:22.373490 [info ] [MainThread]: Running with dbt=1.10.9
+[0m17:18:22.374217 [debug] [MainThread]: running dbt with arguments {'profiles_dir': '.', 'write_json': 'True', 'use_experimental_parser': 'False', 'introspect': 'True', 'use_colors': 'True', 'send_anonymous_usage_stats': 'True', 'empty': 'None', 'log_format': 'default', 'partial_parse': 'True', 'printer_width': '80', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'fail_fast': 'False', 'version_check': 'True', 'static_parser': 'True', 'warn_error': 'None', 'log_cache_events': 'False', 'debug': 'False', 'no_print': 'None', 'quiet': 'False', 'invocation_command': 'dbt parse --profiles-dir .', 'indirect_selection': 'eager', 'target_path': 'None', 'cache_selected_only': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])'}
+[0m17:18:22.377422 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Env var required but not provided: 'GOOGLE_APPLICATION_CREDENTIALS'
+[0m17:18:22.379901 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": false, "command_wall_clock_time": 0.04952025, "process_in_blocks": "0", "process_kernel_time": 0.128388, "process_mem_max_rss": "105725952", "process_out_blocks": "0", "process_user_time": 0.740517}
+[0m17:18:22.380200 [debug] [MainThread]: Command `dbt parse` failed at 17:18:22.380149 after 0.05 seconds
+[0m17:18:22.380409 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106dd7ce0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106cdb770>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106c81f20>]}
+[0m17:18:22.380622 [debug] [MainThread]: Flushing usage events
+[0m17:18:22.538833 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m17:24:28.936648 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1064b7b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11964b9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11964bb10>]}
+
+
+============================== 17:24:28.939802 | b7c2405c-1aa9-47f6-98d4-2a74ac127845 ==============================
+[0m17:24:28.939802 [info ] [MainThread]: Running with dbt=1.10.9
+[0m17:24:28.940166 [debug] [MainThread]: running dbt with arguments {'indirect_selection': 'eager', 'empty': 'None', 'printer_width': '80', 'introspect': 'True', 'version_check': 'True', 'debug': 'False', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'target_path': 'None', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'no_print': 'None', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'write_json': 'True', 'use_experimental_parser': 'False', 'profiles_dir': '.', 'partial_parse': 'True', 'invocation_command': 'dbt parse --profiles-dir .', 'cache_selected_only': 'False', 'use_colors': 'True', 'log_format': 'default', 'warn_error': 'None', 'log_cache_events': 'False'}
+[0m17:24:30.743852 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b7c2405c-1aa9-47f6-98d4-2a74ac127845', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107e5afd0>]}
+[0m17:24:30.773922 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b7c2405c-1aa9-47f6-98d4-2a74ac127845', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x143a21480>]}
+[0m17:24:30.774477 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m17:24:30.932911 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m17:24:30.934198 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m17:24:30.934434 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'b7c2405c-1aa9-47f6-98d4-2a74ac127845', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x143a01d50>]}
+[0m17:24:31.439370 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b7c2405c-1aa9-47f6-98d4-2a74ac127845', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1064d3c50>]}
+[0m17:24:31.441431 [info ] [MainThread]: Performance info: /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/perf_info.json
+[0m17:24:31.472210 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m17:24:31.473681 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m17:24:31.476696 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 2.5827715, "process_in_blocks": "0", "process_kernel_time": 0.423129, "process_mem_max_rss": "369623040", "process_out_blocks": "0", "process_user_time": 2.35741}
+[0m17:24:31.477073 [debug] [MainThread]: Command `dbt parse` succeeded at 17:24:31.477018 after 2.58 seconds
+[0m17:24:31.477284 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119543e70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1441683d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x143ebc390>]}
+[0m17:24:31.477472 [debug] [MainThread]: Flushing usage events
+[0m17:24:31.696990 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m17:46:00.718791 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104c53b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107c539d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107c53b10>]}
+
+
+============================== 17:46:00.722052 | 06e0b6a6-f4da-4f4a-9c93-cb239dd358ec ==============================
+[0m17:46:00.722052 [info ] [MainThread]: Running with dbt=1.10.9
+[0m17:46:00.722397 [debug] [MainThread]: running dbt with arguments {'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'log_cache_events': 'False', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'use_colors': 'True', 'no_print': 'None', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'introspect': 'True', 'invocation_command': 'dbt build --profiles-dir=.', 'write_json': 'True', 'log_format': 'default', 'empty': 'False', 'version_check': 'True', 'indirect_selection': 'eager', 'profiles_dir': '.', 'cache_selected_only': 'False', 'use_experimental_parser': 'False', 'debug': 'False', 'target_path': 'None', 'printer_width': '80', 'static_parser': 'True', 'fail_fast': 'False', 'warn_error': 'None'}
+[0m17:46:00.725235 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Env var required but not provided: 'GOOGLE_APPLICATION_CREDENTIALS'
+[0m17:46:00.727293 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 0.051884875, "process_in_blocks": "0", "process_kernel_time": 0.124522, "process_mem_max_rss": "105627648", "process_out_blocks": "0", "process_user_time": 0.716568}
+[0m17:46:00.727648 [debug] [MainThread]: Command `dbt build` failed at 17:46:00.727591 after 0.05 seconds
+[0m17:46:00.727878 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107c47ce0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107b3f770>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107ae5f20>]}
+[0m17:46:00.728098 [debug] [MainThread]: Flushing usage events
+[0m17:46:00.906704 [debug] [MainThread]: An error was encountered while trying to flush usage events
