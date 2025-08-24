@@ -3,6 +3,17 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/api/*"
+  to   = "https://marketing-agent-core-906749953116.us-east1.run.app/api/:splat"
+  status = 200
+  force = true
+
+[dev]
+  command = "npm run dev"
+  targetPort = 5173
+  framework = "vite"
+
+[[redirects]]
   from = "/demo"
   to = "/demo.html"
   status = 200

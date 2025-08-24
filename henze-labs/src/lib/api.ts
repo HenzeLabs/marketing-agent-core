@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = "/api";
 async function j(u: string) {
   const r = await fetch(u);
   if (!r.ok) throw new Error(r.statusText);
