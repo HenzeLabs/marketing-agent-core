@@ -64,8 +64,9 @@ def fetch_clarity_pageviews(api_key, clarity_project_id, days=45):
     headers = {"Authorization": f"Bearer {api_key}"}
     params = {
         "projectId": clarity_project_id,
-        "numOfDays": days
-        # Add dimension1, dimension2, dimension3 as needed
+        "numOfDays": days,
+        "dimension1": "URL"
+        # Add dimension2, dimension3 as needed
     }
     print(f"Fetching Clarity Data Export API for last {days} day(s)...")
     session = requests.Session()

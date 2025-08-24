@@ -40,10 +40,19 @@ A modular Python-based data pipeline for ingesting marketing data from multiple 
 
 5. **Start the backend API (Flask):**
 
-   ```sh
-   source venv/bin/activate
-   FLASK_APP=app.py flask run --reload --port=5050
-   ```
+   1. Create a `.env` file in the project root with:
+      ```env
+      GOOGLE_APPLICATION_CREDENTIALS=./creds/henzelabs-ci.json
+      GOOGLE_CLOUD_PROJECT=henzelabs-gpt
+      PORT=8080
+      ```
+   2. Start the API:
+      ```sh
+      chmod +x scripts/start_api.sh
+      ./scripts/start_api.sh
+      ```
+   3. The API will be available at `http://127.0.0.1:8080/` (or the port you set in `.env`).
+   4. See [API.md](API.md) for endpoint documentation.
 
 6. **Start the frontend:**
    ```sh
@@ -66,6 +75,14 @@ This project supports multi-brand data ingestion, transformation, and dashboardi
 4. The dashboard will automatically surface new brand data if configured.
 
 ---
+
+---
+
+---
+
+## API Reference
+
+See [API.md](API.md) for full documentation of the Flask API, endpoints, and error handling.
 
 ---
 
@@ -115,3 +132,9 @@ This will create or replace the view `v_shopify_dashboard_metrics` in the `labes
 - [ ] Implement GPT-powered insights API
 - [ ] UX polish on dashboard charts
 - [ ] Add more extensible connectors (Meta, TikTok, etc.)
+
+---
+
+## Next Branch: UI Data Visualization & API Integration
+
+The next development branch will focus on building the dashboard UI, data visualizations, and connecting the frontend to the Flask API endpoints for real-time analytics.

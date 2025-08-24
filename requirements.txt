@@ -1,3 +1,4 @@
+dbt-bigquery==1.10.1
 
 google-cloud-secret-manager
 google-cloud-bigquery
@@ -5,3 +6,6 @@ google-cloud-functions
 requests
 pyyaml
 flask
+flask-cors==4.0.1
+python-dotenv
+gunicorn

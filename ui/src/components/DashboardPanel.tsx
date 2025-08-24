@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ShopifyDashboard from "./ShopifyDashboard";
-
-const metrics = [
-  { label: "Visits", value: "12,340", color: "bg-blue-600" },
-  { label: "CPC", value: "$1.23", color: "bg-pink-500" },
-  { label: "Engagement Rate", value: "5.2%", color: "bg-green-500" },
-  { label: "Impressions", value: "98,765", color: "bg-yellow-500" },
-];
+import ChartLine from "./ChartLine";
+import { fetchClarityMetrics } from "../../../src/lib/api";
 
 const DashboardPanel = () => {
+  const [clarityData, setClarityData] = useState<{ x: string; y: number }[]>(
+    []
+  );
+  const [clarityLoading, setClarityLoading] = useState(true);
+  const [clarityError, setClarityError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchClarityMetrics()
+      .then((data) => {
+        // Group by snapshot_date, sum pageviews
+        const grouped: Record<string, number> = {};
+        data.forEach((row: any) => {
+          if (!row.snapshot_date || row.pagesViews == null) return;
+          grouped[row.snapshot_date] =
+            (grouped[row.snapshot_date] || 0) + Number(row.pagesViews);
+        });
+        // Convert to sorted array
+        const arr = Object.entries(grouped)
+          .map(([x, y]) => ({ x, y }))
+          .sort((a, b) => a.x.localeCompare(b.x));
+        setClarityData(arr);
+        setClarityLoading(false);
+      })
+      .catch((err) => {
+        setClarityError(err.message);
+        setClarityLoading(false);
+      });
+  }, []);
+
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-2xl md:text-3xl font-extrabold mb-2 tracking-tight">
@@ -16,22 +40,16 @@ const DashboardPanel = () => {
       </h2>
       {/* Shopify Dashboard */}
       <ShopifyDashboard />
-      {/* Metrics */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {metrics.map((m) => (
-          <div
-            key={m.label}
-            className={`rounded-lg p-4 flex flex-col items-center ${m.color} bg-opacity-80 shadow hover:scale-105 hover:shadow-lg transition-transform duration-200 cursor-pointer`}
-          >
-            <div className="text-2xl md:text-3xl font-bold">{m.value}</div>
-            <div className="text-sm opacity-80 mt-1">{m.label}</div>
-          </div>
-        ))}
-      </div>
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="rounded-lg bg-zinc-800 p-6 min-h-[180px] flex items-center justify-center shadow hover:shadow-xl transition-shadow duration-200">
-          <span className="text-zinc-400">[Bar Chart Placeholder]</span>
+          {clarityLoading ? (
+            <span className="text-zinc-400">Loading Clarity pageviews...</span>
+          ) : clarityError ? (
+            <span className="text-red-500">Error: {clarityError}</span>
+          ) : (
+            <ChartLine data={clarityData} title="Clarity Pageviews by Day" />
+          )}
         </div>
         <div className="rounded-lg bg-zinc-800 p-6 min-h-[180px] flex items-center justify-center shadow hover:shadow-xl transition-shadow duration-200">
           <span className="text-zinc-400">[Donut Chart Placeholder]</span>

@@ -18,4 +18,4 @@ agg as (
   from valid
   group by order_date
 )
-select * from agg;
+select * from agg

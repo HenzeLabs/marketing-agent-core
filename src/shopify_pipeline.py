@@ -1,18 +1,7 @@
-def run_shopify_orders_pipeline():
-    from shared.logging import setup_logging
-    logger = setup_logging()
-    logger.info("🚀 Starting Shopify Orders Pipeline")
-    try:
-        orders = fetch_all_shopify_orders()
-        logger.info(f"Fetched {len(orders)} orders.")
-        transformed = transform_orders(orders)
-        insert_into_bigquery(transformed)
-    except Exception as e:
-        logger.error(f"Orders pipeline failed: {e}", exc_info=True)
-        raise
-def fetch_all_shopify_customers():
-    token = os.environ["LABESSENTIALS_PROD_SHOPIFY_ADMIN_API_TOKEN"]
-    shop_name = os.environ["LABESSENTIALS_SHOPIFY_SHOP_NAME"]
+def fetch_all_shopify_customers(brand):
+    # Use the actual secret names as env vars, uppercased
+    token = os.environ["{}_prod_shopify_admin_api_token".format(brand).upper()]
+    shop_name = os.environ["{}_shopify_shop_name".format(brand).upper()]
     url = f"https://{shop_name}/admin/api/2023-10/customers.json"
 
     headers = {
@@ -23,9 +12,8 @@ def fetch_all_shopify_customers():
     customers = []
     from datetime import datetime, timedelta
     three_years_ago = (datetime.utcnow() - timedelta(days=3*365)).strftime("%Y-%m-%dT%H:%M:%S")
-    # TEMP: limit to 50 for debugging
     params = {
-        "limit": 50,  # TEMP: reduce batch size for debugging
+        "limit": 250,
         "created_at_min": three_years_ago
     }
     first_page = True
@@ -98,13 +86,16 @@ def transform_customers(customers):
         for c in customers
     ]
 
-def insert_customers_into_bigquery(transformed_customers):
+def insert_customers_into_bigquery(transformed_customers, brand):
     from shared.logging import setup_logging
     logger = setup_logging()
     try:
+        from google.cloud import bigquery
         client = bigquery.Client()
-        project = os.environ.get('LABESSENTIALS_GCP_PROJECT_ID')
-        dataset = os.environ.get('LABESSENTIALS_BIGQUERY_DATASET')
+        project = os.environ.get(f'{brand}_gcp_project_id'.upper())
+        dataset = os.environ.get(f'{brand}_bigquery_dataset'.upper())
+        if not project or not dataset:
+            raise RuntimeError(f"Missing BigQuery project or dataset for brand {brand}")
         table_id = f"{project}.{dataset}.shopify_customers"
         logger.info(f"BigQuery project: {project}")
         logger.info(f"BigQuery dataset: {dataset}")
@@ -139,15 +130,15 @@ def insert_customers_into_bigquery(transformed_customers):
         logger.error(f"Error inserting into BigQuery: {e}", exc_info=True)
         raise
 
-def run_shopify_customers_pipeline():
+def run_shopify_customers_pipeline(brand):
     from shared.logging import setup_logging
     logger = setup_logging()
-    logger.info("🚀 Starting Shopify Customers Pipeline")
+    logger.info(f"🚀 Starting Shopify Customers Pipeline for {brand}")
     try:
-        customers = fetch_all_shopify_customers()
+        customers = fetch_all_shopify_customers(brand)
         logger.info(f"Fetched {len(customers)} customers.")
         transformed = transform_customers(customers)
-        insert_customers_into_bigquery(transformed)
+        insert_customers_into_bigquery(transformed, brand)
     except Exception as e:
         logger.error(f"Pipeline failed: {e}", exc_info=True)
         raise
@@ -158,9 +149,9 @@ from datetime import datetime
 import time
 import json
 
-def fetch_all_shopify_orders():
-    token = os.environ["LABESSENTIALS_PROD_SHOPIFY_ADMIN_API_TOKEN"]
-    shop_name = os.environ["LABESSENTIALS_SHOPIFY_SHOP_NAME"]
+def fetch_all_shopify_orders(brand):
+    token = os.environ["{}_prod_shopify_admin_api_token".format(brand).upper()]
+    shop_name = os.environ["{}_shopify_shop_name".format(brand).upper()]
     url = f"https://{shop_name}/admin/api/2023-10/orders.json"
 
     headers = {
@@ -169,7 +160,10 @@ def fetch_all_shopify_orders():
     }
 
     orders = []
-    params = {"limit": 250, "status": "any"}
+    from datetime import datetime, timedelta
+    # Calculate the date 3 years ago from today
+    three_years_ago = (datetime.utcnow() - timedelta(days=3*365)).strftime("%Y-%m-%dT%H:%M:%S")
+    params = {"limit": 250, "status": "any", "created_at_min": three_years_ago}
     first_page = True
     while url:
         print(f"Fetching: {url}")
@@ -218,10 +212,13 @@ def transform_orders(orders):
         for o in orders
     ]
 
-def insert_into_bigquery(transformed_orders):
+def insert_orders_into_bigquery(transformed_orders, brand):
+    from google.cloud import bigquery
     client = bigquery.Client()
-    project = os.environ.get('LABESSENTIALS_GCP_PROJECT_ID')
-    dataset = os.environ.get('LABESSENTIALS_BIGQUERY_DATASET')
+    project = os.environ.get(f'{brand}_gcp_project_id'.upper())
+    dataset = os.environ.get(f'{brand}_bigquery_dataset'.upper())
+    if not project or not dataset:
+        raise RuntimeError(f"Missing BigQuery project or dataset for brand {brand}")
     table_id = f"{project}.{dataset}.shopify_orders"
     print(f"BigQuery project: {project}")
     print(f"BigQuery dataset: {dataset}")
@@ -254,9 +251,15 @@ def insert_into_bigquery(transformed_orders):
         raise RuntimeError(f"BigQuery insert failed: {errors}")
     print(f"✅ Inserted {len(transformed_orders)} orders into BigQuery.")
 
-def run():
-    print("🚀 Starting Shopify Orders Pipeline")
-    orders = fetch_all_shopify_orders()
-    print(f"Fetched {len(orders)} orders.")
-    transformed = transform_orders(orders)
-    insert_into_bigquery(transformed)
+def run_shopify_orders_pipeline(brand):
+    from shared.logging import setup_logging
+    logger = setup_logging()
+    logger.info(f"🚀 Starting Shopify Orders Pipeline for {brand}")
+    try:
+        orders = fetch_all_shopify_orders(brand)
+        logger.info(f"Fetched {len(orders)} orders.")
+        transformed = transform_orders(orders)
+        insert_orders_into_bigquery(transformed, brand)
+    except Exception as e:
+        logger.error(f"Orders pipeline failed: {e}", exc_info=True)
+        raise

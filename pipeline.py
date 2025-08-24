@@ -1,9 +1,12 @@
+from src.ga4_pipeline import run_ga4_pipeline
 
 def run_pipeline(brand, source):
     from src.load_secrets import load_env_vars_from_config
-    from src.shopify_pipeline import run_shopify_customers_pipeline
+    from src.shopify_pipeline import run_shopify_customers_pipeline, run_shopify_orders_pipeline
     from shared.logging import setup_logging
     from google.cloud import logging as cloud_logging
+    from shared.bigquery import insert_rows_into_table
+    from datetime import datetime
     logger = setup_logging()
     config = load_env_vars_from_config(brand)
     logger.info(f"Loaded config keys: {list(config.get('brands', {}).keys())}")
@@ -11,9 +14,6 @@ def run_pipeline(brand, source):
     # Cloud Logging setup
     cloud_logging_client = cloud_logging.Client()
     cloud_logger = cloud_logging_client.logger("pipeline_failures")
-
-    from shared.bigquery import insert_rows_into_table
-    from datetime import datetime
     log_table = "henzelabs-gpt.analytics.pipeline_logs"
     log_entry = {
         "timestamp": datetime.utcnow().isoformat(),
@@ -22,26 +22,16 @@ def run_pipeline(brand, source):
         "status": None,
         "message": None
     }
+    sources = {
+        "customers": run_shopify_customers_pipeline,
+        "orders": run_shopify_orders_pipeline,
+        "ga4": run_ga4_pipeline,
+    }
     try:
-        if source == "shopify_customers":
-            run_shopify_customers_pipeline()
+        if source in sources:
+            sources[source](brand)
             log_entry["status"] = "success"
-            log_entry["message"] = "shopify_customers pipeline completed successfully"
-            cloud_logger.log_struct({**log_entry, "service": "marketing-agent-core"}, severity="INFO")
-        elif source == "shopify_orders":
-            try:
-                from src.shopify_pipeline import run_shopify_orders_pipeline
-            except ImportError:
-                logger.error("run_shopify_orders_pipeline is not implemented.")
-                log_entry["status"] = "error"
-                log_entry["message"] = "run_shopify_orders_pipeline is not implemented."
-                cloud_logger.log_struct({**log_entry, "service": "marketing-agent-core"}, severity="ERROR")
-                response = insert_rows_into_table(log_table, [log_entry])
-                print("Log insert response:", response)
-                raise NotImplementedError("run_shopify_orders_pipeline is not implemented.")
-            run_shopify_orders_pipeline()
-            log_entry["status"] = "success"
-            log_entry["message"] = "shopify_orders pipeline completed successfully"
+            log_entry["message"] = f"{source} pipeline completed successfully"
             cloud_logger.log_struct({**log_entry, "service": "marketing-agent-core"}, severity="INFO")
         else:
             logger.error(f"Unsupported source: {source}")

@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install deps
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+          # ensure dbt is present even if not in requirements.txt
+          pip install "dbt-bigquery==1.10.1"
+
+      - name: Dummy creds for safe local/parse tests
+        run: |
+          echo '{"type": "service_account"}' > /tmp/dummy-creds.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/dummy-creds.json" >> $GITHUB_ENV
+          echo "DBT_PROJECT_ID=${{ secrets.DBT_PROJECT_ID || 'henzelabs-gpt' }}" >> $GITHUB_ENV
+          echo "DBT_DATASET=${{ secrets.DBT_DATASET || 'labessentials_raw' }}" >> $GITHUB_ENV
+          echo "DBT_LOCATION=${{ secrets.DBT_LOCATION || 'US' }}" >> $GITHUB_ENV
+
+      - name: Run pytest (includes dbt parse)
+        run: pytest -q
+
+      # Optional: real dbt build if creds are available
+      - name: Prepare real GCP SA (if provided)
+        if: ${{ secrets.SA_JSON_B64 != '' || secrets.GCP_SERVICE_ACCOUNT_JSON != '' }}
+        run: |
+          if [ -n "${{ secrets.SA_JSON_B64 }}" ]; then
+            echo "${{ secrets.SA_JSON_B64 }}" | base64 -d > /tmp/sa.json
+          elif [ -n "${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}" ]; then
+            echo "${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}" > /tmp/sa.json
+          fi
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json" >> $GITHUB_ENV
+
+      - name: dbt build (real warehouse)
+        if: ${{ secrets.SA_JSON_B64 != '' || secrets.GCP_SERVICE_ACCOUNT_JSON != '' }}
+        working-directory: transform/dbt
+        run: dbt build --profiles-dir=.

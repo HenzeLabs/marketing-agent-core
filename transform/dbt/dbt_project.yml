@@ -4,3 +4,6 @@ profile: marketing_agent_core
 model-paths: ["models"]
 models:
   +materialized: view
+
+vars:
+  raw_schema: labessentials_raw

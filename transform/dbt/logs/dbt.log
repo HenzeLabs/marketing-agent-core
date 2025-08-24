@@ -47,3 +47,1968 @@ Parsing Error
 [0m17:46:00.727878 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107c47ce0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107b3f770>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107ae5f20>]}
 [0m17:46:00.728098 [debug] [MainThread]: Flushing usage events
 [0m17:46:00.906704 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:04:01.156468 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103f63b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10549b9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10549bb10>]}
+
+
+============================== 18:04:01.159865 | 76589fd7-ddd2-4e1b-bffb-87936b08f647 ==============================
+[0m18:04:01.159865 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:04:01.160219 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'warn_error': 'None', 'use_colors': 'True', 'write_json': 'True', 'log_cache_events': 'False', 'version_check': 'True', 'invocation_command': 'dbt build -s marts --profiles-dir=.', 'cache_selected_only': 'False', 'fail_fast': 'False', 'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'target_path': 'None', 'partial_parse': 'True', 'introspect': 'True', 'debug': 'False', 'printer_width': '80', 'indirect_selection': 'eager', 'no_print': 'None', 'log_format': 'default', 'profiles_dir': '.', 'empty': 'False'}
+[0m18:04:02.980107 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '76589fd7-ddd2-4e1b-bffb-87936b08f647', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1047a2fd0>]}
+[0m18:04:03.014169 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '76589fd7-ddd2-4e1b-bffb-87936b08f647', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x12f325480>]}
+[0m18:04:03.014780 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:04:03.151556 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:04:03.216071 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 8 files added, 0 files changed.
+[0m18:04:03.216424 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/mart_revenue_daily.sql
+[0m18:04:03.216638 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/sources.yml
+[0m18:04:03.216808 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/fct_orders_daily.sql
+[0m18:04:03.216969 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/mart_sessions_daily.sql
+[0m18:04:03.217175 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/schema.yml
+[0m18:04:03.217333 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/stg_orders.sql
+[0m18:04:03.217488 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/stg_ga4_sessions.sql
+[0m18:04:03.217639 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/fct_sessions_daily.sql
+[0m18:04:03.502919 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '76589fd7-ddd2-4e1b-bffb-87936b08f647', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x12f2fe450>]}
+[0m18:04:03.552876 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:04:03.554293 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:04:03.574839 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '76589fd7-ddd2-4e1b-bffb-87936b08f647', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1387b7c50>]}
+[0m18:04:03.575167 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:04:03.576231 [info ] [MainThread]: 
+[0m18:04:03.576436 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:04:03.576589 [info ] [MainThread]: 
+[0m18:04:03.576858 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:04:03.577340 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:04:03.577585 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:04:04.175132 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now create_henzelabs-gpt_labessentials_raw)
+[0m18:04:04.175961 [debug] [ThreadPool]: Creating schema "database: "henzelabs-gpt"
+schema: "labessentials_raw"
+"
+[0m18:04:04.184235 [debug] [ThreadPool]: On create_henzelabs-gpt_labessentials_raw: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "connection_name": "create_henzelabs-gpt_labessentials_raw"} */
+create schema if not exists `henzelabs-gpt`.`labessentials_raw`
+  
+[0m18:04:04.184522 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:04:04.908590 [debug] [ThreadPool]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:94814f0b-6808-4a1b-a5a0-341869e83cab&page=queryresults
+[0m18:04:04.909470 [error] [ThreadPool]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:94814f0b-6808-4a1b-a5a0-341869e83cab&page=queryresults
+[0m18:04:04.910177 [debug] [ThreadPool]: BigQuery adapter: Unhandled error while running:
+macro create_schema
+[0m18:04:04.910655 [debug] [ThreadPool]: BigQuery adapter: Database Error
+  Access Denied: Project henzelabs-gpt: User does not have bigquery.datasets.create permission in project henzelabs-gpt.
+[0m18:04:04.912263 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:04:04.913791 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:04:04.914017 [debug] [MainThread]: Connection 'create_henzelabs-gpt_labessentials_raw' was properly closed.
+[0m18:04:04.914184 [info ] [MainThread]: 
+[0m18:04:04.914360 [info ] [MainThread]: Finished running  in 0 hours 0 minutes and 1.34 seconds (1.34s).
+[0m18:04:04.914669 [error] [MainThread]: Encountered an error:
+Database Error
+  Access Denied: Project henzelabs-gpt: User does not have bigquery.datasets.create permission in project henzelabs-gpt.
+[0m18:04:04.918069 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 3.803473, "process_in_blocks": "0", "process_kernel_time": 0.445308, "process_mem_max_rss": "365707264", "process_out_blocks": "0", "process_user_time": 2.37284}
+[0m18:04:04.918438 [debug] [MainThread]: Command `dbt build` failed at 18:04:04.918378 after 3.80 seconds
+[0m18:04:04.918763 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10538be70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1387eab30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1388f8c80>]}
+[0m18:04:04.919139 [debug] [MainThread]: Flushing usage events
+[0m18:04:05.087500 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:08:41.733143 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1073c3b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108b539d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108b53b10>]}
+
+
+============================== 18:08:41.736320 | d8d3597a-b22d-4365-a719-1f9cb663aa47 ==============================
+[0m18:08:41.736320 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:08:41.736668 [debug] [MainThread]: running dbt with arguments {'partial_parse': 'True', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'use_colors': 'True', 'debug': 'False', 'quiet': 'False', 'no_print': 'None', 'indirect_selection': 'eager', 'version_check': 'True', 'invocation_command': 'dbt build -s marts --profiles-dir=.', 'cache_selected_only': 'False', 'warn_error': 'None', 'use_experimental_parser': 'False', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'introspect': 'True', 'printer_width': '80', 'empty': 'False', 'log_format': 'default', 'log_cache_events': 'False', 'target_path': 'None', 'profiles_dir': '.', 'static_parser': 'True', 'write_json': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m18:08:43.594399 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd8d3597a-b22d-4365-a719-1f9cb663aa47', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107c06fd0>]}
+[0m18:08:43.623410 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd8d3597a-b22d-4365-a719-1f9cb663aa47', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x132525480>]}
+[0m18:08:43.623767 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:08:43.746031 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:08:43.819047 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:08:43.819303 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:08:43.842985 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'd8d3597a-b22d-4365-a719-1f9cb663aa47', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x132c70f50>]}
+[0m18:08:43.890788 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:08:43.892158 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:08:43.912732 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'd8d3597a-b22d-4365-a719-1f9cb663aa47', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x132d1ac60>]}
+[0m18:08:43.913040 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:08:43.914062 [info ] [MainThread]: 
+[0m18:08:43.914267 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:08:43.914422 [info ] [MainThread]: 
+[0m18:08:43.914697 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:08:43.915153 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:08:43.915362 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:08:44.493842 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:08:44.494570 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:08:44.973552 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd8d3597a-b22d-4365-a719-1f9cb663aa47', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x132dcdb70>]}
+[0m18:08:44.974714 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:08:44.984291 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:08:44.985187 [info ] [Thread-1 (]: 1 of 1 START sql view model labessentials_raw.mart_sanity ...................... [RUN]
+[0m18:08:44.985869 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_sanity)
+[0m18:08:44.986416 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:08:44.998959 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:08:45.000822 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:08:45.023813 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:08:45.024732 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:08:45.025054 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:08:45.815099 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:3a694bb9-aa5d-4c03-b7a8-29598f12bc84&page=queryresults
+[0m18:08:46.478893 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'd8d3597a-b22d-4365-a719-1f9cb663aa47', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x133dbd230>]}
+[0m18:08:46.479400 [info ] [Thread-1 (]: 1 of 1 OK created sql view model labessentials_raw.mart_sanity ................. [[32mCREATE VIEW (0 processed)[0m in 1.49s]
+[0m18:08:46.479808 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:08:46.480553 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:08:46.481660 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:08:46.481865 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sanity' was properly closed.
+[0m18:08:46.482058 [info ] [MainThread]: 
+[0m18:08:46.482252 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 2.57 seconds (2.57s).
+[0m18:08:46.482651 [debug] [MainThread]: Command end result
+[0m18:08:46.503707 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:08:46.504929 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:08:46.508161 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:08:46.508352 [info ] [MainThread]: 
+[0m18:08:46.508575 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m18:08:46.508731 [info ] [MainThread]: 
+[0m18:08:46.508902 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+[0m18:08:46.511860 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": true, "command_wall_clock_time": 4.8192677, "process_in_blocks": "0", "process_kernel_time": 0.471715, "process_mem_max_rss": "365576192", "process_out_blocks": "0", "process_user_time": 2.250377}
+[0m18:08:46.512131 [debug] [MainThread]: Command `dbt build` succeeded at 18:08:46.512084 after 4.82 seconds
+[0m18:08:46.512344 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1088fd910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x132fd1440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x132fd1230>]}
+[0m18:08:46.512552 [debug] [MainThread]: Flushing usage events
+[0m18:08:46.695563 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:10:33.399542 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107c77b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1091ab9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1091abb10>]}
+
+
+============================== 18:10:33.402754 | 1fa5309c-12af-464b-afb7-43884ab9c53b ==============================
+[0m18:10:33.402754 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:10:33.403094 [debug] [MainThread]: running dbt with arguments {'fail_fast': 'False', 'printer_width': '80', 'warn_error': 'None', 'introspect': 'True', 'empty': 'None', 'debug': 'False', 'log_cache_events': 'False', 'use_colors': 'True', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'no_print': 'None', 'quiet': 'False', 'use_experimental_parser': 'False', 'target_path': 'None', 'send_anonymous_usage_stats': 'True', 'write_json': 'True', 'profiles_dir': '.', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'static_parser': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt ls -s marts --profiles-dir=.'}
+[0m18:10:35.166467 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '1fa5309c-12af-464b-afb7-43884ab9c53b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1084aefd0>]}
+[0m18:10:35.195911 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '1fa5309c-12af-464b-afb7-43884ab9c53b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13cb25480>]}
+[0m18:10:35.196269 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:10:35.316385 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:10:35.390620 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:10:35.390873 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:10:35.414836 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '1fa5309c-12af-464b-afb7-43884ab9c53b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13cb09750>]}
+[0m18:10:35.463443 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:10:35.464910 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:10:35.475996 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '1fa5309c-12af-464b-afb7-43884ab9c53b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13cedec60>]}
+[0m18:10:35.476274 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:10:35.476459 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '1fa5309c-12af-464b-afb7-43884ab9c53b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13cc4cc90>]}
+[0m18:10:35.476843 [info ] [MainThread]: marketing_agent_core.marts.mart_sanity
+[0m18:10:35.479738 [debug] [MainThread]: Resource report: {"command_name": "list", "command_success": true, "command_wall_clock_time": 2.119184, "process_in_blocks": "0", "process_kernel_time": 0.396441, "process_mem_max_rss": "367198208", "process_out_blocks": "0", "process_user_time": 1.945726}
+[0m18:10:35.480106 [debug] [MainThread]: Command `dbt ls` succeeded at 18:10:35.480058 after 2.12 seconds
+[0m18:10:35.480309 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13d0b7040>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109055910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13d0f2e10>]}
+[0m18:10:35.480483 [debug] [MainThread]: Flushing usage events
+[0m18:10:35.675672 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:12:56.660588 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103eafb60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1053df9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1053dfb10>]}
+
+
+============================== 18:12:56.663871 | a6382ed3-99d8-45ab-ab47-c3996eb6621d ==============================
+[0m18:12:56.663871 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:12:56.664220 [debug] [MainThread]: running dbt with arguments {'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'introspect': 'True', 'send_anonymous_usage_stats': 'True', 'static_parser': 'True', 'version_check': 'True', 'use_experimental_parser': 'False', 'log_format': 'default', 'write_json': 'True', 'target_path': 'None', 'quiet': 'False', 'warn_error': 'None', 'empty': 'None', 'debug': 'False', 'partial_parse': 'True', 'indirect_selection': 'eager', 'profiles_dir': '.', 'fail_fast': 'False', 'printer_width': '80', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'log_cache_events': 'False', 'invocation_command': 'dbt parse --profiles-dir=.', 'cache_selected_only': 'False', 'use_colors': 'True'}
+[0m18:12:58.478124 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'a6382ed3-99d8-45ab-ab47-c3996eb6621d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1046eefd0>]}
+[0m18:12:58.507787 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'a6382ed3-99d8-45ab-ab47-c3996eb6621d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x117921480>]}
+[0m18:12:58.508172 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:12:58.629308 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:12:58.704643 [debug] [MainThread]: Partial parsing enabled: 2 files deleted, 2 files added, 0 files changed.
+[0m18:12:58.705011 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/marts/mart_revenue_daily.sql
+[0m18:12:58.705189 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://models/marts/mart_sessions_daily.sql
+[0m18:12:58.705366 [debug] [MainThread]: Partial parsing: deleted file: marketing_agent_core://models/mart_revenue_daily.sql
+[0m18:12:58.705526 [debug] [MainThread]: Partial parsing: deleted file: marketing_agent_core://models/mart_sessions_daily.sql
+[0m18:12:58.910626 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'a6382ed3-99d8-45ab-ab47-c3996eb6621d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x117ea2a50>]}
+[0m18:12:58.912722 [info ] [MainThread]: Performance info: /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/perf_info.json
+[0m18:12:58.962221 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:12:58.963946 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:12:58.966533 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 2.3477283, "process_in_blocks": "0", "process_kernel_time": 0.414304, "process_mem_max_rss": "372981760", "process_out_blocks": "0", "process_user_time": 2.158087}
+[0m18:12:58.966885 [debug] [MainThread]: Command `dbt parse` succeeded at 18:12:58.966832 after 2.35 seconds
+[0m18:12:58.967089 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x117cdc320>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x117cdc410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1052d7e70>]}
+[0m18:12:58.967276 [debug] [MainThread]: Flushing usage events
+[0m18:12:59.157707 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:13:04.645720 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105e0bb60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1107539d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x110753b10>]}
+
+
+============================== 18:13:04.648232 | 6a5df6b5-58d0-4552-8824-d4a7c79f1aa3 ==============================
+[0m18:13:04.648232 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:13:04.648565 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'static_parser': 'True', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'profiles_dir': '.', 'quiet': 'False', 'version_check': 'True', 'log_format': 'default', 'warn_error': 'None', 'log_cache_events': 'False', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'invocation_command': 'dbt ls -s marts --profiles-dir=.', 'target_path': 'None', 'partial_parse': 'True', 'introspect': 'True', 'empty': 'None', 'printer_width': '80', 'debug': 'False', 'no_print': 'None', 'use_colors': 'True', 'write_json': 'True', 'use_experimental_parser': 'False'}
+[0m18:13:06.021415 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '6a5df6b5-58d0-4552-8824-d4a7c79f1aa3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10664afd0>]}
+[0m18:13:06.051739 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '6a5df6b5-58d0-4552-8824-d4a7c79f1aa3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x142e25480>]}
+[0m18:13:06.052204 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:13:06.173600 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:13:06.244898 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:13:06.245183 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:13:06.268960 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '6a5df6b5-58d0-4552-8824-d4a7c79f1aa3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x142e09750>]}
+[0m18:13:06.317409 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:13:06.318616 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:13:06.330953 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '6a5df6b5-58d0-4552-8824-d4a7c79f1aa3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1433dec60>]}
+[0m18:13:06.331255 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:13:06.331444 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6a5df6b5-58d0-4552-8824-d4a7c79f1aa3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14304cc90>]}
+[0m18:13:06.331866 [info ] [MainThread]: marketing_agent_core.marts.mart_revenue_daily
+[0m18:13:06.332038 [info ] [MainThread]: marketing_agent_core.marts.mart_sanity
+[0m18:13:06.332179 [info ] [MainThread]: marketing_agent_core.marts.mart_sessions_daily
+[0m18:13:06.332314 [info ] [MainThread]: marketing_agent_core.not_null_mart_revenue_daily_date
+[0m18:13:06.332444 [info ] [MainThread]: marketing_agent_core.not_null_mart_sessions_daily_date
+[0m18:13:06.332578 [info ] [MainThread]: marketing_agent_core.unique_mart_revenue_daily_date
+[0m18:13:06.332706 [info ] [MainThread]: marketing_agent_core.unique_mart_sessions_daily_date
+[0m18:13:06.335163 [debug] [MainThread]: Resource report: {"command_name": "list", "command_success": true, "command_wall_clock_time": 1.725331, "process_in_blocks": "0", "process_kernel_time": 0.307909, "process_mem_max_rss": "367935488", "process_out_blocks": "0", "process_user_time": 1.944956}
+[0m18:13:06.335503 [debug] [MainThread]: Command `dbt ls` succeeded at 18:13:06.335454 after 1.73 seconds
+[0m18:13:06.335709 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x142dbf930>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1105fd910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14360ee10>]}
+[0m18:13:06.335877 [debug] [MainThread]: Flushing usage events
+[0m18:13:06.560596 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:13:15.968243 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111e03b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1133539d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x113353b10>]}
+
+
+============================== 18:13:15.971270 | 178c0b3a-44e9-42d6-b8ce-6fd5148d092d ==============================
+[0m18:13:15.971270 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:13:15.971614 [debug] [MainThread]: running dbt with arguments {'empty': 'False', 'introspect': 'True', 'partial_parse': 'True', 'printer_width': '80', 'write_json': 'True', 'send_anonymous_usage_stats': 'True', 'profiles_dir': '.', 'warn_error': 'None', 'log_format': 'default', 'invocation_command': 'dbt build -s marts --profiles-dir=.', 'version_check': 'True', 'indirect_selection': 'eager', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'cache_selected_only': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'use_experimental_parser': 'False', 'no_print': 'None', 'log_cache_events': 'False', 'quiet': 'False', 'use_colors': 'True', 'static_parser': 'True', 'debug': 'False', 'fail_fast': 'False', 'target_path': 'None'}
+[0m18:13:17.566499 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x112256fd0>]}
+[0m18:13:17.596126 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14e325480>]}
+[0m18:13:17.596547 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:13:17.722975 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:13:17.794113 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:13:17.794376 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:13:17.818741 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14e854f50>]}
+[0m18:13:17.867240 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:13:17.868623 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:13:17.887763 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14e92ac60>]}
+[0m18:13:17.888084 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:13:17.889288 [info ] [MainThread]: 
+[0m18:13:17.889490 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:13:17.889645 [info ] [MainThread]: 
+[0m18:13:17.889916 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:13:17.891982 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:13:17.892209 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:13:18.399551 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:13:18.400408 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:13:18.894818 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14e9d34d0>]}
+[0m18:13:18.896105 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:13:18.902136 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_revenue_daily
+[0m18:13:18.902807 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:13:18.903619 [info ] [Thread-1 (]: 1 of 7 START sql table model labessentials_raw.mart_revenue_daily .............. [RUN]
+[0m18:13:18.904510 [info ] [Thread-2 (]: 2 of 7 START sql view model labessentials_raw.mart_sanity ...................... [RUN]
+[0m18:13:18.905215 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_revenue_daily)
+[0m18:13:18.905913 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.marketing_agent_core.mart_sanity'
+[0m18:13:18.906444 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_revenue_daily
+[0m18:13:18.906945 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:13:18.919790 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_revenue_daily"
+[0m18:13:18.922296 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:13:18.923686 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:13:18.924181 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_revenue_daily
+[0m18:13:18.974201 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:13:18.976027 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_revenue_daily"
+[0m18:13:18.976607 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_revenue_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_revenue_daily"} */
+
+  
+    
+
+    create or replace table `henzelabs-gpt`.`labessentials_raw`.`mart_revenue_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      
+
+select
+  order_date as date,
+  orders,
+  gross_sales,
+  discounts,
+  taxes,
+  shipping_charges,
+  total_sales,
+  -- convenience metrics
+  safe_divide(discounts, nullif(gross_sales,0)) as discount_rate,
+  safe_divide(total_sales, nullif(orders,0))    as aov
+from `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+order by date;
+    );
+  
+[0m18:13:18.976871 [debug] [Thread-2 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:13:18.977120 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:13:18.977344 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m18:13:19.606306 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:451eb846-e89b-48ad-93eb-c43df2c7402f&page=queryresults
+[0m18:13:19.607433 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:51d6770e-6761-456b-a518-adb9a5f66077&page=queryresults
+[0m18:13:19.609189 [error] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:51d6770e-6761-456b-a518-adb9a5f66077&page=queryresults
+[0m18:13:19.626992 [debug] [Thread-1 (]: Database Error in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)
+  Syntax error: Expected ")" but got ";" at [28:14]
+  compiled code at target/run/marketing_agent_core/models/marts/mart_revenue_daily.sql
+[0m18:13:19.629611 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14eaee340>]}
+[0m18:13:19.630530 [error] [Thread-1 (]: 1 of 7 ERROR creating sql table model labessentials_raw.mart_revenue_daily ..... [[31mERROR[0m in 0.72s]
+[0m18:13:19.631270 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_revenue_daily
+[0m18:13:19.631773 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sessions_daily
+[0m18:13:19.632395 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_revenue_daily' to be skipped because of status 'error'.  Reason: Database Error in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)
+  Syntax error: Expected ")" but got ";" at [28:14]
+  compiled code at target/run/marketing_agent_core/models/marts/mart_revenue_daily.sql.
+[0m18:13:19.633056 [info ] [Thread-1 (]: 3 of 7 START sql table model labessentials_raw.mart_sessions_daily ............. [RUN]
+[0m18:13:19.634189 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.mart_revenue_daily, now model.marketing_agent_core.mart_sessions_daily)
+[0m18:13:19.634655 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sessions_daily
+[0m18:13:19.638100 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sessions_daily"
+[0m18:13:19.639613 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sessions_daily
+[0m18:13:19.643137 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sessions_daily"
+[0m18:13:19.643989 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sessions_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sessions_daily"} */
+
+  
+    
+
+    create or replace table `henzelabs-gpt`.`labessentials_raw`.`mart_sessions_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      
+
+select
+  event_date as date,
+  sessions,
+  users,
+  pageviews,
+  avg_session_duration_sec,
+  engagement_rate_est
+from `henzelabs-gpt`.`labessentials_raw`.`fct_sessions_daily`
+order by date;
+    );
+  
+[0m18:13:19.644446 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:13:20.061359 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:c822c68c-25b8-42c5-a421-994ef2d07a11&page=queryresults
+[0m18:13:20.062729 [error] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:c822c68c-25b8-42c5-a421-994ef2d07a11&page=queryresults
+[0m18:13:20.071167 [debug] [Thread-1 (]: Database Error in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)
+  Syntax error: Expected ")" but got ";" at [24:14]
+  compiled code at target/run/marketing_agent_core/models/marts/mart_sessions_daily.sql
+[0m18:13:20.072091 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14e97f890>]}
+[0m18:13:20.073057 [error] [Thread-1 (]: 3 of 7 ERROR creating sql table model labessentials_raw.mart_sessions_daily .... [[31mERROR[0m in 0.44s]
+[0m18:13:20.073889 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sessions_daily
+[0m18:13:20.074469 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:13:20.075194 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_sessions_daily' to be skipped because of status 'error'.  Reason: Database Error in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)
+  Syntax error: Expected ")" but got ";" at [24:14]
+  compiled code at target/run/marketing_agent_core/models/marts/mart_sessions_daily.sql.
+[0m18:13:20.075873 [info ] [Thread-1 (]: 4 of 7 SKIP test not_null_mart_revenue_daily_date .............................. [[33mSKIP[0m]
+[0m18:13:20.076807 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:13:20.077388 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:13:20.077882 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23' to be skipped because of status 'skipped'. 
+[0m18:13:20.078547 [info ] [Thread-1 (]: 5 of 7 SKIP test unique_mart_revenue_daily_date ................................ [[33mSKIP[0m]
+[0m18:13:20.079380 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:13:20.079948 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:13:20.080470 [info ] [Thread-1 (]: 6 of 7 SKIP test not_null_mart_sessions_daily_date ............................. [[33mSKIP[0m]
+[0m18:13:20.080941 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8' to be skipped because of status 'skipped'. 
+[0m18:13:20.081394 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:13:20.081928 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:13:20.082305 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab' to be skipped because of status 'skipped'. 
+[0m18:13:20.082750 [info ] [Thread-1 (]: 7 of 7 SKIP test unique_mart_sessions_daily_date ............................... [[33mSKIP[0m]
+[0m18:13:20.083308 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:13:20.083755 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2' to be skipped because of status 'skipped'. 
+[0m18:13:20.139733 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '178c0b3a-44e9-42d6-b8ce-6fd5148d092d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14eb01180>]}
+[0m18:13:20.140210 [info ] [Thread-2 (]: 2 of 7 OK created sql view model labessentials_raw.mart_sanity ................. [[32mCREATE VIEW (0 processed)[0m in 1.23s]
+[0m18:13:20.140599 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:13:20.141439 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:13:20.142568 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:13:20.142760 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sessions_daily' was properly closed.
+[0m18:13:20.142921 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sanity' was properly closed.
+[0m18:13:20.143128 [info ] [MainThread]: 
+[0m18:13:20.143324 [info ] [MainThread]: Finished running 2 table models, 4 data tests, 1 view model in 0 hours 0 minutes and 2.25 seconds (2.25s).
+[0m18:13:20.143892 [debug] [MainThread]: Command end result
+[0m18:13:20.161899 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:13:20.163000 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:13:20.166401 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:13:20.166687 [info ] [MainThread]: 
+[0m18:13:20.167101 [info ] [MainThread]: [31mCompleted with 2 errors, 0 partial successes, and 0 warnings:[0m
+[0m18:13:20.167309 [info ] [MainThread]: 
+[0m18:13:20.167531 [error] [MainThread]: [31mFailure in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)[0m
+[0m18:13:20.167728 [error] [MainThread]:   Database Error in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)
+  Syntax error: Expected ")" but got ";" at [28:14]
+  compiled code at target/run/marketing_agent_core/models/marts/mart_revenue_daily.sql
+[0m18:13:20.167879 [info ] [MainThread]: 
+[0m18:13:20.168055 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/marts/mart_revenue_daily.sql
+[0m18:13:20.168202 [info ] [MainThread]: 
+[0m18:13:20.168379 [error] [MainThread]: [31mFailure in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)[0m
+[0m18:13:20.168559 [error] [MainThread]:   Database Error in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)
+  Syntax error: Expected ")" but got ";" at [24:14]
+  compiled code at target/run/marketing_agent_core/models/marts/mart_sessions_daily.sql
+[0m18:13:20.168698 [info ] [MainThread]: 
+[0m18:13:20.168868 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/marts/mart_sessions_daily.sql
+[0m18:13:20.169011 [info ] [MainThread]: 
+[0m18:13:20.169178 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=2 SKIP=4 NO-OP=0 TOTAL=7
+[0m18:13:20.172199 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 4.242036, "process_in_blocks": "0", "process_kernel_time": 0.461583, "process_mem_max_rss": "373850112", "process_out_blocks": "0", "process_user_time": 2.519242}
+[0m18:13:20.172486 [debug] [MainThread]: Command `dbt build` failed at 18:13:20.172442 after 4.24 seconds
+[0m18:13:20.172693 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14ebc0d70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14ea01010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14e4bc5d0>]}
+[0m18:13:20.172910 [debug] [MainThread]: Flushing usage events
+[0m18:13:20.335056 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:14:10.055800 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10600bb60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1075439d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107543b10>]}
+
+
+============================== 18:14:10.059310 | b8e95a44-b0b8-469d-bd74-e38a6142081f ==============================
+[0m18:14:10.059310 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:14:10.059662 [debug] [MainThread]: running dbt with arguments {'introspect': 'True', 'cache_selected_only': 'False', 'debug': 'False', 'printer_width': '80', 'use_colors': 'True', 'use_experimental_parser': 'False', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'warn_error': 'None', 'profiles_dir': '.', 'no_print': 'None', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'log_cache_events': 'False', 'write_json': 'True', 'fail_fast': 'False', 'static_parser': 'True', 'indirect_selection': 'eager', 'version_check': 'True', 'invocation_command': 'dbt build -s marts --profiles-dir=.', 'partial_parse': 'True', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'empty': 'False', 'log_format': 'default'}
+[0m18:14:11.806081 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10684afd0>]}
+[0m18:14:11.835899 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119a25480>]}
+[0m18:14:11.836293 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:14:11.957217 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:14:12.030044 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 2 files changed.
+[0m18:14:12.030520 [debug] [MainThread]: Partial parsing: updated file: marketing_agent_core://models/marts/mart_revenue_daily.sql
+[0m18:14:12.030749 [debug] [MainThread]: Partial parsing: updated file: marketing_agent_core://models/marts/mart_sessions_daily.sql
+[0m18:14:12.241536 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119f56950>]}
+[0m18:14:12.289898 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:14:12.291250 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:14:12.310374 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a1072f0>]}
+[0m18:14:12.310688 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:14:12.311890 [info ] [MainThread]: 
+[0m18:14:12.312146 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:14:12.312332 [info ] [MainThread]: 
+[0m18:14:12.312606 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:14:12.314676 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:14:12.314897 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:14:12.774294 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:14:12.774897 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:14:13.236269 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a24add0>]}
+[0m18:14:13.237309 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:14:13.244080 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_revenue_daily
+[0m18:14:13.244754 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:14:13.245684 [info ] [Thread-1 (]: 1 of 7 START sql table model labessentials_raw.mart_revenue_daily .............. [RUN]
+[0m18:14:13.246717 [info ] [Thread-2 (]: 2 of 7 START sql view model labessentials_raw.mart_sanity ...................... [RUN]
+[0m18:14:13.247445 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_revenue_daily)
+[0m18:14:13.248153 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.marketing_agent_core.mart_sanity'
+[0m18:14:13.248687 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_revenue_daily
+[0m18:14:13.249092 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:14:13.259362 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_revenue_daily"
+[0m18:14:13.261322 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:14:13.262272 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:14:13.281940 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_revenue_daily
+[0m18:14:13.297931 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:14:13.313419 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_revenue_daily"
+[0m18:14:13.313890 [debug] [Thread-2 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:14:13.314186 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m18:14:13.314442 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_revenue_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_revenue_daily"} */
+
+  
+    
+
+    create or replace table `henzelabs-gpt`.`labessentials_raw`.`mart_revenue_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      
+
+select
+  order_date as date,
+  orders,
+  gross_sales,
+  discounts,
+  taxes,
+  shipping_charges,
+  total_sales,
+  -- convenience metrics
+  safe_divide(discounts, nullif(gross_sales,0)) as discount_rate,
+  safe_divide(total_sales, nullif(orders,0))    as aov
+from `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+order by date
+    );
+  
+[0m18:14:13.314730 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:14:13.999749 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:2dcdd2d6-a241-4dfd-a203-2f220c90d01d&page=queryresults
+[0m18:14:14.000519 [error] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:2dcdd2d6-a241-4dfd-a203-2f220c90d01d&page=queryresults
+[0m18:14:14.005881 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:3ca12045-3611-49c2-8ed3-39c10a5a42ba&page=queryresults
+[0m18:14:14.014147 [debug] [Thread-1 (]: Database Error in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.fct_orders_daily was not found in location US
+  compiled code at target/run/marketing_agent_core/models/marts/mart_revenue_daily.sql
+[0m18:14:14.016401 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a3c6a90>]}
+[0m18:14:14.017245 [error] [Thread-1 (]: 1 of 7 ERROR creating sql table model labessentials_raw.mart_revenue_daily ..... [[31mERROR[0m in 0.77s]
+[0m18:14:14.017904 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_revenue_daily
+[0m18:14:14.018278 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sessions_daily
+[0m18:14:14.018749 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_revenue_daily' to be skipped because of status 'error'.  Reason: Database Error in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.fct_orders_daily was not found in location US
+  compiled code at target/run/marketing_agent_core/models/marts/mart_revenue_daily.sql.
+[0m18:14:14.019238 [info ] [Thread-1 (]: 3 of 7 START sql table model labessentials_raw.mart_sessions_daily ............. [RUN]
+[0m18:14:14.020110 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.mart_revenue_daily, now model.marketing_agent_core.mart_sessions_daily)
+[0m18:14:14.020510 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sessions_daily
+[0m18:14:14.024033 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sessions_daily"
+[0m18:14:14.025570 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sessions_daily
+[0m18:14:14.028549 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sessions_daily"
+[0m18:14:14.029253 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sessions_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sessions_daily"} */
+
+  
+    
+
+    create or replace table `henzelabs-gpt`.`labessentials_raw`.`mart_sessions_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      
+
+select
+  event_date as date,
+  sessions,
+  users,
+  pageviews,
+  avg_session_duration_sec,
+  engagement_rate_est
+from `henzelabs-gpt`.`labessentials_raw`.`fct_sessions_daily`
+order by date
+    );
+  
+[0m18:14:14.029611 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:14:14.554456 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a0ffe90>]}
+[0m18:14:14.555034 [info ] [Thread-2 (]: 2 of 7 OK created sql view model labessentials_raw.mart_sanity ................. [[32mCREATE VIEW (0 processed)[0m in 1.31s]
+[0m18:14:14.555468 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:14:14.555765 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:14:14.556113 [info ] [Thread-2 (]: 4 of 7 SKIP test not_null_mart_revenue_daily_date .............................. [[33mSKIP[0m]
+[0m18:14:14.556463 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:14:14.556761 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:14:14.556993 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23' to be skipped because of status 'skipped'. 
+[0m18:14:14.557254 [info ] [Thread-2 (]: 5 of 7 SKIP test unique_mart_revenue_daily_date ................................ [[33mSKIP[0m]
+[0m18:14:14.557765 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:14:14.557979 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8' to be skipped because of status 'skipped'. 
+[0m18:14:14.602383 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:1b15ab3c-a9cf-47c1-8242-fdebd985b474&page=queryresults
+[0m18:14:14.602804 [error] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:1b15ab3c-a9cf-47c1-8242-fdebd985b474&page=queryresults
+[0m18:14:14.606445 [debug] [Thread-1 (]: Database Error in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.fct_sessions_daily was not found in location US
+  compiled code at target/run/marketing_agent_core/models/marts/mart_sessions_daily.sql
+[0m18:14:14.606802 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b8e95a44-b0b8-469d-bd74-e38a6142081f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a2d95a0>]}
+[0m18:14:14.607258 [error] [Thread-1 (]: 3 of 7 ERROR creating sql table model labessentials_raw.mart_sessions_daily .... [[31mERROR[0m in 0.59s]
+[0m18:14:14.607729 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sessions_daily
+[0m18:14:14.608139 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_sessions_daily' to be skipped because of status 'error'.  Reason: Database Error in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.fct_sessions_daily was not found in location US
+  compiled code at target/run/marketing_agent_core/models/marts/mart_sessions_daily.sql.
+[0m18:14:14.608683 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:14:14.608963 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:14:14.609250 [info ] [Thread-2 (]: 6 of 7 SKIP test not_null_mart_sessions_daily_date ............................. [[33mSKIP[0m]
+[0m18:14:14.609580 [info ] [Thread-1 (]: 7 of 7 SKIP test unique_mart_sessions_daily_date ............................... [[33mSKIP[0m]
+[0m18:14:14.609920 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:14:14.610242 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:14:14.610502 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab' to be skipped because of status 'skipped'. 
+[0m18:14:14.610785 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2' to be skipped because of status 'skipped'. 
+[0m18:14:14.611679 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:14:14.613076 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:14:14.613332 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sessions_daily' was properly closed.
+[0m18:14:14.613525 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sanity' was properly closed.
+[0m18:14:14.613791 [info ] [MainThread]: 
+[0m18:14:14.614028 [info ] [MainThread]: Finished running 2 table models, 4 data tests, 1 view model in 0 hours 0 minutes and 2.30 seconds (2.30s).
+[0m18:14:14.614719 [debug] [MainThread]: Command end result
+[0m18:14:14.636289 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:14:14.637428 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:14:14.640574 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:14:14.640759 [info ] [MainThread]: 
+[0m18:14:14.640954 [info ] [MainThread]: [31mCompleted with 2 errors, 0 partial successes, and 0 warnings:[0m
+[0m18:14:14.641122 [info ] [MainThread]: 
+[0m18:14:14.641323 [error] [MainThread]: [31mFailure in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)[0m
+[0m18:14:14.641513 [error] [MainThread]:   Database Error in model mart_revenue_daily (models/marts/mart_revenue_daily.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.fct_orders_daily was not found in location US
+  compiled code at target/run/marketing_agent_core/models/marts/mart_revenue_daily.sql
+[0m18:14:14.641660 [info ] [MainThread]: 
+[0m18:14:14.641832 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/marts/mart_revenue_daily.sql
+[0m18:14:14.641976 [info ] [MainThread]: 
+[0m18:14:14.642149 [error] [MainThread]: [31mFailure in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)[0m
+[0m18:14:14.642327 [error] [MainThread]:   Database Error in model mart_sessions_daily (models/marts/mart_sessions_daily.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.fct_sessions_daily was not found in location US
+  compiled code at target/run/marketing_agent_core/models/marts/mart_sessions_daily.sql
+[0m18:14:14.642468 [info ] [MainThread]: 
+[0m18:14:14.642634 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/marts/mart_sessions_daily.sql
+[0m18:14:14.642772 [info ] [MainThread]: 
+[0m18:14:14.642933 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=2 SKIP=4 NO-OP=0 TOTAL=7
+[0m18:14:14.645622 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 4.631433, "process_in_blocks": "0", "process_kernel_time": 0.465846, "process_mem_max_rss": "379666432", "process_out_blocks": "0", "process_user_time": 2.598898}
+[0m18:14:14.645943 [debug] [MainThread]: Command `dbt build` failed at 18:14:14.645898 after 4.63 seconds
+[0m18:14:14.646166 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a39a3f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11a408d40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1068229d0>]}
+[0m18:14:14.646367 [debug] [MainThread]: Flushing usage events
+[0m18:14:14.809295 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:15:07.507179 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10786bb60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108d9b9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108d9bb10>]}
+
+
+============================== 18:15:07.510718 | 00edbe0d-783f-4050-9400-404a72061bf5 ==============================
+[0m18:15:07.510718 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:15:07.511105 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'write_json': 'True', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'printer_width': '80', 'no_print': 'None', 'profiles_dir': '.', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'version_check': 'True', 'use_experimental_parser': 'False', 'log_cache_events': 'False', 'target_path': 'None', 'static_parser': 'True', 'debug': 'False', 'use_colors': 'True', 'fail_fast': 'False', 'empty': 'False', 'invocation_command': 'dbt build --profiles-dir=.', 'indirect_selection': 'eager', 'partial_parse': 'True', 'warn_error': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_format': 'default', 'introspect': 'True'}
+[0m18:15:09.316289 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10809efd0>]}
+[0m18:15:09.346298 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b325480>]}
+[0m18:15:09.346747 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:15:09.470898 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:15:09.547350 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:15:09.547611 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:15:09.571752 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b890e50>]}
+[0m18:15:09.620143 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:15:09.621791 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:15:09.696688 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b932d50>]}
+[0m18:15:09.697112 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:15:09.698803 [info ] [MainThread]: 
+[0m18:15:09.699020 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:15:09.699181 [info ] [MainThread]: 
+[0m18:15:09.699468 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:15:09.701735 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:15:09.701990 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:15:10.334522 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:15:10.335611 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:15:10.853012 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b9d2dd0>]}
+[0m18:15:10.854043 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:15:10.859883 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:10.860584 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:15:10.861416 [info ] [Thread-2 (]: 2 of 20 START sql view model labessentials_raw.stg_ga4_sessions ................ [RUN]
+[0m18:15:10.862437 [info ] [Thread-1 (]: 1 of 20 START sql view model labessentials_raw.mart_sanity ..................... [RUN]
+[0m18:15:10.863461 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.marketing_agent_core.stg_ga4_sessions'
+[0m18:15:10.864122 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_sanity)
+[0m18:15:10.864727 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:10.865310 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:15:10.878254 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:15:10.880215 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:15:10.881117 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:10.881529 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:15:10.927249 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:15:10.928351 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:15:10.928960 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_ga4_sessions: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_ga4_sessions"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_ga4_sessions`
+  OPTIONS()
+  as 
+
+with base as (
+  select
+    cast(event_date as date) as event_date,
+    event_name,
+    user_pseudo_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'ga_session_id') as ga_session_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'engagement_time_msec') as engagement_time_msec
+  from `henzelabs-gpt`.`labessentials_raw`.`ga4_events`
+),
+filtered as (
+  select
+    event_date,
+    user_pseudo_id,
+    ga_session_id,
+    event_name,
+    coalesce(engagement_time_msec, 0) as engagement_time_msec,
+    event_name = 'session_start' as is_session_start,
+    event_name = 'page_view' as is_page_view
+  from base
+  where ga_session_id is not null
+)
+select * from filtered;;
+
+
+[0m18:15:10.929267 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:15:10.929565 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m18:15:10.929857 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:15:12.406084 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:1b8949ea-dbc9-4064-b188-b9df37725408&page=queryresults
+[0m18:15:12.407230 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:1b8949ea-dbc9-4064-b188-b9df37725408&page=queryresults
+[0m18:15:12.422457 [debug] [Thread-2 (]: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Syntax error: Unexpected ";" at [29:24]
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:15:12.424786 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11bae57e0>]}
+[0m18:15:12.425615 [error] [Thread-2 (]: 2 of 20 ERROR creating sql view model labessentials_raw.stg_ga4_sessions ....... [[31mERROR[0m in 1.56s]
+[0m18:15:12.426342 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:12.426820 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_orders
+[0m18:15:12.427451 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.stg_ga4_sessions' to be skipped because of status 'error'.  Reason: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Syntax error: Unexpected ";" at [29:24]
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql.
+[0m18:15:12.428085 [info ] [Thread-2 (]: 3 of 20 START sql view model labessentials_raw.stg_orders ...................... [RUN]
+[0m18:15:12.429265 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.stg_ga4_sessions, now model.marketing_agent_core.stg_orders)
+[0m18:15:12.429908 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_orders
+[0m18:15:12.433601 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_orders"
+[0m18:15:12.434410 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_orders
+[0m18:15:12.438978 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_orders"
+[0m18:15:12.440148 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_orders: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_orders"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+  OPTIONS()
+  as 
+
+with src as (
+  select
+    cast(order_number as string)     as order_number,
+    cast(id as string)               as order_id,
+    cast(customer_id as string)      as customer_id,
+    cast(created_at as timestamp)    as created_at_ts,
+    cast(updated_at as timestamp)    as updated_at_ts,
+    date(cast(created_at as timestamp)) as order_date,
+    cast(total_price as numeric)     as total_price,
+    cast(subtotal_price as numeric)  as subtotal_price,
+    cast(total_tax as numeric)       as total_tax,
+    cast(total_discounts as numeric) as total_discounts,
+    cast(total_shipping as numeric)  as total_shipping,
+    cast(financial_status as string) as financial_status,
+    cast(cancelled_at as timestamp)  as cancelled_at_ts,
+    cast(currency as string)         as currency
+  from `henzelabs-gpt`.`labessentials_raw`.`shopify_orders`
+)
+select * from src;;
+
+
+[0m18:15:12.440724 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:15:12.584243 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:a53a46bc-370a-4960-81e0-2e0486978de9&page=queryresults
+[0m18:15:12.910532 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:25cfca87-e3db-475a-a6bd-41f86a80af57&page=queryresults
+[0m18:15:12.912329 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:25cfca87-e3db-475a-a6bd-41f86a80af57&page=queryresults
+[0m18:15:12.922279 [debug] [Thread-2 (]: Database Error in model stg_orders (models/stg_orders.sql)
+  Syntax error: Unexpected ";" at [26:19]
+  compiled code at target/run/marketing_agent_core/models/stg_orders.sql
+[0m18:15:12.923162 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11bb04350>]}
+[0m18:15:12.924111 [error] [Thread-2 (]: 3 of 20 ERROR creating sql view model labessentials_raw.stg_orders ............. [[31mERROR[0m in 0.49s]
+[0m18:15:12.924934 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_orders
+[0m18:15:12.925529 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:15:12.926700 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.stg_orders' to be skipped because of status 'error'.  Reason: Database Error in model stg_orders (models/stg_orders.sql)
+  Syntax error: Unexpected ";" at [26:19]
+  compiled code at target/run/marketing_agent_core/models/stg_orders.sql.
+[0m18:15:12.927398 [info ] [Thread-2 (]: 4 of 20 SKIP test not_null_stg_ga4_sessions_event_date ......................... [[33mSKIP[0m]
+[0m18:15:12.929230 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:15:12.930090 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:15:12.930532 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb' to be skipped because of status 'skipped'. 
+[0m18:15:12.931497 [info ] [Thread-2 (]: 5 of 20 SKIP test not_null_stg_ga4_sessions_ga_session_id ...................... [[33mSKIP[0m]
+[0m18:15:12.932494 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:15:12.932997 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:15:12.933394 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf' to be skipped because of status 'skipped'. 
+[0m18:15:12.933885 [info ] [Thread-2 (]: 6 of 20 SKIP test not_null_stg_ga4_sessions_user_pseudo_id ..................... [[33mSKIP[0m]
+[0m18:15:12.934481 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:15:12.934934 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:15:12.935308 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db' to be skipped because of status 'skipped'. 
+[0m18:15:12.935742 [info ] [Thread-2 (]: 7 of 20 SKIP test not_null_stg_orders_order_date ............................... [[33mSKIP[0m]
+[0m18:15:12.936344 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:15:12.936861 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:15:12.937732 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb' to be skipped because of status 'skipped'. 
+[0m18:15:12.938681 [info ] [Thread-2 (]: 8 of 20 SKIP test not_null_stg_orders_order_id ................................. [[33mSKIP[0m]
+[0m18:15:12.939318 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:15:12.939781 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.fct_sessions_daily
+[0m18:15:12.940107 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64' to be skipped because of status 'skipped'. 
+[0m18:15:12.940514 [info ] [Thread-2 (]: 9 of 20 SKIP relation labessentials_raw.fct_sessions_daily ..................... [[33mSKIP[0m]
+[0m18:15:12.941153 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.fct_sessions_daily
+[0m18:15:12.941613 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.fct_orders_daily
+[0m18:15:12.941961 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:15:12.942337 [info ] [Thread-2 (]: 10 of 20 SKIP relation labessentials_raw.fct_orders_daily ...................... [[33mSKIP[0m]
+[0m18:15:12.942884 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.fct_orders_daily
+[0m18:15:12.943269 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:15:12.943646 [info ] [Thread-2 (]: 11 of 20 SKIP test not_null_fct_sessions_daily_event_date ...................... [[33mSKIP[0m]
+[0m18:15:12.944031 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_orders_daily' to be skipped because of status 'skipped'. 
+[0m18:15:12.944428 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:15:12.944979 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:15:12.945311 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c' to be skipped because of status 'skipped'. 
+[0m18:15:12.945739 [info ] [Thread-2 (]: 12 of 20 SKIP test unique_fct_sessions_daily_event_date ........................ [[33mSKIP[0m]
+[0m18:15:12.946273 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:15:12.946674 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:15:12.947018 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174' to be skipped because of status 'skipped'. 
+[0m18:15:12.947403 [info ] [Thread-2 (]: 13 of 20 SKIP test not_null_fct_orders_daily_order_date ........................ [[33mSKIP[0m]
+[0m18:15:12.947968 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:15:12.948349 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:15:12.948685 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd' to be skipped because of status 'skipped'. 
+[0m18:15:12.949053 [info ] [Thread-2 (]: 14 of 20 SKIP test unique_fct_orders_daily_order_date .......................... [[33mSKIP[0m]
+[0m18:15:12.949521 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:15:12.949853 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.mart_sessions_daily
+[0m18:15:12.950122 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e' to be skipped because of status 'skipped'. 
+[0m18:15:12.950449 [info ] [Thread-2 (]: 15 of 20 SKIP relation labessentials_raw.mart_sessions_daily ................... [[33mSKIP[0m]
+[0m18:15:12.950910 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.mart_sessions_daily
+[0m18:15:12.951252 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.mart_revenue_daily
+[0m18:15:12.951524 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:15:12.951843 [info ] [Thread-2 (]: 16 of 20 SKIP relation labessentials_raw.mart_revenue_daily .................... [[33mSKIP[0m]
+[0m18:15:12.952379 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.mart_revenue_daily
+[0m18:15:12.952713 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:15:12.952976 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_revenue_daily' to be skipped because of status 'skipped'. 
+[0m18:15:12.953895 [info ] [Thread-2 (]: 17 of 20 SKIP test not_null_mart_sessions_daily_date ........................... [[33mSKIP[0m]
+[0m18:15:12.954567 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:15:12.954910 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:15:12.955189 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab' to be skipped because of status 'skipped'. 
+[0m18:15:12.955521 [info ] [Thread-2 (]: 18 of 20 SKIP test unique_mart_sessions_daily_date ............................. [[33mSKIP[0m]
+[0m18:15:12.955919 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:15:12.956238 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:15:12.956503 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2' to be skipped because of status 'skipped'. 
+[0m18:15:12.956823 [info ] [Thread-2 (]: 19 of 20 SKIP test not_null_mart_revenue_daily_date ............................ [[33mSKIP[0m]
+[0m18:15:12.957273 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:15:12.957589 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:15:12.957872 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23' to be skipped because of status 'skipped'. 
+[0m18:15:12.958192 [info ] [Thread-2 (]: 20 of 20 SKIP test unique_mart_revenue_daily_date .............................. [[33mSKIP[0m]
+[0m18:15:12.958587 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:15:12.958896 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8' to be skipped because of status 'skipped'. 
+[0m18:15:13.129859 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '00edbe0d-783f-4050-9400-404a72061bf5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11bafd5a0>]}
+[0m18:15:13.130437 [info ] [Thread-1 (]: 1 of 20 OK created sql view model labessentials_raw.mart_sanity ................ [[32mCREATE VIEW (0 processed)[0m in 2.27s]
+[0m18:15:13.130874 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:15:13.131634 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:15:13.132734 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:15:13.132922 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sanity' was properly closed.
+[0m18:15:13.133085 [debug] [MainThread]: Connection 'model.marketing_agent_core.stg_orders' was properly closed.
+[0m18:15:13.133317 [info ] [MainThread]: 
+[0m18:15:13.133506 [info ] [MainThread]: Finished running 2 table models, 13 data tests, 5 view models in 0 hours 0 minutes and 3.43 seconds (3.43s).
+[0m18:15:13.134275 [debug] [MainThread]: Command end result
+[0m18:15:13.153174 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:15:13.154281 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:15:13.157682 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:15:13.157879 [info ] [MainThread]: 
+[0m18:15:13.158090 [info ] [MainThread]: [31mCompleted with 2 errors, 0 partial successes, and 0 warnings:[0m
+[0m18:15:13.158260 [info ] [MainThread]: 
+[0m18:15:13.158465 [error] [MainThread]: [31mFailure in model stg_ga4_sessions (models/stg_ga4_sessions.sql)[0m
+[0m18:15:13.158657 [error] [MainThread]:   Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Syntax error: Unexpected ";" at [29:24]
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:15:13.158802 [info ] [MainThread]: 
+[0m18:15:13.158978 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:15:13.159128 [info ] [MainThread]: 
+[0m18:15:13.159307 [error] [MainThread]: [31mFailure in model stg_orders (models/stg_orders.sql)[0m
+[0m18:15:13.159487 [error] [MainThread]:   Database Error in model stg_orders (models/stg_orders.sql)
+  Syntax error: Unexpected ";" at [26:19]
+  compiled code at target/run/marketing_agent_core/models/stg_orders.sql
+[0m18:15:13.159626 [info ] [MainThread]: 
+[0m18:15:13.159795 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/stg_orders.sql
+[0m18:15:13.159947 [info ] [MainThread]: 
+[0m18:15:13.160111 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=2 SKIP=17 NO-OP=0 TOTAL=20
+[0m18:15:13.164734 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 5.696953, "process_in_blocks": "0", "process_kernel_time": 0.474496, "process_mem_max_rss": "366575616", "process_out_blocks": "0", "process_user_time": 2.533043}
+[0m18:15:13.165097 [debug] [MainThread]: Command `dbt build` failed at 18:15:13.165054 after 5.70 seconds
+[0m18:15:13.165313 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11bba9810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11ba01130>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b4bc5d0>]}
+[0m18:15:13.165515 [debug] [MainThread]: Flushing usage events
+[0m18:15:13.354583 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:15:35.198915 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1042fbb60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1060539d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106053b10>]}
+
+
+============================== 18:15:35.202121 | b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e ==============================
+[0m18:15:35.202121 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:15:35.202461 [debug] [MainThread]: running dbt with arguments {'use_colors': 'True', 'no_print': 'None', 'invocation_command': 'dbt build --profiles-dir=.', 'log_format': 'default', 'printer_width': '80', 'indirect_selection': 'eager', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'use_experimental_parser': 'False', 'debug': 'False', 'partial_parse': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'True', 'empty': 'False', 'log_cache_events': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'profiles_dir': '.', 'write_json': 'True', 'version_check': 'True', 'introspect': 'True', 'cache_selected_only': 'False', 'quiet': 'False', 'static_parser': 'True'}
+[0m18:15:36.890778 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10475afd0>]}
+[0m18:15:36.920736 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13fc29480>]}
+[0m18:15:36.921169 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:15:37.049701 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:15:37.121407 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 2 files changed.
+[0m18:15:37.121864 [debug] [MainThread]: Partial parsing: updated file: marketing_agent_core://models/stg_orders.sql
+[0m18:15:37.122106 [debug] [MainThread]: Partial parsing: updated file: marketing_agent_core://models/stg_ga4_sessions.sql
+[0m18:15:37.330068 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x140a92a50>]}
+[0m18:15:37.378891 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:15:37.380513 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:15:37.400083 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x140d133e0>]}
+[0m18:15:37.400407 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 496 macros
+[0m18:15:37.401963 [info ] [MainThread]: 
+[0m18:15:37.402175 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:15:37.402337 [info ] [MainThread]: 
+[0m18:15:37.402602 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:15:37.404791 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:15:37.405023 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:15:37.866034 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:15:37.866472 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:15:38.362670 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x140f235b0>]}
+[0m18:15:38.363825 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:15:38.369556 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:15:38.370265 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:38.371142 [info ] [Thread-1 (]: 1 of 20 START sql view model labessentials_raw.mart_sanity ..................... [RUN]
+[0m18:15:38.372188 [info ] [Thread-2 (]: 2 of 20 START sql view model labessentials_raw.stg_ga4_sessions ................ [RUN]
+[0m18:15:38.372992 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_sanity)
+[0m18:15:38.373850 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.marketing_agent_core.stg_ga4_sessions'
+[0m18:15:38.374435 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:15:38.374964 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:38.384339 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:15:38.388462 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:15:38.389441 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:15:38.395899 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:38.424981 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:15:38.425782 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:15:38.426344 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_ga4_sessions: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_ga4_sessions"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_ga4_sessions`
+  OPTIONS()
+  as 
+
+with base as (
+  select
+    cast(event_date as date) as event_date,
+    event_name,
+    user_pseudo_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'ga_session_id') as ga_session_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'engagement_time_msec') as engagement_time_msec
+  from `henzelabs-gpt`.`labessentials_raw`.`ga4_events`
+),
+filtered as (
+  select
+    event_date,
+    user_pseudo_id,
+    ga_session_id,
+    event_name,
+    coalesce(engagement_time_msec, 0) as engagement_time_msec,
+    event_name = 'session_start' as is_session_start,
+    event_name = 'page_view' as is_page_view
+  from base
+  where ga_session_id is not null
+)
+select * from filtered;
+
+
+[0m18:15:38.426660 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:15:38.426942 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m18:15:38.427208 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:15:39.070796 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:3b69b055-b1cf-4f1a-b098-c93ffcc500c3&page=queryresults
+[0m18:15:39.071871 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:3b69b055-b1cf-4f1a-b098-c93ffcc500c3&page=queryresults
+[0m18:15:39.088055 [debug] [Thread-2 (]: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:15:39.091674 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1410d20d0>]}
+[0m18:15:39.092603 [error] [Thread-2 (]: 2 of 20 ERROR creating sql view model labessentials_raw.stg_ga4_sessions ....... [[31mERROR[0m in 0.72s]
+[0m18:15:39.093332 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:15:39.093820 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_orders
+[0m18:15:39.094447 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.stg_ga4_sessions' to be skipped because of status 'error'.  Reason: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql.
+[0m18:15:39.095094 [info ] [Thread-2 (]: 3 of 20 START sql view model labessentials_raw.stg_orders ...................... [RUN]
+[0m18:15:39.096251 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.stg_ga4_sessions, now model.marketing_agent_core.stg_orders)
+[0m18:15:39.096852 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_orders
+[0m18:15:39.100662 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_orders"
+[0m18:15:39.101856 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:7536e108-1a45-4c91-b040-d43299386dd2&page=queryresults
+[0m18:15:39.102851 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_orders
+[0m18:15:39.106332 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_orders"
+[0m18:15:39.107455 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_orders: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_orders"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+  OPTIONS()
+  as 
+
+with src as (
+  select
+    cast(order_number as string)     as order_number,
+    cast(id as string)               as order_id,
+    cast(customer_id as string)      as customer_id,
+    cast(created_at as timestamp)    as created_at_ts,
+    cast(updated_at as timestamp)    as updated_at_ts,
+    date(cast(created_at as timestamp)) as order_date,
+    cast(total_price as numeric)     as total_price,
+    cast(subtotal_price as numeric)  as subtotal_price,
+    cast(total_tax as numeric)       as total_tax,
+    cast(total_discounts as numeric) as total_discounts,
+    cast(total_shipping as numeric)  as total_shipping,
+    cast(financial_status as string) as financial_status,
+    cast(cancelled_at as timestamp)  as cancelled_at_ts,
+    cast(currency as string)         as currency
+  from `henzelabs-gpt`.`labessentials_raw`.`shopify_orders`
+)
+select * from src;
+
+
+[0m18:15:39.107977 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:15:39.466957 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x140ffce90>]}
+[0m18:15:39.467453 [info ] [Thread-1 (]: 1 of 20 OK created sql view model labessentials_raw.mart_sanity ................ [[32mCREATE VIEW (0 processed)[0m in 1.09s]
+[0m18:15:39.467880 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:15:39.468168 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:15:39.468464 [info ] [Thread-1 (]: 4 of 20 SKIP test not_null_stg_ga4_sessions_event_date ......................... [[33mSKIP[0m]
+[0m18:15:39.468812 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:15:39.469033 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:15:39.469231 [info ] [Thread-1 (]: 5 of 20 SKIP test not_null_stg_ga4_sessions_ga_session_id ...................... [[33mSKIP[0m]
+[0m18:15:39.469413 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb' to be skipped because of status 'skipped'. 
+[0m18:15:39.469627 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:15:39.469906 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:15:39.470151 [info ] [Thread-1 (]: 6 of 20 SKIP test not_null_stg_ga4_sessions_user_pseudo_id ..................... [[33mSKIP[0m]
+[0m18:15:39.470400 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf' to be skipped because of status 'skipped'. 
+[0m18:15:39.470592 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:15:39.470816 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db' to be skipped because of status 'skipped'. 
+[0m18:15:39.471110 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.fct_sessions_daily
+[0m18:15:39.471332 [info ] [Thread-1 (]: 7 of 20 SKIP relation labessentials_raw.fct_sessions_daily ..................... [[33mSKIP[0m]
+[0m18:15:39.471577 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.fct_sessions_daily
+[0m18:15:39.471796 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:15:39.472092 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:15:39.472313 [info ] [Thread-1 (]: 8 of 20 SKIP test not_null_fct_sessions_daily_event_date ....................... [[33mSKIP[0m]
+[0m18:15:39.472737 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:15:39.473121 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:15:39.473299 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c' to be skipped because of status 'skipped'. 
+[0m18:15:39.473566 [info ] [Thread-1 (]: 9 of 20 SKIP test unique_fct_sessions_daily_event_date ......................... [[33mSKIP[0m]
+[0m18:15:39.473858 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:15:39.474030 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174' to be skipped because of status 'skipped'. 
+[0m18:15:39.474348 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sessions_daily
+[0m18:15:39.474623 [info ] [Thread-1 (]: 10 of 20 SKIP relation labessentials_raw.mart_sessions_daily ................... [[33mSKIP[0m]
+[0m18:15:39.474850 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sessions_daily
+[0m18:15:39.475043 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:15:39.475292 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:15:39.475482 [info ] [Thread-1 (]: 11 of 20 SKIP test not_null_mart_sessions_daily_date ........................... [[33mSKIP[0m]
+[0m18:15:39.475676 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:15:39.475854 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:15:39.476027 [info ] [Thread-1 (]: 12 of 20 SKIP test unique_mart_sessions_daily_date ............................. [[33mSKIP[0m]
+[0m18:15:39.476217 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:15:39.476373 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab' to be skipped because of status 'skipped'. 
+[0m18:15:39.476538 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2' to be skipped because of status 'skipped'. 
+[0m18:15:39.743584 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:2296834a-f261-42f6-aee3-5f20b446eb2c&page=queryresults
+[0m18:15:39.899915 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:2296834a-f261-42f6-aee3-5f20b446eb2c&page=queryresults
+[0m18:15:39.904081 [debug] [Thread-2 (]: Database Error in model stg_orders (models/stg_orders.sql)
+  Unrecognized name: customer_id at [12:10]
+  compiled code at target/run/marketing_agent_core/models/stg_orders.sql
+[0m18:15:39.904455 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b2a92d9d-e651-4b07-a7a4-fdc34b29ca1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x140fce6d0>]}
+[0m18:15:39.904913 [error] [Thread-2 (]: 3 of 20 ERROR creating sql view model labessentials_raw.stg_orders ............. [[31mERROR[0m in 0.81s]
+[0m18:15:39.905384 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_orders
+[0m18:15:39.905797 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.stg_orders' to be skipped because of status 'error'.  Reason: Database Error in model stg_orders (models/stg_orders.sql)
+  Unrecognized name: customer_id at [12:10]
+  compiled code at target/run/marketing_agent_core/models/stg_orders.sql.
+[0m18:15:39.906366 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:15:39.906703 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:15:39.907020 [info ] [Thread-1 (]: 13 of 20 SKIP test not_null_stg_orders_order_date .............................. [[33mSKIP[0m]
+[0m18:15:39.907316 [info ] [Thread-2 (]: 14 of 20 SKIP test not_null_stg_orders_order_id ................................ [[33mSKIP[0m]
+[0m18:15:39.907593 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:15:39.907847 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:15:39.908096 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb' to be skipped because of status 'skipped'. 
+[0m18:15:39.908459 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64' to be skipped because of status 'skipped'. 
+[0m18:15:39.908918 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.fct_orders_daily
+[0m18:15:39.909205 [info ] [Thread-1 (]: 15 of 20 SKIP relation labessentials_raw.fct_orders_daily ...................... [[33mSKIP[0m]
+[0m18:15:39.909465 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.fct_orders_daily
+[0m18:15:39.909688 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_orders_daily' to be skipped because of status 'skipped'. 
+[0m18:15:39.910047 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:15:39.910291 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:15:39.910531 [info ] [Thread-2 (]: 16 of 20 SKIP test not_null_fct_orders_daily_order_date ........................ [[33mSKIP[0m]
+[0m18:15:39.910799 [info ] [Thread-1 (]: 17 of 20 SKIP test unique_fct_orders_daily_order_date .......................... [[33mSKIP[0m]
+[0m18:15:39.911048 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:15:39.911279 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:15:39.911497 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd' to be skipped because of status 'skipped'. 
+[0m18:15:39.911759 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e' to be skipped because of status 'skipped'. 
+[0m18:15:39.912081 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.mart_revenue_daily
+[0m18:15:39.912434 [info ] [Thread-2 (]: 18 of 20 SKIP relation labessentials_raw.mart_revenue_daily .................... [[33mSKIP[0m]
+[0m18:15:39.912715 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.mart_revenue_daily
+[0m18:15:39.912928 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_revenue_daily' to be skipped because of status 'skipped'. 
+[0m18:15:39.913290 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:15:39.913521 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:15:39.913766 [info ] [Thread-1 (]: 19 of 20 SKIP test not_null_mart_revenue_daily_date ............................ [[33mSKIP[0m]
+[0m18:15:39.914058 [info ] [Thread-2 (]: 20 of 20 SKIP test unique_mart_revenue_daily_date .............................. [[33mSKIP[0m]
+[0m18:15:39.914327 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:15:39.914557 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:15:39.914784 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23' to be skipped because of status 'skipped'. 
+[0m18:15:39.915041 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8' to be skipped because of status 'skipped'. 
+[0m18:15:39.915722 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:15:39.916901 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:15:39.917105 [debug] [MainThread]: Connection 'model.marketing_agent_core.mart_sanity' was properly closed.
+[0m18:15:39.917307 [debug] [MainThread]: Connection 'model.marketing_agent_core.stg_orders' was properly closed.
+[0m18:15:39.917725 [info ] [MainThread]: 
+[0m18:15:39.918008 [info ] [MainThread]: Finished running 2 table models, 13 data tests, 5 view models in 0 hours 0 minutes and 2.52 seconds (2.52s).
+[0m18:15:39.919147 [debug] [MainThread]: Command end result
+[0m18:15:39.938950 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:15:39.940083 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:15:39.943345 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:15:39.943533 [info ] [MainThread]: 
+[0m18:15:39.943729 [info ] [MainThread]: [31mCompleted with 2 errors, 0 partial successes, and 0 warnings:[0m
+[0m18:15:39.943892 [info ] [MainThread]: 
+[0m18:15:39.944089 [error] [MainThread]: [31mFailure in model stg_ga4_sessions (models/stg_ga4_sessions.sql)[0m
+[0m18:15:39.944280 [error] [MainThread]:   Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:15:39.944430 [info ] [MainThread]: 
+[0m18:15:39.944601 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:15:39.944751 [info ] [MainThread]: 
+[0m18:15:39.944926 [error] [MainThread]: [31mFailure in model stg_orders (models/stg_orders.sql)[0m
+[0m18:15:39.945101 [error] [MainThread]:   Database Error in model stg_orders (models/stg_orders.sql)
+  Unrecognized name: customer_id at [12:10]
+  compiled code at target/run/marketing_agent_core/models/stg_orders.sql
+[0m18:15:39.945239 [info ] [MainThread]: 
+[0m18:15:39.945406 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/stg_orders.sql
+[0m18:15:39.945615 [info ] [MainThread]: 
+[0m18:15:39.945809 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=2 SKIP=17 NO-OP=0 TOTAL=20
+[0m18:15:39.949080 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 4.7893662, "process_in_blocks": "0", "process_kernel_time": 0.439225, "process_mem_max_rss": "379387904", "process_out_blocks": "0", "process_user_time": 2.561565}
+[0m18:15:39.949393 [debug] [MainThread]: Command `dbt build` failed at 18:15:39.949349 after 4.79 seconds
+[0m18:15:39.949608 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1414949b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x140bdff50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x13fdee550>]}
+[0m18:15:39.949803 [debug] [MainThread]: Flushing usage events
+[0m18:15:40.102561 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:19:55.263696 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1076a3b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108bdb9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108bdbb10>]}
+
+
+============================== 18:19:55.267461 | 182cd641-768d-46dc-9e42-5b6343d643e5 ==============================
+[0m18:19:55.267461 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:19:55.267812 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'use_colors': 'True', 'profiles_dir': '.', 'static_parser': 'True', 'use_experimental_parser': 'False', 'warn_error': 'None', 'write_json': 'True', 'debug': 'False', 'invocation_command': 'dbt build --profiles-dir=.', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'fail_fast': 'False', 'empty': 'False', 'send_anonymous_usage_stats': 'True', 'partial_parse': 'True', 'indirect_selection': 'eager', 'printer_width': '80', 'introspect': 'True', 'version_check': 'True', 'target_path': 'None', 'no_print': 'None', 'log_cache_events': 'False', 'cache_selected_only': 'False'}
+[0m18:19:57.112788 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107ee2fd0>]}
+[0m18:19:57.144036 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b125480>]}
+[0m18:19:57.144487 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:19:57.280840 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:19:57.353975 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 1 files changed.
+[0m18:19:57.354417 [debug] [MainThread]: Partial parsing: added file: marketing_agent_core://macros/column_exists.sql
+[0m18:19:57.354683 [debug] [MainThread]: Partial parsing: updated file: marketing_agent_core://models/stg_orders.sql
+[0m18:19:57.569604 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b682850>]}
+[0m18:19:57.619204 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:19:57.620733 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:19:57.640676 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b8e3980>]}
+[0m18:19:57.640996 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 497 macros
+[0m18:19:57.642534 [info ] [MainThread]: 
+[0m18:19:57.642752 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:19:57.642914 [info ] [MainThread]: 
+[0m18:19:57.643181 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:19:57.645412 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:19:57.645648 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:19:58.162673 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:19:58.163350 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:19:58.600269 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b9a34d0>]}
+[0m18:19:58.601123 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:19:58.609194 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:19:58.609962 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:19:58.610830 [info ] [Thread-2 (]: 2 of 20 START sql view model labessentials_raw.stg_ga4_sessions ................ [RUN]
+[0m18:19:58.611789 [info ] [Thread-1 (]: 1 of 20 START sql view model labessentials_raw.mart_sanity ..................... [RUN]
+[0m18:19:58.612769 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.marketing_agent_core.stg_ga4_sessions'
+[0m18:19:58.613521 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_sanity)
+[0m18:19:58.614190 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_ga4_sessions
+[0m18:19:58.614806 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:19:58.625377 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:19:58.627482 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:19:58.628568 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:19:58.628984 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_ga4_sessions
+[0m18:19:58.666894 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:19:58.668170 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:19:58.668900 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_ga4_sessions: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_ga4_sessions"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_ga4_sessions`
+  OPTIONS()
+  as 
+
+with base as (
+  select
+    cast(event_date as date) as event_date,
+    event_name,
+    user_pseudo_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'ga_session_id') as ga_session_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'engagement_time_msec') as engagement_time_msec
+  from `henzelabs-gpt`.`labessentials_raw`.`ga4_events`
+),
+filtered as (
+  select
+    event_date,
+    user_pseudo_id,
+    ga_session_id,
+    event_name,
+    coalesce(engagement_time_msec, 0) as engagement_time_msec,
+    event_name = 'session_start' as is_session_start,
+    event_name = 'page_view' as is_page_view
+  from base
+  where ga_session_id is not null
+)
+select * from filtered;
+
+
+[0m18:19:58.669232 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:19:58.669551 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m18:19:58.669823 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:19:59.454385 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:28299b65-f8db-4845-85ea-793d4f212282&page=queryresults
+[0m18:19:59.455060 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:28299b65-f8db-4845-85ea-793d4f212282&page=queryresults
+[0m18:19:59.464962 [debug] [Thread-2 (]: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:19:59.466515 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11bada680>]}
+[0m18:19:59.467044 [error] [Thread-2 (]: 2 of 20 ERROR creating sql view model labessentials_raw.stg_ga4_sessions ....... [[31mERROR[0m in 0.85s]
+[0m18:19:59.467476 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:19:59.467768 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_orders
+[0m18:19:59.468134 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.stg_ga4_sessions' to be skipped because of status 'error'.  Reason: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql.
+[0m18:19:59.468475 [info ] [Thread-2 (]: 3 of 20 START sql view model labessentials_raw.stg_orders ...................... [RUN]
+[0m18:19:59.469117 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.stg_ga4_sessions, now model.marketing_agent_core.stg_orders)
+[0m18:19:59.469435 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_orders
+[0m18:19:59.474539 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:19:59.476044 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:a831ad7c-cf4a-474a-9c11-65caf9350d8b&page=queryresults
+[0m18:19:59.898619 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b833710>]}
+[0m18:19:59.899092 [info ] [Thread-1 (]: 1 of 20 OK created sql view model labessentials_raw.mart_sanity ................ [[32mCREATE VIEW (0 processed)[0m in 1.29s]
+[0m18:19:59.899447 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:19:59.899690 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:19:59.899934 [info ] [Thread-1 (]: 4 of 20 SKIP test not_null_stg_ga4_sessions_event_date ......................... [[33mSKIP[0m]
+[0m18:19:59.900229 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:19:59.900498 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:19:59.900731 [info ] [Thread-1 (]: 5 of 20 SKIP test not_null_stg_ga4_sessions_ga_session_id ...................... [[33mSKIP[0m]
+[0m18:19:59.900945 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb' to be skipped because of status 'skipped'. 
+[0m18:19:59.901152 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:19:59.901423 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:19:59.901636 [info ] [Thread-1 (]: 6 of 20 SKIP test not_null_stg_ga4_sessions_user_pseudo_id ..................... [[33mSKIP[0m]
+[0m18:19:59.901853 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:19:59.902025 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf' to be skipped because of status 'skipped'. 
+[0m18:19:59.902249 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db' to be skipped because of status 'skipped'. 
+[0m18:19:59.902536 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.fct_sessions_daily
+[0m18:19:59.902755 [info ] [Thread-1 (]: 7 of 20 SKIP relation labessentials_raw.fct_sessions_daily ..................... [[33mSKIP[0m]
+[0m18:19:59.902977 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.fct_sessions_daily
+[0m18:19:59.903152 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:19:59.903402 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:19:59.903593 [info ] [Thread-1 (]: 8 of 20 SKIP test not_null_fct_sessions_daily_event_date ....................... [[33mSKIP[0m]
+[0m18:19:59.903790 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:19:59.903973 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:19:59.904139 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c' to be skipped because of status 'skipped'. 
+[0m18:19:59.904330 [info ] [Thread-1 (]: 9 of 20 SKIP test unique_fct_sessions_daily_event_date ......................... [[33mSKIP[0m]
+[0m18:19:59.904588 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:19:59.904924 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174' to be skipped because of status 'skipped'. 
+[0m18:19:59.905186 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sessions_daily
+[0m18:19:59.905385 [info ] [Thread-1 (]: 10 of 20 SKIP relation labessentials_raw.mart_sessions_daily ................... [[33mSKIP[0m]
+[0m18:19:59.905590 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sessions_daily
+[0m18:19:59.905762 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:19:59.906028 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:19:59.906215 [info ] [Thread-1 (]: 11 of 20 SKIP test not_null_mart_sessions_daily_date ........................... [[33mSKIP[0m]
+[0m18:19:59.906434 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:19:59.906629 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:19:59.906786 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab' to be skipped because of status 'skipped'. 
+[0m18:19:59.906968 [info ] [Thread-1 (]: 12 of 20 SKIP test unique_mart_sessions_daily_date ............................. [[33mSKIP[0m]
+[0m18:19:59.907197 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:19:59.907392 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2' to be skipped because of status 'skipped'. 
+[0m18:20:02.441475 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_orders"
+[0m18:20:02.443832 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_orders
+[0m18:20:02.446859 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_orders"
+[0m18:20:02.447490 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_orders: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_orders"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+  OPTIONS()
+  as 
+
+
+
+
+with src as (
+  select
+    -- required
+    cast(id as string)                                    as order_id,
+    date(cast(created_at as timestamp))                   as order_date,
+
+    -- optional fields (guarded)
+    cast(order_number as string)                        as order_number,
+
+    cast(null as string)                                as customer_id,
+
+    cast(null as timestamp)                             as updated_at_ts,
+
+    cast(total_price as numeric)                        as total_price,
+
+    cast(subtotal_price as numeric)                     as subtotal_price,
+
+    cast(total_tax as numeric)                          as total_tax,
+
+    cast(total_discounts as numeric)                    as total_discounts,
+
+    cast(0 as numeric)                                  as total_shipping,
+
+    cast(financial_status as string)                    as financial_status,
+
+    cast(cancelled_at as timestamp)                     as cancelled_at_ts,
+
+    cast(currency as string)                            as currency
+  from `henzelabs-gpt`.`labessentials_raw`.`shopify_orders`
+)
+select * from src;
+
+
+[0m18:20:02.856926 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:71fce735-69bd-42bd-a9d1-af6143eedf3a&page=queryresults
+[0m18:20:03.346145 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11ba15f40>]}
+[0m18:20:03.347369 [info ] [Thread-2 (]: 3 of 20 OK created sql view model labessentials_raw.stg_orders ................. [[32mCREATE VIEW (0 processed)[0m in 3.88s]
+[0m18:20:03.348294 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_orders
+[0m18:20:03.349342 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:20:03.349933 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:20:03.350238 [info ] [Thread-1 (]: 13 of 20 START test not_null_stg_orders_order_date ............................. [RUN]
+[0m18:20:03.350827 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.mart_sanity, now test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb)
+[0m18:20:03.350575 [info ] [Thread-2 (]: 14 of 20 START test not_null_stg_orders_order_id ............................... [RUN]
+[0m18:20:03.351241 [debug] [Thread-1 (]: Began compiling node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:20:03.351554 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.stg_orders, now test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64)
+[0m18:20:03.359590 [debug] [Thread-1 (]: Writing injected SQL for node "test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb"
+[0m18:20:03.359949 [debug] [Thread-2 (]: Began compiling node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:20:03.362093 [debug] [Thread-2 (]: Writing injected SQL for node "test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64"
+[0m18:20:03.362757 [debug] [Thread-2 (]: Began executing node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:20:03.375136 [debug] [Thread-1 (]: Began executing node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:20:03.375499 [debug] [Thread-2 (]: Writing runtime sql for node "test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64"
+[0m18:20:03.376809 [debug] [Thread-1 (]: Writing runtime sql for node "test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb"
+[0m18:20:03.377489 [debug] [Thread-1 (]: On test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_date
+from `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+where order_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:20:03.377763 [debug] [Thread-2 (]: On test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:20:03.378023 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:20:03.378260 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:20:04.726285 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:a128ef50-a271-43d8-9ee6-e1ec88b35abb&page=queryresults
+[0m18:20:04.728917 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:f52413a5-bc71-417c-82b5-4a6165eea412&page=queryresults
+[0m18:20:05.273821 [info ] [Thread-2 (]: 14 of 20 PASS not_null_stg_orders_order_id ..................................... [[32mPASS[0m in 1.92s]
+[0m18:20:05.274890 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:20:05.329391 [info ] [Thread-1 (]: 13 of 20 PASS not_null_stg_orders_order_date ................................... [[32mPASS[0m in 1.98s]
+[0m18:20:05.330359 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:20:05.331181 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.fct_orders_daily
+[0m18:20:05.331959 [info ] [Thread-2 (]: 15 of 20 START sql view model labessentials_raw.fct_orders_daily ............... [RUN]
+[0m18:20:05.332581 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64, now model.marketing_agent_core.fct_orders_daily)
+[0m18:20:05.333092 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.fct_orders_daily
+[0m18:20:05.336365 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.fct_orders_daily"
+[0m18:20:05.337225 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.fct_orders_daily
+[0m18:20:05.339631 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.fct_orders_daily"
+[0m18:20:05.340386 [debug] [Thread-2 (]: On model.marketing_agent_core.fct_orders_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.fct_orders_daily"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+  OPTIONS()
+  as 
+
+with valid as (
+  select *
+  from `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+  where cancelled_at_ts is null
+    and coalesce(total_price,0) >= 0
+),
+agg as (
+  select
+    order_date,
+    count(*)                                        as orders,
+    sum(coalesce(subtotal_price,0))                 as gross_sales,
+    sum(coalesce(total_discounts,0))                as discounts,
+    sum(coalesce(total_tax,0))                      as taxes,
+    sum(coalesce(total_shipping,0))                 as shipping_charges,
+    sum(coalesce(total_price,0))                    as total_sales
+  from valid
+  group by order_date
+)
+select * from agg;;
+
+
+[0m18:20:05.340847 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:20:05.794212 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:82e51468-ef93-4228-a65d-2067d6101602&page=queryresults
+[0m18:20:05.795681 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:82e51468-ef93-4228-a65d-2067d6101602&page=queryresults
+[0m18:20:05.806339 [debug] [Thread-2 (]: Database Error in model fct_orders_daily (models/fct_orders_daily.sql)
+  Syntax error: Unexpected ";" at [26:19]
+  compiled code at target/run/marketing_agent_core/models/fct_orders_daily.sql
+[0m18:20:05.807207 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '182cd641-768d-46dc-9e42-5b6343d643e5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11ba96d50>]}
+[0m18:20:05.808165 [error] [Thread-2 (]: 15 of 20 ERROR creating sql view model labessentials_raw.fct_orders_daily ...... [[31mERROR[0m in 0.47s]
+[0m18:20:05.808989 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.fct_orders_daily
+[0m18:20:05.809727 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_orders_daily' to be skipped because of status 'error'.  Reason: Database Error in model fct_orders_daily (models/fct_orders_daily.sql)
+  Syntax error: Unexpected ";" at [26:19]
+  compiled code at target/run/marketing_agent_core/models/fct_orders_daily.sql.
+[0m18:20:05.810742 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:20:05.811445 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:20:05.812111 [info ] [Thread-2 (]: 17 of 20 SKIP test unique_fct_orders_daily_order_date .......................... [[33mSKIP[0m]
+[0m18:20:05.812760 [info ] [Thread-1 (]: 16 of 20 SKIP test not_null_fct_orders_daily_order_date ........................ [[33mSKIP[0m]
+[0m18:20:05.813343 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:20:05.813885 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:20:05.814358 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e' to be skipped because of status 'skipped'. 
+[0m18:20:05.815088 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd' to be skipped because of status 'skipped'. 
+[0m18:20:05.815922 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.mart_revenue_daily
+[0m18:20:05.816433 [info ] [Thread-2 (]: 18 of 20 SKIP relation labessentials_raw.mart_revenue_daily .................... [[33mSKIP[0m]
+[0m18:20:05.816939 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.mart_revenue_daily
+[0m18:20:05.817338 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_revenue_daily' to be skipped because of status 'skipped'. 
+[0m18:20:05.818056 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:20:05.818523 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:20:05.819024 [info ] [Thread-1 (]: 19 of 20 SKIP test not_null_mart_revenue_daily_date ............................ [[33mSKIP[0m]
+[0m18:20:05.819538 [info ] [Thread-2 (]: 20 of 20 SKIP test unique_mart_revenue_daily_date .............................. [[33mSKIP[0m]
+[0m18:20:05.820022 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:20:05.820464 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:20:05.820860 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23' to be skipped because of status 'skipped'. 
+[0m18:20:05.821554 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8' to be skipped because of status 'skipped'. 
+[0m18:20:05.823027 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:20:05.824922 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:20:05.825260 [debug] [MainThread]: Connection 'test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb' was properly closed.
+[0m18:20:05.825545 [debug] [MainThread]: Connection 'model.marketing_agent_core.fct_orders_daily' was properly closed.
+[0m18:20:05.825920 [info ] [MainThread]: 
+[0m18:20:05.826262 [info ] [MainThread]: Finished running 2 table models, 13 data tests, 5 view models in 0 hours 0 minutes and 8.18 seconds (8.18s).
+[0m18:20:05.827908 [debug] [MainThread]: Command end result
+[0m18:20:05.856809 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:20:05.858267 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:20:05.863171 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:20:05.863492 [info ] [MainThread]: 
+[0m18:20:05.863756 [info ] [MainThread]: [31mCompleted with 2 errors, 0 partial successes, and 0 warnings:[0m
+[0m18:20:05.863973 [info ] [MainThread]: 
+[0m18:20:05.864232 [error] [MainThread]: [31mFailure in model stg_ga4_sessions (models/stg_ga4_sessions.sql)[0m
+[0m18:20:05.864474 [error] [MainThread]:   Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:20:05.864658 [info ] [MainThread]: 
+[0m18:20:05.864874 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:20:05.865056 [info ] [MainThread]: 
+[0m18:20:05.865279 [error] [MainThread]: [31mFailure in model fct_orders_daily (models/fct_orders_daily.sql)[0m
+[0m18:20:05.865499 [error] [MainThread]:   Database Error in model fct_orders_daily (models/fct_orders_daily.sql)
+  Syntax error: Unexpected ";" at [26:19]
+  compiled code at target/run/marketing_agent_core/models/fct_orders_daily.sql
+[0m18:20:05.865672 [info ] [MainThread]: 
+[0m18:20:05.865882 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/fct_orders_daily.sql
+[0m18:20:05.866069 [info ] [MainThread]: 
+[0m18:20:05.866284 [info ] [MainThread]: Done. PASS=4 WARN=0 ERROR=2 SKIP=14 NO-OP=0 TOTAL=20
+[0m18:20:05.869629 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 10.646136, "process_in_blocks": "0", "process_kernel_time": 0.504233, "process_mem_max_rss": "373161984", "process_out_blocks": "0", "process_user_time": 2.901791}
+[0m18:20:05.869980 [debug] [MainThread]: Command `dbt build` failed at 18:20:05.869922 after 10.65 seconds
+[0m18:20:05.870234 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b850ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11b4ea8d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108c25550>]}
+[0m18:20:05.870465 [debug] [MainThread]: Flushing usage events
+[0m18:20:06.073105 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:26:12.832940 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105efbb60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1074339d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107433b10>]}
+
+
+============================== 18:26:12.836223 | 0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c ==============================
+[0m18:26:12.836223 [info ] [MainThread]: Running with dbt=1.10.9
+[0m18:26:12.836588 [debug] [MainThread]: running dbt with arguments {'introspect': 'True', 'quiet': 'False', 'use_experimental_parser': 'False', 'static_parser': 'True', 'fail_fast': 'False', 'send_anonymous_usage_stats': 'True', 'invocation_command': 'dbt build --profiles-dir=.', 'warn_error': 'None', 'version_check': 'True', 'log_path': '/Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'use_colors': 'True', 'log_format': 'default', 'log_cache_events': 'False', 'printer_width': '80', 'empty': 'False', 'indirect_selection': 'eager', 'cache_selected_only': 'False', 'profiles_dir': '.', 'partial_parse': 'True', 'debug': 'False', 'target_path': 'None', 'no_print': 'None', 'write_json': 'True'}
+[0m18:26:14.626469 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106736fd0>]}
+[0m18:26:14.656243 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x143725480>]}
+[0m18:26:14.656632 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:26:14.775919 [debug] [MainThread]: checksum: 6543b8b248ceda473ef0d611849d5d909085b6b714afa9b515e9635faea7af23, vars: {}, profile: , target: , version: 1.10.9
+[0m18:26:14.828764 [info ] [MainThread]: Unable to do partial parsing because a project config has changed
+[0m18:26:14.829101 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x144455350>]}
+[0m18:26:15.580235 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1442df6b0>]}
+[0m18:26:15.626220 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:26:15.627869 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:26:15.648597 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x144051630>]}
+[0m18:26:15.648906 [info ] [MainThread]: Found 7 models, 13 data tests, 2 sources, 497 macros
+[0m18:26:15.650416 [info ] [MainThread]: 
+[0m18:26:15.650623 [info ] [MainThread]: Concurrency: 2 threads (target='bigquery')
+[0m18:26:15.650783 [info ] [MainThread]: 
+[0m18:26:15.651042 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:26:15.653199 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_henzelabs-gpt'
+[0m18:26:15.653420 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:26:16.198957 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_henzelabs-gpt, now list_henzelabs-gpt_labessentials_raw)
+[0m18:26:16.199711 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:26:16.708855 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14438bd40>]}
+[0m18:26:16.709339 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:26:16.714238 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sanity
+[0m18:26:16.714725 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:26:16.715759 [info ] [Thread-1 (]: 1 of 20 START sql view model labessentials_raw.mart_sanity ..................... [RUN]
+[0m18:26:16.716466 [info ] [Thread-2 (]: 2 of 20 START sql view model labessentials_raw.stg_ga4_sessions ................ [RUN]
+[0m18:26:16.716937 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_henzelabs-gpt_labessentials_raw, now model.marketing_agent_core.mart_sanity)
+[0m18:26:16.717706 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.marketing_agent_core.stg_ga4_sessions'
+[0m18:26:16.718083 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_sanity
+[0m18:26:16.718921 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_ga4_sessions
+[0m18:26:16.728987 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_sanity"
+[0m18:26:16.732031 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:26:16.732738 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_sanity
+[0m18:26:16.756627 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_sanity"
+[0m18:26:16.756963 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_ga4_sessions
+[0m18:26:16.758797 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_ga4_sessions"
+[0m18:26:16.759509 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_sanity: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_sanity"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`mart_sanity`
+  OPTIONS()
+  as select 1 as ok;
+
+
+[0m18:26:16.759827 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_ga4_sessions: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_ga4_sessions"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_ga4_sessions`
+  OPTIONS()
+  as 
+
+with base as (
+  select
+    cast(event_date as date) as event_date,
+    event_name,
+    user_pseudo_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'ga_session_id') as ga_session_id,
+    (select ep.value.int_value from unnest(event_params) ep where ep.key = 'engagement_time_msec') as engagement_time_msec
+  from `henzelabs-gpt`.`labessentials_raw`.`ga4_events`
+),
+filtered as (
+  select
+    event_date,
+    user_pseudo_id,
+    ga_session_id,
+    event_name,
+    coalesce(engagement_time_msec, 0) as engagement_time_msec,
+    event_name = 'session_start' as is_session_start,
+    event_name = 'page_view' as is_page_view
+  from base
+  where ga_session_id is not null
+)
+select * from filtered;
+
+
+[0m18:26:16.760090 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:26:16.760316 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m18:26:17.320927 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:baf993a8-675f-46fb-9755-4e3b393864f0&page=queryresults
+[0m18:26:17.321799 [error] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:baf993a8-675f-46fb-9755-4e3b393864f0&page=queryresults
+[0m18:26:17.334394 [debug] [Thread-2 (]: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:26:17.336532 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x144a94c50>]}
+[0m18:26:17.337203 [error] [Thread-2 (]: 2 of 20 ERROR creating sql view model labessentials_raw.stg_ga4_sessions ....... [[31mERROR[0m in 0.62s]
+[0m18:26:17.337733 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_ga4_sessions
+[0m18:26:17.338098 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.stg_orders
+[0m18:26:17.338555 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.stg_ga4_sessions' to be skipped because of status 'error'.  Reason: Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql.
+[0m18:26:17.339042 [info ] [Thread-2 (]: 3 of 20 START sql view model labessentials_raw.stg_orders ...................... [RUN]
+[0m18:26:17.339910 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.stg_ga4_sessions, now model.marketing_agent_core.stg_orders)
+[0m18:26:17.340275 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.stg_orders
+[0m18:26:17.347422 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:26:17.393299 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:52ebe0be-79b6-4412-b220-9671363a56a3&page=queryresults
+[0m18:26:17.843806 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x144a4ad00>]}
+[0m18:26:17.844259 [info ] [Thread-1 (]: 1 of 20 OK created sql view model labessentials_raw.mart_sanity ................ [[32mCREATE VIEW (0 processed)[0m in 1.13s]
+[0m18:26:17.844617 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sanity
+[0m18:26:17.844877 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:26:17.845106 [info ] [Thread-1 (]: 4 of 20 SKIP test not_null_stg_ga4_sessions_event_date ......................... [[33mSKIP[0m]
+[0m18:26:17.845369 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb
+[0m18:26:17.845581 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:26:17.845780 [info ] [Thread-1 (]: 5 of 20 SKIP test not_null_stg_ga4_sessions_ga_session_id ...................... [[33mSKIP[0m]
+[0m18:26:17.845969 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_event_date.30d43252bb' to be skipped because of status 'skipped'. 
+[0m18:26:17.846193 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf
+[0m18:26:17.846469 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:26:17.846673 [info ] [Thread-1 (]: 6 of 20 SKIP test not_null_stg_ga4_sessions_user_pseudo_id ..................... [[33mSKIP[0m]
+[0m18:26:17.846883 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_ga_session_id.0ec8bb2eaf' to be skipped because of status 'skipped'. 
+[0m18:26:17.847119 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db
+[0m18:26:17.847396 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_stg_ga4_sessions_user_pseudo_id.b2c29154db' to be skipped because of status 'skipped'. 
+[0m18:26:17.847692 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.fct_sessions_daily
+[0m18:26:17.847894 [info ] [Thread-1 (]: 7 of 20 SKIP relation labessentials_raw.fct_sessions_daily ..................... [[33mSKIP[0m]
+[0m18:26:17.848105 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.fct_sessions_daily
+[0m18:26:17.848289 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.fct_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:26:17.848565 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:26:17.848757 [info ] [Thread-1 (]: 8 of 20 SKIP test not_null_fct_sessions_daily_event_date ....................... [[33mSKIP[0m]
+[0m18:26:17.849006 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c
+[0m18:26:17.849350 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:26:17.849569 [info ] [Thread-1 (]: 9 of 20 SKIP test unique_fct_sessions_daily_event_date ......................... [[33mSKIP[0m]
+[0m18:26:17.849940 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_fct_sessions_daily_event_date.49508be38c' to be skipped because of status 'skipped'. 
+[0m18:26:17.850157 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174
+[0m18:26:17.850456 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_fct_sessions_daily_event_date.8d2648f174' to be skipped because of status 'skipped'. 
+[0m18:26:17.850818 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_sessions_daily
+[0m18:26:17.851031 [info ] [Thread-1 (]: 10 of 20 SKIP relation labessentials_raw.mart_sessions_daily ................... [[33mSKIP[0m]
+[0m18:26:17.851242 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_sessions_daily
+[0m18:26:17.851407 [debug] [Thread-5 (]: Marking all children of 'model.marketing_agent_core.mart_sessions_daily' to be skipped because of status 'skipped'. 
+[0m18:26:17.851647 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:26:17.851838 [info ] [Thread-1 (]: 11 of 20 SKIP test not_null_mart_sessions_daily_date ........................... [[33mSKIP[0m]
+[0m18:26:17.852090 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab
+[0m18:26:17.852303 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:26:17.852491 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.not_null_mart_sessions_daily_date.4f802018ab' to be skipped because of status 'skipped'. 
+[0m18:26:17.852674 [info ] [Thread-1 (]: 12 of 20 SKIP test unique_mart_sessions_daily_date ............................. [[33mSKIP[0m]
+[0m18:26:17.852930 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2
+[0m18:26:17.853114 [debug] [Thread-5 (]: Marking all children of 'test.marketing_agent_core.unique_mart_sessions_daily_date.ba4bee70f2' to be skipped because of status 'skipped'. 
+[0m18:26:20.011952 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.stg_orders"
+[0m18:26:20.014728 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.stg_orders
+[0m18:26:20.019958 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.stg_orders"
+[0m18:26:20.021914 [debug] [Thread-2 (]: On model.marketing_agent_core.stg_orders: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.stg_orders"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+  OPTIONS()
+  as 
+
+
+
+
+with src as (
+  select
+    -- required
+    cast(id as string)                                    as order_id,
+    date(cast(created_at as timestamp))                   as order_date,
+
+    -- optional fields (guarded)
+    cast(order_number as string)                        as order_number,
+
+    cast(null as string)                                as customer_id,
+
+    cast(null as timestamp)                             as updated_at_ts,
+
+    cast(total_price as numeric)                        as total_price,
+
+    cast(subtotal_price as numeric)                     as subtotal_price,
+
+    cast(total_tax as numeric)                          as total_tax,
+
+    cast(total_discounts as numeric)                    as total_discounts,
+
+    cast(0 as numeric)                                  as total_shipping,
+
+    cast(financial_status as string)                    as financial_status,
+
+    cast(cancelled_at as timestamp)                     as cancelled_at_ts,
+
+    cast(currency as string)                            as currency
+  from `henzelabs-gpt`.`labessentials_raw`.`shopify_orders`
+)
+select * from src;
+
+
+[0m18:26:20.419689 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:3f8fda8d-ff8e-4d07-9ceb-313c3cbeb1b4&page=queryresults
+[0m18:26:20.831214 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x144d30230>]}
+[0m18:26:20.832622 [info ] [Thread-2 (]: 3 of 20 OK created sql view model labessentials_raw.stg_orders ................. [[32mCREATE VIEW (0 processed)[0m in 3.49s]
+[0m18:26:20.833934 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.stg_orders
+[0m18:26:20.835332 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:26:20.836145 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:26:20.836752 [info ] [Thread-1 (]: 13 of 20 START test not_null_stg_orders_order_date ............................. [RUN]
+[0m18:26:20.837345 [info ] [Thread-2 (]: 14 of 20 START test not_null_stg_orders_order_id ............................... [RUN]
+[0m18:26:20.837987 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.mart_sanity, now test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb)
+[0m18:26:20.838546 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.stg_orders, now test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64)
+[0m18:26:20.839062 [debug] [Thread-1 (]: Began compiling node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:26:20.839561 [debug] [Thread-2 (]: Began compiling node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:26:20.862521 [debug] [Thread-1 (]: Writing injected SQL for node "test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb"
+[0m18:26:20.864270 [debug] [Thread-2 (]: Writing injected SQL for node "test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64"
+[0m18:26:20.865425 [debug] [Thread-1 (]: Began executing node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:26:20.865840 [debug] [Thread-2 (]: Began executing node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:26:20.883576 [debug] [Thread-2 (]: Writing runtime sql for node "test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64"
+[0m18:26:20.884580 [debug] [Thread-1 (]: Writing runtime sql for node "test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb"
+[0m18:26:20.885315 [debug] [Thread-1 (]: On test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_date
+from `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+where order_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:26:20.885681 [debug] [Thread-2 (]: On test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:26:20.885990 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:26:20.886266 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:26:21.715157 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:db712e60-eab8-4ee1-99ff-d62cac614d8f&page=queryresults
+[0m18:26:22.077983 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:0c400b99-aba4-4a15-a725-de98cad95082&page=queryresults
+[0m18:26:22.274566 [info ] [Thread-2 (]: 14 of 20 PASS not_null_stg_orders_order_id ..................................... [[32mPASS[0m in 1.44s]
+[0m18:26:22.275891 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64
+[0m18:26:22.639709 [info ] [Thread-1 (]: 13 of 20 PASS not_null_stg_orders_order_date ................................... [[32mPASS[0m in 1.80s]
+[0m18:26:22.640942 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb
+[0m18:26:22.642412 [debug] [Thread-2 (]: Began running node model.marketing_agent_core.fct_orders_daily
+[0m18:26:22.643477 [info ] [Thread-2 (]: 15 of 20 START sql view model labessentials_raw.fct_orders_daily ............... [RUN]
+[0m18:26:22.644462 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.marketing_agent_core.not_null_stg_orders_order_id.81cfe2fe64, now model.marketing_agent_core.fct_orders_daily)
+[0m18:26:22.645350 [debug] [Thread-2 (]: Began compiling node model.marketing_agent_core.fct_orders_daily
+[0m18:26:22.650299 [debug] [Thread-2 (]: Writing injected SQL for node "model.marketing_agent_core.fct_orders_daily"
+[0m18:26:22.651457 [debug] [Thread-2 (]: Began executing node model.marketing_agent_core.fct_orders_daily
+[0m18:26:22.654798 [debug] [Thread-2 (]: Writing runtime sql for node "model.marketing_agent_core.fct_orders_daily"
+[0m18:26:22.655841 [debug] [Thread-2 (]: On model.marketing_agent_core.fct_orders_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.fct_orders_daily"} */
+
+
+  create or replace view `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+  OPTIONS()
+  as 
+
+with valid as (
+  select *
+  from `henzelabs-gpt`.`labessentials_raw`.`stg_orders`
+  where cancelled_at_ts is null
+    and coalesce(total_price,0) >= 0
+),
+agg as (
+  select
+    order_date,
+    count(*)                                        as orders,
+    sum(coalesce(subtotal_price,0))                 as gross_sales,
+    sum(coalesce(total_discounts,0))                as discounts,
+    sum(coalesce(total_tax,0))                      as taxes,
+    sum(coalesce(total_shipping,0))                 as shipping_charges,
+    sum(coalesce(total_price,0))                    as total_sales
+  from valid
+  group by order_date
+)
+select * from agg;
+
+
+[0m18:26:22.656490 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:26:23.363203 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:e8bed8df-d7b0-4300-9066-9fced5846c9a&page=queryresults
+[0m18:26:23.801152 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x14455ca50>]}
+[0m18:26:23.802528 [info ] [Thread-2 (]: 15 of 20 OK created sql view model labessentials_raw.fct_orders_daily .......... [[32mCREATE VIEW (0 processed)[0m in 1.16s]
+[0m18:26:23.803643 [debug] [Thread-2 (]: Finished running node model.marketing_agent_core.fct_orders_daily
+[0m18:26:23.804610 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:26:23.805162 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:26:23.805734 [info ] [Thread-1 (]: 16 of 20 START test not_null_fct_orders_daily_order_date ....................... [RUN]
+[0m18:26:23.806398 [info ] [Thread-2 (]: 17 of 20 START test unique_fct_orders_daily_order_date ......................... [RUN]
+[0m18:26:23.806992 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.marketing_agent_core.not_null_stg_orders_order_date.2177a3e8bb, now test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd)
+[0m18:26:23.807742 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.fct_orders_daily, now test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e)
+[0m18:26:23.808479 [debug] [Thread-1 (]: Began compiling node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:26:23.808996 [debug] [Thread-2 (]: Began compiling node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:26:23.813778 [debug] [Thread-1 (]: Writing injected SQL for node "test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd"
+[0m18:26:23.821158 [debug] [Thread-2 (]: Writing injected SQL for node "test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e"
+[0m18:26:23.822384 [debug] [Thread-2 (]: Began executing node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:26:23.829868 [debug] [Thread-1 (]: Began executing node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:26:23.833491 [debug] [Thread-2 (]: Writing runtime sql for node "test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e"
+[0m18:26:23.835450 [debug] [Thread-1 (]: Writing runtime sql for node "test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd"
+[0m18:26:23.836385 [debug] [Thread-1 (]: On test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_date
+from `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+where order_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:26:23.836881 [debug] [Thread-2 (]: On test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with dbt_test__target as (
+
+  select order_date as unique_field
+  from `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+  where order_date is not null
+
+)
+
+select
+    unique_field,
+    count(*) as n_records
+
+from dbt_test__target
+group by unique_field
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:26:23.837331 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:26:23.837686 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:26:25.073622 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:a37ef58d-b789-4f7c-b573-f3ef77423d3d&page=queryresults
+[0m18:26:25.191518 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:92073f65-3021-4b59-a46d-230118fd8073&page=queryresults
+[0m18:26:25.650645 [info ] [Thread-1 (]: 16 of 20 PASS not_null_fct_orders_daily_order_date ............................. [[32mPASS[0m in 1.84s]
+[0m18:26:25.652213 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd
+[0m18:26:25.830743 [info ] [Thread-2 (]: 17 of 20 PASS unique_fct_orders_daily_order_date ............................... [[32mPASS[0m in 2.02s]
+[0m18:26:25.832022 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e
+[0m18:26:25.833169 [debug] [Thread-1 (]: Began running node model.marketing_agent_core.mart_revenue_daily
+[0m18:26:25.834478 [info ] [Thread-1 (]: 18 of 20 START sql table model labessentials_raw.mart_revenue_daily ............ [RUN]
+[0m18:26:25.835535 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.marketing_agent_core.not_null_fct_orders_daily_order_date.c601be55cd, now model.marketing_agent_core.mart_revenue_daily)
+[0m18:26:25.836182 [debug] [Thread-1 (]: Began compiling node model.marketing_agent_core.mart_revenue_daily
+[0m18:26:25.840511 [debug] [Thread-1 (]: Writing injected SQL for node "model.marketing_agent_core.mart_revenue_daily"
+[0m18:26:25.842811 [debug] [Thread-1 (]: Began executing node model.marketing_agent_core.mart_revenue_daily
+[0m18:26:25.879589 [debug] [Thread-1 (]: Writing runtime sql for node "model.marketing_agent_core.mart_revenue_daily"
+[0m18:26:25.880560 [debug] [Thread-1 (]: On model.marketing_agent_core.mart_revenue_daily: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "model.marketing_agent_core.mart_revenue_daily"} */
+
+  
+    
+
+    create or replace table `henzelabs-gpt`.`labessentials_raw`.`mart_revenue_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      
+
+select
+  order_date as date,
+  orders,
+  gross_sales,
+  discounts,
+  taxes,
+  shipping_charges,
+  total_sales,
+  -- convenience metrics
+  safe_divide(discounts, nullif(gross_sales,0)) as discount_rate,
+  safe_divide(total_sales, nullif(orders,0))    as aov
+from `henzelabs-gpt`.`labessentials_raw`.`fct_orders_daily`
+order by date
+    );
+  
+[0m18:26:25.880929 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:26:26.641627 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:f6819184-3188-46b3-b85f-3da3aa481eac&page=queryresults
+[0m18:26:29.003853 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0a2916b8-0e7b-4e7d-80cc-4385b5d28b0c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x144f791d0>]}
+[0m18:26:29.005104 [info ] [Thread-1 (]: 18 of 20 OK created sql table model labessentials_raw.mart_revenue_daily ....... [[32mCREATE TABLE (193.0 rows, 18.6 KiB processed)[0m in 3.17s]
+[0m18:26:29.006184 [debug] [Thread-1 (]: Finished running node model.marketing_agent_core.mart_revenue_daily
+[0m18:26:29.007343 [debug] [Thread-2 (]: Began running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:26:29.008043 [debug] [Thread-1 (]: Began running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:26:29.009293 [info ] [Thread-2 (]: 19 of 20 START test not_null_mart_revenue_daily_date ........................... [RUN]
+[0m18:26:29.010453 [info ] [Thread-1 (]: 20 of 20 START test unique_mart_revenue_daily_date ............................. [RUN]
+[0m18:26:29.011381 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.marketing_agent_core.unique_fct_orders_daily_order_date.47d226940e, now test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23)
+[0m18:26:29.012012 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.marketing_agent_core.mart_revenue_daily, now test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8)
+[0m18:26:29.012594 [debug] [Thread-2 (]: Began compiling node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:26:29.013115 [debug] [Thread-1 (]: Began compiling node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:26:29.018926 [debug] [Thread-2 (]: Writing injected SQL for node "test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23"
+[0m18:26:29.024204 [debug] [Thread-1 (]: Writing injected SQL for node "test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8"
+[0m18:26:29.025562 [debug] [Thread-2 (]: Began executing node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:26:29.026182 [debug] [Thread-1 (]: Began executing node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:26:29.028808 [debug] [Thread-2 (]: Writing runtime sql for node "test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23"
+[0m18:26:29.031231 [debug] [Thread-1 (]: Writing runtime sql for node "test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8"
+[0m18:26:29.032421 [debug] [Thread-2 (]: On test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select date
+from `henzelabs-gpt`.`labessentials_raw`.`mart_revenue_daily`
+where date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:26:29.033064 [debug] [Thread-1 (]: On test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8: /* {"app": "dbt", "dbt_version": "1.10.9", "profile_name": "marketing_agent_core", "target_name": "bigquery", "node_id": "test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with dbt_test__target as (
+
+  select date as unique_field
+  from `henzelabs-gpt`.`labessentials_raw`.`mart_revenue_daily`
+  where date is not null
+
+)
+
+select
+    unique_field,
+    count(*) as n_records
+
+from dbt_test__target
+group by unique_field
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m18:26:29.033555 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:26:29.034012 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:26:29.870814 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:922cc289-edca-4c66-970c-6d3ec8cd5301&page=queryresults
+[0m18:26:30.035489 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=henzelabs-gpt&j=bq:US:9794cd22-5b18-40dd-8ce3-7caf79c9dadb&page=queryresults
+[0m18:26:30.413733 [info ] [Thread-2 (]: 19 of 20 PASS not_null_mart_revenue_daily_date ................................. [[32mPASS[0m in 1.40s]
+[0m18:26:30.415372 [debug] [Thread-2 (]: Finished running node test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23
+[0m18:26:30.598089 [info ] [Thread-1 (]: 20 of 20 PASS unique_mart_revenue_daily_date ................................... [[32mPASS[0m in 1.59s]
+[0m18:26:30.599692 [debug] [Thread-1 (]: Finished running node test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8
+[0m18:26:30.602079 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:26:30.605614 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:26:30.606267 [debug] [MainThread]: Connection 'test.marketing_agent_core.unique_mart_revenue_daily_date.301e6020b8' was properly closed.
+[0m18:26:30.606710 [debug] [MainThread]: Connection 'test.marketing_agent_core.not_null_mart_revenue_daily_date.606cbdcc23' was properly closed.
+[0m18:26:30.607264 [info ] [MainThread]: 
+[0m18:26:30.607748 [info ] [MainThread]: Finished running 2 table models, 13 data tests, 5 view models in 0 hours 0 minutes and 14.96 seconds (14.96s).
+[0m18:26:30.611480 [debug] [MainThread]: Command end result
+[0m18:26:30.644837 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/manifest.json
+[0m18:26:30.646820 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/semantic_manifest.json
+[0m18:26:30.652681 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/laurenadmin/Projects/marketing-agent-core/transform/dbt/target/run_results.json
+[0m18:26:30.653103 [info ] [MainThread]: 
+[0m18:26:30.653396 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m18:26:30.653648 [info ] [MainThread]: 
+[0m18:26:30.654142 [error] [MainThread]: [31mFailure in model stg_ga4_sessions (models/stg_ga4_sessions.sql)[0m
+[0m18:26:30.654500 [error] [MainThread]:   Database Error in model stg_ga4_sessions (models/stg_ga4_sessions.sql)
+  Not found: Table henzelabs-gpt:labessentials_raw.ga4_events was not found in location US
+  compiled code at target/run/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:26:30.654762 [info ] [MainThread]: 
+[0m18:26:30.655042 [info ] [MainThread]:   compiled code at target/compiled/marketing_agent_core/models/stg_ga4_sessions.sql
+[0m18:26:30.655295 [info ] [MainThread]: 
+[0m18:26:30.655684 [info ] [MainThread]: Done. PASS=10 WARN=0 ERROR=1 SKIP=9 NO-OP=0 TOTAL=20
+[0m18:26:30.659945 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 17.869022, "process_in_blocks": "0", "process_kernel_time": 0.502313, "process_mem_max_rss": "377847808", "process_out_blocks": "0", "process_user_time": 3.802137}
+[0m18:26:30.660404 [debug] [MainThread]: Command `dbt build` failed at 18:26:30.660334 after 17.87 seconds
+[0m18:26:30.660698 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x146007b30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x146007bf0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1460079b0>]}
+[0m18:26:30.660979 [debug] [MainThread]: Flushing usage events
+[0m18:26:30.884876 [debug] [MainThread]: An error was encountered while trying to flush usage events

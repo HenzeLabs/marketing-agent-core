@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: raw
-    schema: labessentials_raw # change if your dataset differs
+    schema: "{{ var('raw_schema', 'labessentials_raw') }}" # dynamic schema via dbt var
     tables:
       - name: shopify_orders # change if your raw table name differs
+      - name: ga4_events # GA4 export table (events_* or a view named ga4_events)

@@ -1,9 +1,10 @@
 import DashboardPanel from "./components/DashboardPanel";
 import CopilotPanel from "./components/CopilotPanel";
+import DashboardLayout from "./components/DashboardLayout";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans p-2 sm:p-4 md:p-6">
+    <DashboardLayout>
       <div className="flex flex-col md:flex-row h-full gap-4 md:gap-8 max-w-7xl mx-auto">
         {/* Left: Dashboard */}
         <div className="flex-1 flex flex-col border-b md:border-b-0 md:border-r border-zinc-800 p-4 md:p-6 rounded-lg md:rounded-l-lg bg-zinc-900/60 shadow transition-all duration-200">
@@ -17,7 +18,7 @@ function App() {
           <CopilotPanel />
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }
 

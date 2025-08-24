@@ -7,7 +7,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 
-ENV PORT=8080
 ENV PYTHONPATH=/app
-
-CMD ["python", "app.py"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]

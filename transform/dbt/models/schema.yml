@@ -19,3 +19,25 @@ models:
     columns:
       - name: date
         tests: [not_null, unique]
+
+  - name: stg_ga4_sessions
+    description: "Flattened GA4 events with session_id, page_view and engagement flags."
+    columns:
+      - name: event_date
+        tests: [not_null]
+      - name: user_pseudo_id
+        tests: [not_null]
+      - name: ga_session_id
+        tests: [not_null]
+
+  - name: fct_sessions_daily
+    description: "Daily session metrics aggregated from GA4 session-level rollups."
+    columns:
+      - name: event_date
+        tests: [not_null, unique]
+
+  - name: mart_sessions_daily
+    description: "Chart-ready daily GA4 session metrics."
+    columns:
+      - name: date
+        tests: [not_null, unique]
