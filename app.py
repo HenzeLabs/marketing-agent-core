@@ -22,13 +22,20 @@ def get_bq():
     except Exception:
         return None
 
-def rows(sql):
+import logging
+
+def rows(sql, debug_label=None):
     client = get_bq()
     if not client:
+        logging.error(f"[rows] No BigQuery client for {debug_label or sql}")
         return []
     try:
-        return [dict(r) for r in client.query(sql).result()]
-    except Exception:
+        result = [dict(r) for r in client.query(sql).result()]
+        if debug_label:
+            logging.info(f"[rows] {debug_label}: {result}")
+        return result
+    except Exception as e:
+        logging.error(f"[rows] Exception for {debug_label or sql}: {e}")
         return []
 
 
@@ -57,26 +64,28 @@ def health():
 @app.get("/api/metrics/revenue-daily")
 def revenue_daily():
     return jsonify(rows("""
-        SELECT dt, revenue
+        SELECT date as dt, revenue
         FROM `henzelabs-gpt.hotash_core.v_ga4_revenue_daily`
-        ORDER BY dt DESC LIMIT 30
+        ORDER BY date DESC LIMIT 30
     """))
 
 @app.get("/api/metrics/sessions-daily")
 def sessions_daily():
-    return jsonify(rows("""
-        SELECT dt, sessions
+    sql = """
+        SELECT date as dt, sessions
         FROM `henzelabs-gpt.hotash_core.v_ga4_sessions_daily`
-        ORDER BY dt DESC LIMIT 30
-    """))
+        ORDER BY date DESC LIMIT 30
+    """
+    return jsonify(rows(sql, debug_label="sessions-daily"))
 
 @app.get("/api/clarity/top-urls")
 def clarity_top_urls():
-    return jsonify(rows("""
-        SELECT url, SUM(pageviews) AS pv
-        FROM `henzelabs-gpt.hotash_raw.clarity_pageviews`
-        GROUP BY url ORDER BY pv DESC LIMIT 20
-    """))
+    sql = """
+        SELECT url, views
+        FROM `henzelabs-gpt.hotash_core.v_clarity_top_urls`
+        ORDER BY date DESC, views DESC LIMIT 20
+    """
+    return jsonify(rows(sql, debug_label="clarity-top-urls"))
 
 @app.get("/api/shopify-metrics")
 def shopify_metrics():
@@ -104,3 +113,48 @@ def get_clarity_summaries():
         ORDER BY snapshot_date DESC, ai_priority ASC LIMIT 200
     """
     return jsonify(rows(sql))
+
+# --- Admin Ingest Endpoints (token gated) ---
+from flask import request
+import logging
+
+ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")
+
+def check_admin():
+    token = request.headers.get("X-Admin-Token")
+    if not ADMIN_TOKEN or token != ADMIN_TOKEN:
+        return False
+    return True
+
+def run_ga4_pipeline():
+    logging.info("GA4 ingest pipeline triggered (noop)")
+    return True
+
+def run_clarity_pipeline():
+    logging.info("Clarity ingest pipeline triggered (noop)")
+    return True
+
+def run_shopify_pipeline():
+    logging.info("Shopify ingest pipeline triggered (noop)")
+    return True
+
+@app.post("/admin/ingest/ga4")
+def admin_ingest_ga4():
+    if not check_admin():
+        return {"error": "Unauthorized"}, 401
+    run_ga4_pipeline()
+    return {"ok": True}
+
+@app.post("/admin/ingest/clarity")
+def admin_ingest_clarity():
+    if not check_admin():
+        return {"error": "Unauthorized"}, 401
+    run_clarity_pipeline()
+    return {"ok": True}
+
+@app.post("/admin/ingest/shopify")
+def admin_ingest_shopify():
+    if not check_admin():
+        return {"error": "Unauthorized"}, 401
+    run_shopify_pipeline()
+    return {"ok": True}

@@ -25,20 +25,61 @@ A modular Python-based data pipeline for ingesting marketing data from multiple 
    ```
 2. **Set up `.env` with GCP and API keys** (see `config.yaml` for required variables)
 3. **Install dependencies:**
+
    ```sh
    python3 -m venv venv
    source venv/bin/activate
    pip install -r requirements.txt
    ```
-4. **Run a pipeline:**
+
+4. **Create BigQuery views:**
 
    ```sh
-   python -m scripts.pipeline_shopify
-   # or
-   python -m scripts.pipeline_clarity
+   make views
    ```
 
-5. **Start the backend API (Flask):**
+5. **Set up admin token:**
+
+   Add to your `.env`:
+
+   ```env
+   ADMIN_TOKEN=your-strong-admin-token
+   ```
+
+6. **Start the backend API (Flask):**
+
+   1. Create a `.env` file in the project root with:
+      ```env
+      GOOGLE_APPLICATION_CREDENTIALS=./creds/henzelabs-ci.json
+      GOOGLE_CLOUD_PROJECT=henzelabs-gpt
+      PORT=8080
+      ADMIN_TOKEN=your-strong-admin-token
+      ```
+   2. Start the API:
+      ```sh
+      chmod +x scripts/start_api.sh
+      ./scripts/start_api.sh
+      ```
+   3. The API will be available at `http://127.0.0.1:8080/` (or the port you set in `.env`).
+   4. See [API.md](API.md) for endpoint documentation.
+
+7. **Create/update Cloud Scheduler jobs:**
+
+   ```sh
+   make schedule
+   ```
+
+8. **Smoke test your deployment:**
+
+   ```sh
+   bash scripts/smoke.sh "$SERVICE_URL"
+   # Example:
+   # SERVICE_URL="https://marketing-agent-core-906749953116.us-east1.run.app" bash scripts/smoke.sh "$SERVICE_URL"
+   ```
+
+   This will fail if any endpoint returns non-200 or empty arrays.
+
+9. **Start the backend API (Flask):**
 
    1. Create a `.env` file in the project root with:
       ```env
@@ -54,10 +95,10 @@ A modular Python-based data pipeline for ingesting marketing data from multiple 
    3. The API will be available at `http://127.0.0.1:8080/` (or the port you set in `.env`).
    4. See [API.md](API.md) for endpoint documentation.
 
-6. **Start the frontend:**
-   ```sh
-   cd ui && npm install && npm run dev
-   ```
+10. **Start the frontend:**
+    ```sh
+    cd ui && npm install && npm run dev
+    ```
 
 ---
 

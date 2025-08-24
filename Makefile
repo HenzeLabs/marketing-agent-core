@@ -38,5 +38,14 @@ docker-run:
 deploy:
 	gcloud run deploy marketing-agent-core --source . --project henzelabs-gpt --region us-central1 --allow-unauthenticated --set-env-vars GOOGLE_CLOUD_PROJECT=henzelabs-gpt,PORT=8080
 
+# Create BigQuery core views
+views:
+	bq mk -f --dataset --location=US henzelabs-gpt:hotash_core || true
+	bq query --nouse_legacy_sql < sql/create_core_views.sql
+
+# Create/update Cloud Scheduler jobs
+schedule:
+	bash scripts/scheduler.sh
+
 clean:
 	rm -rf $(VENV) **/__pycache__ .pytest_cache
