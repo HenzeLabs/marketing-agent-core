@@ -37,11 +37,16 @@ export default function Landing() {
           e.preventDefault();
         }}
       >
+        <label htmlFor="email" className="sr-only">
+          Your email
+        </label>
         <input
+          id="email"
           type="email"
           name="email"
           required
-          placeholder="Your email"
+          placeholder="you@example.com"
+          autoComplete="email"
           className="rounded-lg px-4 py-2 border border-gray-300 focus:border-blue-500 focus:outline-none"
         />
         <button
