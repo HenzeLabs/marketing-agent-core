@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Marketing Agent Core API
+  version: 1.0.0
+  description: Minimal OpenAPI spec for public metrics endpoints.
+servers:
+  - url: https://marketing-agent-core-906749953116.us-east1.run.app
+paths:
+  /_health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+  /api/metrics/sessions-daily:
+    get:
+      summary: Daily sessions (GA4)
+      responses:
+        "200":
+          description: List of daily sessions
+  /api/metrics/revenue-daily:
+    get:
+      summary: Daily revenue (unified)
+      parameters:
+        - in: query
+          name: source
+          schema:
+            type: string
+            enum: [unified, shopify, ga4]
+          description: Revenue source (future-proof)
+        - in: query
+          name: days
+          schema:
+            type: integer
+            default: 90
+          description: Number of days to return
+      responses:
+        "200":
+          description: List of daily revenue
+  /api/clarity/top-urls:
+    get:
+      summary: Top Clarity URLs
+      responses:
+        "200":
+          description: List of top URLs

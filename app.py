@@ -30,7 +30,8 @@ def rows(sql, debug_label=None):
         logging.error(f"[rows] No BigQuery client for {debug_label or sql}")
         return []
     try:
-        result = [dict(r) for r in client.query(sql).result()]
+        job_config = bigquery.QueryJobConfig(maximum_bytes_billed=2_000_000_000)
+        result = [dict(r) for r in client.query(sql, job_config=job_config).result()]
         if debug_label:
             logging.info(f"[rows] {debug_label}: {result}")
         return result
@@ -64,8 +65,8 @@ def health():
 @app.get("/api/metrics/revenue-daily")
 def revenue_daily():
     return jsonify(rows("""
-        SELECT date as dt, revenue
-        FROM `henzelabs-gpt.hotash_core.v_ga4_revenue_daily`
+        SELECT date as dt, revenue_net as revenue
+        FROM `henzelabs-gpt.hotash_core.v_revenue_daily_unified`
         ORDER BY date DESC LIMIT 30
     """))
 
@@ -128,33 +129,39 @@ def check_admin():
 
 def run_ga4_pipeline():
     logging.info("GA4 ingest pipeline triggered (noop)")
-    return True
+    # TODO: Replace with actual row count from pipeline
+    return 0
 
 def run_clarity_pipeline():
     logging.info("Clarity ingest pipeline triggered (noop)")
-    return True
+    # TODO: Replace with actual row count from pipeline
+    return 0
 
 def run_shopify_pipeline():
     logging.info("Shopify ingest pipeline triggered (noop)")
-    return True
+    # TODO: Replace with actual row count from pipeline
+    return 0
 
 @app.post("/admin/ingest/ga4")
 def admin_ingest_ga4():
     if not check_admin():
         return {"error": "Unauthorized"}, 401
-    run_ga4_pipeline()
-    return {"ok": True}
+    rows_written = run_ga4_pipeline()
+    logging.info(f"/admin/ingest/ga4: rows_written={rows_written}")
+    return {"ok": True, "rows_written": rows_written}
 
 @app.post("/admin/ingest/clarity")
 def admin_ingest_clarity():
     if not check_admin():
         return {"error": "Unauthorized"}, 401
-    run_clarity_pipeline()
-    return {"ok": True}
+    rows_written = run_clarity_pipeline()
+    logging.info(f"/admin/ingest/clarity: rows_written={rows_written}")
+    return {"ok": True, "rows_written": rows_written}
 
 @app.post("/admin/ingest/shopify")
 def admin_ingest_shopify():
     if not check_admin():
         return {"error": "Unauthorized"}, 401
-    run_shopify_pipeline()
-    return {"ok": True}
+    rows_written = run_shopify_pipeline()
+    logging.info(f"/admin/ingest/shopify: rows_written={rows_written}")
+    return {"ok": True, "rows_written": rows_written}
