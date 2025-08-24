@@ -1,5 +1,5 @@
 // src/pages/Metrics.tsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getSessions, getRevenue, getClarity } from "../lib/api";
 import KpiCard from "../components/KpiCard";
 import LineTile from "../components/LineTile";
