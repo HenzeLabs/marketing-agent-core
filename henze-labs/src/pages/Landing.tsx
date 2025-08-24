@@ -27,7 +27,6 @@ export default function Landing() {
       </div>
       <form
         className="flex flex-col md:flex-row gap-2 items-center justify-center"
-        action="mailto:hello@henzelabs.com"
         method="GET"
         onSubmit={(e) => {
           // fallback: mailto

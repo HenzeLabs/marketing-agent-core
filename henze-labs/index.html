@@ -6,77 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
-  <body
-    class="min-h-dvh bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100 antialiased"
-  >
-    <header
-      class="container mx-auto px-6 py-5 flex items-center justify-between"
-    >
-      <a href="/" class="font-semibold tracking-tight">HL</a>
-      <nav class="flex gap-6 text-sm text-slate-300">
-        <a class="hover:text-white" href="/demo">Demo</a>
-        <a class="hover:text-white" href="/pricing">Pricing</a>
-        <a
-          class="inline-flex items-center rounded-xl border border-slate-700 px-3 py-1.5 hover:bg-slate-700/40"
-          href="/start"
-          >Start 30-day pilot</a
-        >
-      </nav>
-    </header>
-
-    <main class="container mx-auto px-6">
-      <section class="mx-auto max-w-3xl py-20 text-center">
-        <h1
-          class="text-4xl md:text-6xl font-extrabold tracking-tight text-white"
-        >
-          Cut RevOps grunt work without hiring.
-        </h1>
-        <p class="mt-5 text-lg text-slate-300">
-          Automate reporting and data syncs. Unify metrics from all your tools.
-          Launch in days, not months.
-        </p>
-
-        <div
-          class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
-        >
-          <a
-            href="/start"
-            class="inline-flex items-center justify-center rounded-xl bg-white text-slate-900 px-5 py-3 font-medium hover:bg-slate-200"
-          >
-            Start 30-day pilot
-          </a>
-          <a
-            href="/pricing"
-            class="inline-flex items-center justify-center rounded-xl border border-slate-600 px-5 py-3 font-medium text-white hover:bg-slate-700/50"
-          >
-            See pricing
-          </a>
-        </div>
-
-        <form class="mt-10 flex w-full max-w-md mx-auto gap-2">
-          <input
-            type="email"
-            placeholder="Your email"
-            class="w-full rounded-xl bg-slate-900/60 border border-slate-700 px-4 py-3 text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/20"
-          />
-          <button
-            class="rounded-xl bg-blue-500 px-4 py-3 font-medium text-white hover:bg-blue-400"
-          >
-            Request info
-          </button>
-        </form>
-
-        <p class="mt-4 text-xs text-slate-400">No spam. Cancel anytime.</p>
-      </section>
-    </main>
-
-    <footer
-      class="container mx-auto px-6 py-10 text-center text-xs text-slate-500"
-    >
-      © <span id="y"></span> Henze Labs
-    </footer>
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
