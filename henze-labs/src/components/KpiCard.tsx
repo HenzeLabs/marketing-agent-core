@@ -1,15 +1,32 @@
-interface KpiCardProps {
+type KpiCardProps = {
   label: string;
   value: string | number;
-  sub?: string;
-}
+  delta?: number;
+  suffix?: string;
+  icon?: React.ReactNode;
+};
 
-export default function KpiCard({ label, value, sub }: KpiCardProps) {
+export function KpiCard({ label, value, delta, suffix, icon }: KpiCardProps) {
+  const up = typeof delta === "number" && delta >= 0;
   return (
-    <div className="rounded-2xl shadow bg-white p-6 flex flex-col items-center min-w-[160px]">
-      <div className="text-2xl font-bold text-blue-700">{value}</div>
-      <div className="text-gray-600 text-sm">{label}</div>
-      {sub && <div className="text-xs text-gray-400 mt-1">{sub}</div>}
+    <div className="card p-5">
+      <div className="flex items-center gap-3">
+        {icon && (
+          <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+            {icon}
+          </div>
+        )}
+        <div className="text-sm text-content-muted">{label}</div>
+      </div>
+      <div className="mt-2 text-2xl font-semibold text-content">
+        {value}
+        {suffix}
+      </div>
+      {typeof delta === "number" && (
+        <div className={`mt-1 text-xs ${up ? "text-success" : "text-danger"}`}>
+          {up ? "▲" : "▼"} {Math.abs(delta).toFixed(1)}%
+        </div>
+      )}
     </div>
   );
 }

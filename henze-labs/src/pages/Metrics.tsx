@@ -1,46 +1,38 @@
 // src/pages/Metrics.tsx
 import { useEffect, useState } from "react";
 import { getSessions, getRevenue, getClarity } from "../lib/api";
-import KpiCard from "../components/KpiCard";
+import { Section } from "../components/Section";
+import { Card } from "../components/Card";
+import { KpiCard } from "../components/KpiCard";
 import LineTile from "../components/LineTile";
 import BarTile from "../components/BarTile";
 import TopUrlsTable from "../components/TopUrlsTable";
+  if (loading)
+    return <div className="p-8 text-center">Loading live metrics</div>;
+  if (error)
+    return <div className="p-8 text-red-600">Error loading metrics: {error}</div>;
 
-type Norm = { date: string; value: number };
-type TopUrl = { date: string; url: string; views: number };
+  const sessionsTotal = sessions.reduce((a, b) => a + b.value, 0);
+  const revenueTotal = revenue.reduce((a, b) => a + b.value, 0);
 
-export default function Metrics() {
-  const [sessions, setSessions] = useState<Norm[]>([]);
-  const [revenue, setRevenue] = useState<Norm[]>([]);
-  const [clarity, setClarity] = useState<TopUrl[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setLoading(true);
-    Promise.all([
-      getSessions().catch(() => []),
-      getRevenue().catch(() => []),
-      getClarity().catch(() => []),
-    ])
-      .then(([sessionsRaw, revenueRaw, clarityRaw]) => {
-        // Normalize sessions/revenue to {date, value}
-        const sessionsNorm = Array.isArray(sessionsRaw)
-          ? sessionsRaw.map((d: any) => ({
-              date: d.date || d.dt,
-              value: d.sessions || d.value || 0,
-            }))
-          : [];
-        const revenueNorm = Array.isArray(revenueRaw)
-          ? revenueRaw.map((d: any) => ({
-              date: d.date || d.dt,
-              value: d.revenue || d.value || 0,
-            }))
-          : [];
-        const clarityNorm = Array.isArray(clarityRaw)
-          ? clarityRaw.map((d: any) => ({
-              date: d.date,
-              url: d.url,
+  return (
+    <>
+      <Section title="Live Metrics Demo" subtitle="All data is real-time from your connected sources.">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <KpiCard label="Sessions (30d)" value={sessionsTotal.toLocaleString()} />
+          <KpiCard label="Revenue (30d)" value={revenueTotal.toLocaleString()} suffix=" USD" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card><LineTile data={sessions} label="Sessions by Day" /></Card>
+          <Card><BarTile data={revenue} label="Revenue by Day" /></Card>
+        </div>
+        <Card className="mb-8">
+          <TopUrlsTable data={clarity} />
+        </Card>
+      </Section>
+    </>
+  );
+}
               views: d.views,
             }))
           : [];

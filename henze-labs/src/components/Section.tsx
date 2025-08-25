@@ -1,20 +1,32 @@
 import React from "react";
 import clsx from "clsx";
 
-interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+type SectionProps = {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
   children: React.ReactNode;
-}
+  className?: string;
+};
 
-export function Section({ children, className, ...props }: SectionProps) {
+export function Section({
+  title,
+  subtitle,
+  children,
+  className = "",
+}: SectionProps) {
   return (
-    <section
-      className={clsx(
-        "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16",
-        className
-      )}
-      {...props}
-    >
-      {children}
+    <section className={clsx("section", className)}>
+      <div className="container">
+        {(title || subtitle) && (
+          <div className="mb-10">
+            {title && (
+              <h2 className="text-2xl md:text-3xl text-content">{title}</h2>
+            )}
+            {subtitle && <p className="text-content-muted mt-2">{subtitle}</p>}
+          </div>
+        )}
+        {children}
+      </div>
     </section>
   );
 }

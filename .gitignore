@@ -21,3 +21,6 @@ build/
 dist/
 coverage/
 config.yaml
+
+# Local Netlify folder
+.netlify
