@@ -95,20 +95,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-      <style>{`
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { 
-          animation: fade-in-up 0.5s ease-out forwards;
-          opacity: 0; /* Start hidden */
-        }
-        .bg-grid-white\\[\/0\\.05\\] {
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-      `}</style>
     </section>
   );
 };

@@ -2,101 +2,101 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Henze Labs Marketing Analytics</title>
-    <meta
-      name="description"
-      content="Modern marketing analytics and dashboards by Henze Labs."
-    />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/src/index.css" />
+    <title>Vite + React + TS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "marketing-navy": {
+                DEFAULT: "#1B335E",
+                5: "#1B335E0D",
+                10: "#1B335E1A",
+                20: "#1B335E33",
+                30: "#1B335E4D",
+                40: "#1B335E66",
+                50: "#1B335E80",
+                60: "#1B335E99",
+                80: "#1B335ECC",
+              },
+              "marketing-slate": {
+                DEFAULT: "#4A6C9B",
+                5: "#4A6C9B0D",
+                10: "#4A6C9B1A",
+                20: "#4A6C9B33",
+                30: "#4A6C9B4D",
+                40: "#4A6C9B66",
+                50: "#4A6C9B80",
+                60: "#4A6C9B99",
+                80: "#4A6C9BCC",
+              },
+              "marketing-cyan": {
+                DEFAULT: "#00C7C7",
+                5: "#00C7C70D",
+                10: "#00C7C71A",
+                20: "#00C7C733",
+                30: "#00C7C74D",
+                40: "#00C7C766",
+                50: "#00C7C780",
+                60: "#00C7C799",
+                80: "#00C7C7CC",
+              },
+              "marketing-off-white": "#F8F9FA",
+              "marketing-gray-light": {
+                DEFAULT: "#E0E7FF",
+                5: "#E0E7FF0D",
+                10: "#E0E7FF1A",
+                20: "#E0E7FF33",
+                30: "#E0E7FF4D",
+                40: "#E0E7FF66",
+                50: "#E0E7FF80",
+                60: "#E0E7FF99",
+                80: "#E0E7FFCC",
+              },
+              "marketing-charcoal": {
+                DEFAULT: "#0D1B2A",
+                5: "#0D1B2A0D",
+                10: "#0D1B2A1A",
+                20: "#0D1B2A33",
+                30: "#0D1B2A4D",
+                40: "#0D1B2A66",
+                50: "#0D1B2A80",
+                60: "#0D1B2A99",
+                80: "#0D1B2ACC",
+              },
+              "marketing-text-light": "#F0F4F8",
+              "marketing-orange": "#FF8C42",
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
     <style>
-      body {
-        margin: 0;
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.5s ease-out forwards;
+        opacity: 0;
+      }
+      .bg-grid-white\[/0.05\] {
+          background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 40px 40px;
       }
     </style>
   </head>
-  <body class="bg-background text-content font-body antialiased">
-    <header
-      class="w-full px-4 py-12 bg-surface/80 backdrop-blur-md shadow-md flex flex-col md:flex-row items-center"
-    >
-      <div class="w-full md:w-1/3">
-        <!-- Empty on left for desktop -->
-      </div>
-      <div class="w-full md:w-1/3 flex justify-center">
-        <img src="/logo.svg" alt="Henze Labs Logo" style="height: 12rem" />
-      </div>
-      <nav
-        class="w-full md:w-1/3 flex justify-center md:justify-end gap-4 mt-6 md:mt-0"
-      >
-        <a href="#features" class="btn btn-ghost">Features</a>
-        <a href="#metrics" class="btn btn-ghost">Metrics</a>
-        <a href="#contact" class="btn btn-primary ml-2">Contact</a>
-      </nav>
-    </header>
-    <main>
-      <section class="section container text-center">
-        <h1 class="text-5xl md:text-6xl font-display mb-6">
-          Modern Marketing Analytics
-        </h1>
-        <p class="text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
-          Unlock actionable insights and beautiful dashboards for your business.
-          Built for speed, clarity, and growth.
-        </p>
-        <a href="#contact" class="btn btn-primary text-lg">Get Started</a>
-      </section>
-      <section
-        id="features"
-        class="section container grid md:grid-cols-3 gap-8"
-      >
-        <div class="card p-6">
-          <h2 class="text-xl font-semibold mb-2">Unified Data</h2>
-          <p>
-            Connect all your marketing sources in one place for a holistic view.
-          </p>
-        </div>
-        <div class="card p-6">
-          <h2 class="text-xl font-semibold mb-2">Real-Time Metrics</h2>
-          <p>Monitor performance with up-to-the-minute dashboards and KPIs.</p>
-        </div>
-        <div class="card p-6">
-          <h2 class="text-xl font-semibold mb-2">Custom Insights</h2>
-          <p>
-            Tailor analytics to your business needs with flexible reporting.
-          </p>
-        </div>
-      </section>
-      <section id="metrics" class="section container text-center">
-        <h2 class="text-3xl font-display mb-4">Sample Metrics</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="card p-4">
-            <div class="text-2xl font-bold">1.2M</div>
-            <div class="text-sm text-secondary">Pageviews</div>
-          </div>
-          <div class="card p-4">
-            <div class="text-2xl font-bold">8.5K</div>
-            <div class="text-sm text-secondary">Conversions</div>
-          </div>
-          <div class="card p-4">
-            <div class="text-2xl font-bold">$320K</div>
-            <div class="text-sm text-secondary">Revenue</div>
-          </div>
-        </div>
-      </section>
-      <section id="contact" class="section container text-center">
-        <h2 class="text-3xl font-display mb-4">Contact Us</h2>
-        <p class="mb-6">
-          Ready to level up your marketing analytics? Reach out to our team
-          today.
-        </p>
-        <a href="mailto:info@henzelabs.com" class="btn btn-primary">Email Us</a>
-      </section>
-    </main>
-    <footer
-      class="w-full py-6 text-center text-sm text-secondary bg-surface/80 mt-12"
-    >
-      &copy; 2025 Henze Labs. All rights reserved.
-    </footer>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
