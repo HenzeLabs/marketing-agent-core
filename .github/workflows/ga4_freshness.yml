@@ -1,0 +1,41 @@
+name: GA4 Freshness (both brands)
+
+on:
+  schedule:
+    - cron: "10 10 * * *"   # daily at 10:10 UTC
+  workflow_dispatch:
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: ">= 449.0.0"
+
+      - name: Auth with Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          project_id: henzelabs-gpt
+
+      - name: Set gcloud project
+        run: gcloud config set project henzelabs-gpt
+
+      - name: Run GA4 freshness healthcheck
+        run: |
+          chmod +x scripts/healthcheck_ga4_both.sh
+          ./scripts/healthcheck_ga4_both.sh
