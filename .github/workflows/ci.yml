@@ -1,8 +1,10 @@
+---
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
 
 jobs:
@@ -36,9 +38,12 @@ jobs:
         run: |
           echo '{"type": "service_account"}' > /tmp/dummy-creds.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/dummy-creds.json" >> $GITHUB_ENV
-          echo "DBT_PROJECT_ID=${{ secrets.DBT_PROJECT_ID || 'henzelabs-gpt' }}" >> $GITHUB_ENV
-          echo "DBT_DATASET=${{ secrets.DBT_DATASET || 'labessentials_raw' }}" >> $GITHUB_ENV
-          echo "DBT_LOCATION=${{ secrets.DBT_LOCATION || 'US' }}" >> $GITHUB_ENV
+          echo "DBT_PROJECT_ID=${{ secrets.DBT_PROJECT_ID || 'henzelabs-gpt' }}" \
+            >> $GITHUB_ENV
+          echo "DBT_DATASET=${{ secrets.DBT_DATASET || 'labessentials_raw' }}" \
+            >> $GITHUB_ENV
+          echo "DBT_LOCATION=${{ secrets.DBT_LOCATION || 'US' }}" \
+            >> $GITHUB_ENV
 
       - name: Run pytest (includes dbt parse)
         run: pytest -q
