@@ -1,39 +1,113 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Ensure this file is processed by PostCSS with Tailwind CSS plugin enabled */
+/* If not using Tailwind CSS, remove the following lines or configure PostCSS properly */
+/* @tailwind directives removed because Tailwind CSS is not configured in the build process */
 
 @layer base {
   html {
-    @apply bg-background text-content font-body antialiased;
+    background-color: var(--color-background, #fff); /* bg-background */
+    color: var(--color-content, #0f172a); /* text-content */
+    font-family: var(--font-body, system-ui, sans-serif); /* font-body */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display tracking-tight;
+    font-family: var(--font-display, inherit); /* font-display */
+    letter-spacing: -0.015em; /* tracking-tight */
   }
   a {
-    @apply underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary;
+    text-underline-offset: 2px; /* underline-offset-2 */
+    outline: none; /* focus:outline-none */
+  }
+  a:focus,
+  a:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-primary, #2563eb); /* focus-visible:ring-2 focus-visible:ring-primary */
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-shadow shadow-sm hover:shadow-md;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem; /* rounded-lg */
+        padding-left: 1rem; /* px-4 */
+        padding-right: 1rem; /* px-4 */
+        padding-top: 0.5rem; /* py-2 */
+        padding-bottom: 0.5rem; /* py-2 */
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 500; /* font-medium */
+        transition-property: box-shadow;
+        transition-duration: 150ms;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); /* shadow-sm */
+    }
+    .btn:hover {
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); /* hover:shadow-md */
   }
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary-600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem; /* rounded-lg */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition-property: box-shadow;
+    transition-duration: 150ms;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); /* shadow-sm */
+    background-color: var(--color-primary, #2563eb); /* bg-primary */
+    color: #fff; /* text-white */
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-600, #1d4ed8); /* hover:bg-primary-600 */
   }
   .btn-ghost {
-    @apply btn bg-transparent hover:bg-secondary;
+      /* @apply btn bg-transparent hover:bg-secondary; */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem; /* rounded-lg */
+      padding-left: 1rem; /* px-4 */
+      padding-right: 1rem; /* px-4 */
+      padding-top: 0.5rem; /* py-2 */
+      padding-bottom: 0.5rem; /* py-2 */
+      font-size: 0.875rem; /* text-sm */
+      font-weight: 500; /* font-medium */
+      transition-property: box-shadow;
+      transition-duration: 150ms;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); /* shadow-sm */
+      background-color: transparent;
+    }
+    .btn-ghost:hover {
+      background-color: var(--color-secondary, #e5e7eb); /* hover:bg-secondary */
   }
   .card {
-    @apply rounded-xl bg-surface shadow-md border border-secondary/50;
+    border-radius: 0.75rem; /* rounded-xl */
+    background-color: var(--color-surface, #fff); /* bg-surface */
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); /* shadow-md */
+    border-width: 1px; /* border */
+    border-color: rgba(var(--color-secondary, 100,116,139), 0.5); /* border-secondary/50 */
   }
   .section {
-    @apply py-16 md:py-24;
+    padding-top: 4rem;    /* py-16 */
+    padding-bottom: 4rem; /* py-16 */
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-top: 6rem;    /* md:py-24 */
+      padding-bottom: 6rem; /* md:py-24 */
+    }
   }
   .container {
-    @apply max-w-6xl mx-auto px-4;
+    max-width: 72rem; /* max-w-6xl */
+    margin-left: auto; /* mx-auto */
+    margin-right: auto; /* mx-auto */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
   }
 }

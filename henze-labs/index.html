@@ -2,18 +2,97 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Henze Labs Marketing Analytics</title>
+    <meta
+      name="description"
+      content="Modern marketing analytics and dashboards by Henze Labs."
     />
-    <title>Vite + TS</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/src/index.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="bg-background text-content font-body antialiased">
+    <header
+      class="w-full px-4 py-6 bg-surface/80 backdrop-blur-md shadow-md flex items-center justify-between"
+    >
+      <div class="flex items-center gap-3">
+        <img src="/logo.svg" alt="Henze Labs Logo" style="height: 2.5rem" />
+        <span class="font-display text-2xl tracking-tight">Henze Labs</span>
+      </div>
+      <nav>
+        <a href="#features" class="btn btn-ghost">Features</a>
+        <a href="#metrics" class="btn btn-ghost">Metrics</a>
+        <a href="#contact" class="btn btn-primary ml-2">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <section class="section container text-center">
+        <h1 class="text-4xl md:text-6xl font-display mb-6">
+          Modern Marketing Analytics
+        </h1>
+        <p class="text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
+          Unlock actionable insights and beautiful dashboards for your business.
+          Built for speed, clarity, and growth.
+        </p>
+        <a href="#contact" class="btn btn-primary text-lg">Get Started</a>
+      </section>
+      <section
+        id="features"
+        class="section container grid md:grid-cols-3 gap-8"
+      >
+        <div class="card p-6">
+          <h2 class="text-xl font-semibold mb-2">Unified Data</h2>
+          <p>
+            Connect all your marketing sources in one place for a holistic view.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h2 class="text-xl font-semibold mb-2">Real-Time Metrics</h2>
+          <p>Monitor performance with up-to-the-minute dashboards and KPIs.</p>
+        </div>
+        <div class="card p-6">
+          <h2 class="text-xl font-semibold mb-2">Custom Insights</h2>
+          <p>
+            Tailor analytics to your business needs with flexible reporting.
+          </p>
+        </div>
+      </section>
+      <section id="metrics" class="section container text-center">
+        <h2 class="text-3xl font-display mb-4">Sample Metrics</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card p-4">
+            <div class="text-2xl font-bold">1.2M</div>
+            <div class="text-sm text-secondary">Pageviews</div>
+          </div>
+          <div class="card p-4">
+            <div class="text-2xl font-bold">8.5K</div>
+            <div class="text-sm text-secondary">Conversions</div>
+          </div>
+          <div class="card p-4">
+            <div class="text-2xl font-bold">$320K</div>
+            <div class="text-sm text-secondary">Revenue</div>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="section container text-center">
+        <h2 class="text-3xl font-display mb-4">Contact Us</h2>
+        <p class="mb-6">
+          Ready to level up your marketing analytics? Reach out to our team
+          today.
+        </p>
+        <a href="mailto:info@henzelabs.com" class="btn btn-primary">Email Us</a>
+      </section>
+    </main>
+    <footer
+      class="w-full py-6 text-center text-sm text-secondary bg-surface/80 mt-12"
+    >
+      &copy; 2025 Henze Labs. All rights reserved.
+    </footer>
   </body>
 </html>
