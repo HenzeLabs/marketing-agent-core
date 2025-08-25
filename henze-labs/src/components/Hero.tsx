@@ -22,11 +22,11 @@ const AnimatedInsight = ({
 
 const Hero: React.FC = () => {
   return (
-    <section className="pt-40 pb-20 md:pt-48 md:pb-28">
+    <section className="pt-40 pb-20 md:pt-48 md:pb-28 bg-marketing-charcoal">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter mb-6 leading-tight text-marketing-text-light">
               Your marketing data,
               <span className="block bg-gradient-to-r from-sky-400 to-marketing-cyan bg-clip-text text-transparent">
                 explained like a human.
@@ -39,11 +39,21 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-12">
-              <Button href="#" variant="primary" size="lg">
+              <Button
+                href="#"
+                variant="primary"
+                size="lg"
+                className="text-marketing-navy"
+              >
                 <span>See the Demo</span>
-                <ArrowRightIcon className="w-5 h-5" />
+                <ArrowRightIcon className="w-5 h-5 text-marketing-navy" />
               </Button>
-              <Button href="#" variant="secondary" size="lg">
+              <Button
+                href="#"
+                variant="secondary"
+                size="lg"
+                className="text-marketing-cyan"
+              >
                 Book a Call
               </Button>
             </div>
@@ -53,14 +63,16 @@ const Hero: React.FC = () => {
             <div className="absolute -inset-8 bg-gradient-to-br from-marketing-navy/50 via-marketing-cyan/20 to-marketing-slate/50 rounded-3xl filter blur-2xl"></div>
             <div className="relative border border-marketing-slate-50 bg-marketing-charcoal-50 rounded-2xl p-6 backdrop-blur-lg shadow-2xl">
               <div className="flex justify-between items-center mb-4">
-                <p className="font-semibold text-lg">Yesterday's Brief</p>
-                <span className="text-xs font-mono bg-white/10 px-2 py-1 rounded">
+                <p className="font-semibold text-lg text-marketing-text-light">
+                  Yesterday's Brief
+                </p>
+                <span className="text-xs font-mono bg-white/10 px-2 py-1 rounded text-green-400">
                   LIVE
                 </span>
               </div>
               <div className="space-y-3">
                 <AnimatedInsight delay="200ms">
-                  <span className="font-bold text-marketing-text-light">
+                  <span className="font-bold text-green-400">
                     +12% sessions
                   </span>{" "}
                   driven by organic search.
@@ -92,7 +104,7 @@ const Hero: React.FC = () => {
           animation: fade-in-up 0.5s ease-out forwards;
           opacity: 0; /* Start hidden */
         }
-        .bg-grid-white\\[\\/0\\.05\\] {
+        .bg-grid-white\\[\/0\\.05\\] {
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
         }

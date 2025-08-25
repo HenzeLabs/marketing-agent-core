@@ -21,7 +21,7 @@ const Testimonials: React.FC = () => {
     <section className="py-20 sm:py-28">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-marketing-text-light">
             Loved by data-driven teams
           </h2>
           <p className="text-lg text-marketing-gray-light">
@@ -40,7 +40,9 @@ const Testimonials: React.FC = () => {
                 “{testimonial.quote}”
               </blockquote>
               <cite className="mt-6 block not-italic">
-                <span className="font-bold">{testimonial.author}</span>
+                <span className="font-bold text-marketing-text-light">
+                  {testimonial.author}
+                </span>
                 <br />
                 <span className="text-marketing-gray-light">
                   {testimonial.title}

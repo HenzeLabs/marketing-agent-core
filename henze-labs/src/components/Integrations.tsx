@@ -13,7 +13,7 @@ const Integrations: React.FC = () => {
     <section className="py-20 sm:py-28 bg-marketing-slate-5">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-marketing-text-light">
             Connect your entire stack
           </h2>
           <p className="text-lg text-marketing-gray-light">
@@ -27,8 +27,10 @@ const Integrations: React.FC = () => {
               key={integration.name}
               className="flex flex-col items-center justify-center gap-4 bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl text-center"
             >
-              <integration.icon className="w-10 h-10 text-marketing-gray-light" />
-              <span className="font-semibold">{integration.name}</span>
+              <integration.icon className="w-10 h-10 text-marketing-cyan" />
+              <span className="font-semibold text-marketing-text-light">
+                {integration.name}
+              </span>
             </div>
           ))}
         </div>

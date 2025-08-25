@@ -14,7 +14,7 @@ const Security: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-marketing-text-light">
               Built for trust & security
             </h2>
             <p className="text-lg text-marketing-gray-light mb-6">

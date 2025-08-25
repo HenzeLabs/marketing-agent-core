@@ -45,7 +45,7 @@ const Features: React.FC = () => {
     <section className="py-20 sm:py-28 bg-marketing-slate/5">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-marketing-text-light">
             A smarter way to monitor performance
           </h2>
           <p className="text-lg text-marketing-gray-light">
@@ -64,9 +64,11 @@ const Features: React.FC = () => {
               }`}
             >
               <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
-                <feature.icon className="w-6 h-6" />
+                <feature.icon className="w-6 h-6 text-marketing-cyan" />
               </div>
-              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+              <h3 className="text-xl font-bold mb-2 text-marketing-text-light">
+                {feature.title}
+              </h3>
               <p className="text-marketing-gray-light">{feature.description}</p>
             </div>
           ))}

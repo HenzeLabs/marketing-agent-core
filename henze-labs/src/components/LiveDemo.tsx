@@ -7,7 +7,7 @@ const LiveDemo: React.FC = () => {
     <section className="py-20 sm:py-28">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-marketing-text-light">
             See it in action
           </h2>
           <p className="text-lg text-marketing-gray-light mb-10">
@@ -21,29 +21,36 @@ const LiveDemo: React.FC = () => {
           <div className="relative grid md:grid-cols-3 gap-4 border border-marketing-slate-50 bg-marketing-charcoal-50 rounded-2xl p-6 backdrop-blur-lg shadow-2xl">
             <div className="bg-marketing-slate-20 p-4 rounded-lg">
               <p className="text-sm text-marketing-gray-light">Sessions</p>
-              <p className="text-2xl font-bold">
+              <p className="text-2xl font-bold text-marketing-text-light">
                 2,489{" "}
                 <span className="text-sm text-green-400 font-medium">+12%</span>
               </p>
             </div>
             <div className="bg-marketing-slate-20 p-4 rounded-lg">
               <p className="text-sm text-marketing-gray-light">Revenue</p>
-              <p className="text-2xl font-bold">
+              <p className="text-2xl font-bold text-marketing-text-light">
                 $12,345{" "}
                 <span className="text-sm text-green-400 font-medium">+8%</span>
               </p>
             </div>
             <div className="bg-marketing-slate-20 p-4 rounded-lg md:col-span-1">
               <p className="text-sm text-marketing-gray-light">Top URL</p>
-              <p className="text-lg font-bold truncate">/product/new-release</p>
+              <p className="text-lg font-bold text-marketing-text-light truncate">
+                /product/new-release
+              </p>
             </div>
           </div>
         </div>
 
         <div className="mt-12 text-center">
-          <Button href="#" variant="primary" size="lg">
+          <Button
+            href="#"
+            variant="primary"
+            size="lg"
+            className="text-marketing-navy"
+          >
             <span>Open Full Demo</span>
-            <ArrowRightIcon className="w-5 h-5" />
+            <ArrowRightIcon className="w-5 h-5 text-marketing-navy" />
           </Button>
         </div>
       </div>
