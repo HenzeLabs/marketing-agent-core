@@ -4,6 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        "marketing-navy": "#1B335E",
+        "marketing-slate": "#4A6C9B",
+        "marketing-cyan": "#00C7C7",
+        "marketing-off-white": "#F8F9FA",
+        "marketing-gray-light": "#E0E7FF",
+        "marketing-charcoal": "#0D1B2A",
+        "marketing-text-light": "#F0F4F8",
+        "marketing-orange": "#FF8C42",
+        // legacy/compat
         primary: { DEFAULT: "#2563EB", 600: "#1D4ED8", 700: "#1E40AF" },
         secondary: "#E2E8F0",
         accent: "#0891B2",
@@ -26,8 +35,9 @@ export default {
         lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       },
       fontFamily: {
+        sans: ["Inter", "sans-serif"],
         display: ["Inter", "sans-serif"],
-        body: ["Roboto", "sans-serif"],
+        body: ["Inter", "sans-serif"],
       },
       ringColor: { DEFAULT: "#3B82F6" },
       // If you want extras without breaking defaults:
