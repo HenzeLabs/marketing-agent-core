@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { getSessions, getRevenue, getClarity } from "../lib/api";
 import { Section } from "../components/Section";
-import { Card } from "../components/Card";
+import Card from "../components/Card";
 import { KpiCard } from "../components/KpiCard";
 import LineTile from "../components/LineTile";
 import BarTile from "../components/BarTile";
 import TopUrlsTable from "../components/TopUrlsTable";
+
+export type CardProps = {
+  title: string;
+  description?: string;
+  className?: string;
+  children?: React.ReactNode;
+};
 
 export default function Metrics() {
   const [sessions, setSessions] = useState<{ date: string; value: number }[]>(
@@ -68,10 +75,11 @@ export default function Metrics() {
   const revenueTotal = revenue.reduce((a, b) => a + b.value, 0);
 
   return (
-    <Section
-      title="Live Metrics Demo"
-      subtitle="All data is real-time from your connected sources."
-    >
+    <Section>
+      <div className="mb-4">
+        <h2 className="text-2xl font-bold">Live Metrics Demo</h2>
+        <p className="text-gray-600">All data is real-time from your connected sources.</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <KpiCard
           label="Sessions (30d)"
@@ -84,14 +92,14 @@ export default function Metrics() {
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <Card>
+        <Card title="Sessions Trend" description="Sessions by day for the last 30 days">
           <LineTile data={sessions} label="Sessions by Day" />
         </Card>
-        <Card>
+        <Card title="Revenue Trend" description="Revenue by day for the last 30 days">
           <BarTile data={revenue} label="Revenue by Day" />
         </Card>
       </div>
-      <Card className="mb-8">
+      <Card className="mb-8" title="Top URLs" description="Most viewed URLs from Clarity">
         <TopUrlsTable data={clarity} />
       </Card>
     </Section>

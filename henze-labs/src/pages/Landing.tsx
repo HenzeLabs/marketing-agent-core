@@ -1,27 +1,28 @@
-// src/pages/Landing.tsx
 
-export default function Landing() {
+import Hero from '../components/Hero';
+import Features from '../components/Features';
+import Integrations from '../components/Integrations';
+import Testimonials from '../components/Testimonials';
+import PricingCTA from '../components/PricingCTA';
+import FAQ from '../components/FAQ';
+import ClientLogos from '../components/ClientLogos';
+import Security from '../components/Security';
+import LiveDemo from '../components/LiveDemo';
+
+const Landing: React.FC = () => {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent section">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-6xl font-display text-content">
-            Cut RevOps grunt work{" "}
-            <span className="text-primary">without hiring</span>.
-          </h1>
-          <p className="mt-6 text-lg text-content-muted max-w-2xl mx-auto">
-            Automate reporting & data syncs. Launch in days, not months.
-          </p>
-          <div className="mt-10 flex justify-center gap-3">
-            <a href="/demo" className="btn-primary">
-              See live demo
-            </a>
-            <a href="/pricing" className="btn-ghost">
-              Pricing
-            </a>
-          </div>
-        </div>
-      </section>
+      <Hero />
+      <ClientLogos />
+      <Integrations />
+      <Features />
+      <LiveDemo />
+      <Testimonials />
+      <PricingCTA />
+      <Security />
+      <FAQ />
     </>
   );
-}
+};
+
+export default Landing;

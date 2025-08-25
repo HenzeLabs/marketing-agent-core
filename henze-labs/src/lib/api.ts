@@ -1,11 +1,24 @@
-const API_BASE = "/api";
+// Example API functions for metrics page
+export async function getSessions() {
+  // Replace with real API call
+  return [
+    { date: '2024-06-01', value: 120 },
+    { date: '2024-06-02', value: 150 },
+  ];
+}
 
-const j = async (path: string) => {
-  const r = await fetch(`${API_BASE}${path}`);
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return r.json();
-};
+export async function getRevenue() {
+  // Replace with real API call
+  return [
+    { date: '2024-06-01', value: 2000 },
+    { date: '2024-06-02', value: 2500 },
+  ];
+}
 
-export const getSessions = () => j(`/metrics/sessions-daily`);
-export const getRevenue = () => j(`/metrics/revenue-daily`);
-export const getClarity = () => j(`/clarity/top-urls`);
+export async function getClarity() {
+  // Replace with real API call
+  return [
+    { date: '2024-06-01', value: 80 },
+    { date: '2024-06-02', value: 90 },
+  ];
+}
