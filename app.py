@@ -1,4 +1,3 @@
-
 # Clean, deduplicated Flask app
 import os
 from flask import Flask, jsonify
@@ -6,6 +5,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 from google.cloud import bigquery
+from datetime import date, timedelta
 
 load_dotenv()
 PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", "henzelabs-gpt")
@@ -38,9 +38,6 @@ def rows(sql, debug_label=None):
     except Exception as e:
         logging.error(f"[rows] Exception for {debug_label or sql}: {e}")
         return []
-
-
-
 
 
 @app.get("/")
@@ -78,6 +75,26 @@ def sessions_daily():
         ORDER BY date DESC LIMIT 30
     """
     return jsonify(rows(sql, debug_label="sessions-daily"))
+
+bq = bigquery.Client()
+def ds(brand): return "labessentials_raw" if brand=="labessentials" else "hotash_raw"
+
+
+
+@app.get("/api/metrics/ga4-daily")
+def ga4_daily():
+    brand=request.args.get("brand","labessentials")
+    days=28 if "28" in request.args.get("range","") else 30
+    q = f"""
+      SELECT date, sessions, total_users, engaged_sessions, bounce_rate
+      FROM `{bq.project}.{ds(brand)}.ga4_daily_metrics`
+      WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL {days} DAY) AND CURRENT_DATE()
+      ORDER BY date
+    """
+    job = bq.query(q, job_config=bigquery.QueryJobConfig())
+    rows = [dict(r) for r in job.result(timeout=15)]  # short server-side timeout
+    return jsonify({"series":[{"date":str(r["date"]), "value":r["sessions"]} for r in rows],
+                    "summary": f"{brand}: {len(rows)} days"})
 
 @app.get("/api/clarity/top-urls")
 def clarity_top_urls():

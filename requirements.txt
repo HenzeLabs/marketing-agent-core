@@ -1,8 +1,11 @@
 dbt-bigquery==1.10.1
+functions-framework
 
 google-cloud-secret-manager
 google-cloud-bigquery
 google-cloud-functions
+google-cloud-logging
+google-analytics-data
 requests
 pyyaml
 flask

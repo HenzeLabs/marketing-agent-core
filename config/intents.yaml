@@ -1,0 +1,10 @@
+- intent: ga4.sessions_daily
+  patterns:
+    - "traffic trend"
+  tool: ga4.sessions_daily
+  defaults:
+    range: last_28_days
+- intent: default
+  patterns:
+    - "*"
+  tool: ga4.sessions_daily

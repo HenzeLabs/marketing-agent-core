@@ -1,0 +1,125 @@
+name: Pipeline Health Check
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC (9 PM EST / 6 PM PST)
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+    
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: henzelabs-gpt
+    
+    - name: Install BigQuery component
+      run: |
+        gcloud components install bq --quiet
+    
+    - name: Run health check
+      id: healthcheck
+      run: |
+        python scripts/healthcheck.py 2>&1 | tee healthcheck.log
+        echo "exit_code=$?" >> $GITHUB_OUTPUT
+      continue-on-error: true
+    
+    - name: Upload logs as artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: healthcheck-logs
+        path: healthcheck.log
+    
+    - name: Get recent Cloud Function logs on failure
+      if: steps.healthcheck.outputs.exit_code != '0'
+      run: |
+        echo "=== Recent Cloud Function Logs ==="
+        gcloud functions logs read run-pipeline-entrypoint \
+          --region us-central1 \
+          --limit=100 \
+          --format="table(time_utc,level,log)" \
+          | head -50
+    
+    - name: Create issue on failure
+      if: steps.healthcheck.outputs.exit_code != '0'
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const log = fs.readFileSync('healthcheck.log', 'utf8');
+          
+          // Extract stale tables from log
+          const staleMatches = log.match(/Stale tables: (\d+)/);
+          const staleCount = staleMatches ? staleMatches[1] : 'unknown';
+          
+          const issueTitle = `Pipeline Health Check Failed - ${staleCount} stale table(s)`;
+          const issueBody = `## Pipeline Health Check Failed
+          
+          The automated health check detected stale data in the marketing pipelines.
+          
+          **Timestamp:** ${new Date().toISOString()}
+          **Workflow Run:** [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          
+          ### Health Check Output
+          \`\`\`
+          ${log.slice(-2000)}  // Last 2000 chars to avoid huge issues
+          \`\`\`
+          
+          ### Next Steps
+          1. Check the [workflow logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details
+          2. Manually trigger pipelines if needed
+          3. Investigate root cause of pipeline failures
+          `;
+          
+          // Check if similar issue already exists
+          const issues = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'pipeline-health'
+          });
+          
+          const recentIssue = issues.data.find(issue => {
+            const hoursSinceCreated = (Date.now() - new Date(issue.created_at)) / (1000 * 60 * 60);
+            return hoursSinceCreated < 24;
+          });
+          
+          if (!recentIssue) {
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+              labels: ['pipeline-health', 'automated']
+            });
+          } else {
+            // Add comment to existing issue
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: recentIssue.number,
+              body: `Health check failed again at ${new Date().toISOString()}. See [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).`
+            });
+          }
+    
+    - name: Fail job if health check failed
+      if: steps.healthcheck.outputs.exit_code != '0'
+      run: exit 1
