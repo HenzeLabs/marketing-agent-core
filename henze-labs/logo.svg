@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530.03 530.03">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        font-family: TTOctosquaresTrialVariable-CondDemiBold, 'TT Octosquares Trial Variable';
+        font-size: 85px;
+        font-variation-settings: 'wght' 600, 'wdth' 75, 'slnt' 0;
+        font-weight: 300;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #1b2145;
+      }
+
+      .cls-5 {
+        fill: #30bec0;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+
+      .cls-7 {
+        letter-spacing: .03em;
+      }
+
+      .cls-4 {
+        font-family: AcuminConcept-CondMedium, 'Acumin Variable Concept';
+        font-size: 54.66px;
+        font-variation-settings: 'wght' 500, 'wdth' 67, 'slnt' 0;
+        font-weight: 500;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect class="cls-1" width="530.03" height="530.03"/>
+    <g>
+      <path class="cls-5" d="M227.6,192.97v15.14c0,6.96,16.72,12.63,37.38,12.63s37.46-5.67,37.46-12.63v-15.14c-9.11,5.6-23.97,7.82-37.46,7.82s-28.34-2.22-37.38-7.82Z"/>
+      <path class="cls-5" d="M227.6,164.41v15.14c0,6.96,16.72,12.63,37.38,12.63s37.46-5.67,37.46-12.63v-15.14c-9.11,5.6-23.97,7.82-37.46,7.82s-28.34-2.22-37.38-7.82Z"/>
+      <path class="cls-5" d="M265.02,138.38c-20.68,0-37.45,5.66-37.45,12.63s16.77,12.63,37.45,12.63,37.45-5.66,37.45-12.63-16.77-12.63-37.45-12.63Z"/>
+    </g>
+    <text class="cls-3" transform="translate(137.14 432.04)"><tspan x="0" y="0">HENZE</tspan></text>
+    <text class="cls-4" transform="translate(216.21 486.73)"><tspan class="cls-7" x="0" y="0">L</tspan><tspan class="cls-6" x="23.12" y="0">A</tspan><tspan class="cls-2" x="47.82" y="0">B</tspan><tspan x="73.79" y="0">S</tspan></text>
+  </g>
+</svg>
