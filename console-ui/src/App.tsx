@@ -287,6 +287,52 @@ function App() {
     }
   }
 
+  const renderRevenueDonut = () => {
+    if (!revenue) return <div className="text-marketing-gray-light text-center py-8">No revenue data</div>
+    
+    const total = revenue.total
+    const segments = [
+      { label: 'Product Sales', value: total * 0.7, color: '#00C7C7' },
+      { label: 'Shipping', value: total * 0.15, color: '#FF8C42' },
+      { label: 'Tax', value: total * 0.15, color: '#4A6C9B' }
+    ]
+    
+    return (
+      <div className="flex items-center justify-center">
+        <div className="relative w-48 h-48">
+          <svg width="192" height="192" className="transform -rotate-90">
+            <circle cx="96" cy="96" r="80" fill="none" stroke="#1B335E" strokeWidth="16" opacity="0.3"/>
+            {segments.map((segment, index) => {
+              const prevTotal = segments.slice(0, index).reduce((sum, s) => sum + s.value, 0)
+              const percentage = segment.value / total
+              const strokeDasharray = `${percentage * 502.65} 502.65`
+              const strokeDashoffset = -prevTotal / total * 502.65
+              
+              return (
+                <circle
+                  key={index}
+                  cx="96"
+                  cy="96"
+                  r="80"
+                  fill="none"
+                  stroke={segment.color}
+                  strokeWidth="16"
+                  strokeDasharray={strokeDasharray}
+                  strokeDashoffset={strokeDashoffset}
+                  className="transition-all duration-500"
+                />
+              )
+            })}
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-2xl font-bold text-marketing-cyan">${total.toLocaleString()}</div>
+            <div className="text-xs text-marketing-gray-light">Total Revenue</div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   const renderSessionsChart = () => {
     if (!sessions.length) return <div className="text-marketing-gray-light text-center py-8">No data available</div>
     
@@ -473,49 +519,55 @@ function App() {
             </div>
           </header>
 
-          {/* Key Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+          {/* KPI Cards - Dashboard Style */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             {getScoreCards().map((card, index) => (
               <div 
                 key={index} 
-                className="bg-marketing-navy/50 border border-marketing-slate/30 rounded-lg p-4 backdrop-blur-sm hover:bg-marketing-navy/60 transition-all animate-fade-in-up"
+                className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6 backdrop-blur-sm hover:shadow-lg transition-all animate-fade-in-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="text-xs font-medium text-marketing-gray-light uppercase tracking-wide mb-2">{card.title}</div>
-                <div className="flex items-baseline justify-between">
-                  <div className={`text-2xl font-semibold ${card.color}`}>{card.value}</div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-sm font-medium text-marketing-gray-light uppercase tracking-wide">{card.title}</div>
                   {card.trend && (
-                    <div className={`flex items-center text-sm font-medium ${
-                      card.trend === 'up' ? 'text-green-400' : 'text-red-400'
+                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      card.trend === 'up' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
                     }`}>
-                      <span className="mr-1">{card.trend === 'up' ? '↗' : '↘'}</span>
+                      {card.trend === 'up' ? '↗' : '↘'} {card.trend === 'up' ? 'UP' : 'DOWN'}
                     </div>
                   )}
+                </div>
+                <div className={`text-3xl font-bold ${card.color} mb-2`}>{card.value}</div>
+                <div className="w-full bg-marketing-slate/30 rounded-full h-2">
+                  <div className={`h-2 rounded-full ${card.color.replace('text-', 'bg-')} opacity-60`} style={{width: '75%'}}></div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            {/* Sessions Chart */}
-            <div className="bg-marketing-navy/50 border border-marketing-slate/30 rounded-lg p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            {/* Sessions Trend Chart */}
+            <div className="lg:col-span-2 bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '600ms' }}>
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-marketing-text-light">
-                  Sessions Overview
-                </h3>
-                <span className="text-sm text-marketing-gray-light">
-                  {dateRange === 'custom' ? `${getDaysFromRange()} days` : dateRange.replace('last_', '').replace('_', ' ')}
-                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-marketing-text-light">Sessions Trend</h3>
+                  <p className="text-sm text-marketing-gray-light">Daily visitor analytics</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-marketing-cyan">{sessions.reduce((sum, s) => sum + s.sessions, 0)}</div>
+                  <div className="text-xs text-marketing-gray-light">Total Sessions</div>
+                </div>
               </div>
               {renderSessionsChart()}
             </div>
 
-            {/* Revenue Breakdown */}
-            <div className="bg-marketing-navy/50 border border-marketing-slate/30 rounded-lg p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '700ms' }}>
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-marketing-text-light">Revenue Breakdown</h3>
-                <span className="text-sm text-marketing-gray-light">{dateRange.replace('last_', '').replace('_', ' ')}</span>
+            {/* Revenue Donut Chart */}
+            <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '700ms' }}>
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-marketing-text-light">Revenue Mix</h3>
+                <p className="text-sm text-marketing-gray-light">Sales breakdown</p>
               </div>
+              {renderRevenueDonut()}
               <div className="space-y-6">
                 {revenue && (
                   <div className="space-y-4">
@@ -566,10 +618,10 @@ function App() {
           </div>
 
           {/* Page Analytics */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '800ms' }}>
+          <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '800ms' }}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Page analytics</h3>
-              <span className="text-sm text-gray-500">
+              <h3 className="text-lg font-semibold text-marketing-text-light">Top Pages</h3>
+              <span className="text-sm text-marketing-gray-light">
                 {dateRange === 'custom' ? 'Custom range' : dateRange.replace('last_', '').replace('_', ' ')}
               </span>
             </div>
