@@ -113,33 +113,52 @@ def wow_summary():
           (SELECT v FROM cur) AS current_total,
           (SELECT v FROM prev) AS previous_total
         """
-    else:  # revenue
-        q = f"""
-        WITH win AS (
-          SELECT
-            DATE_SUB(CURRENT_DATE(), INTERVAL {d-1} DAY) AS cur_start,
-            CURRENT_DATE() AS cur_end,
-            DATE_SUB(CURRENT_DATE(), INTERVAL {2*d} DAY) AS prev_start,
-            DATE_SUB(CURRENT_DATE(), INTERVAL {d} DAY) AS prev_end
-        ),
-        cur AS (
-          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-          FROM `{bq.project}.{dataset}.shopify_orders`, win
-          WHERE DATE(created_at) BETWEEN win.cur_start AND win.cur_end
-            AND cancelled_at IS NULL
-        ),
-        prev AS (
-          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-          FROM `{bq.project}.{dataset}.shopify_orders`, win
-          WHERE DATE(created_at) BETWEEN win.prev_start AND win.prev_end
-            AND cancelled_at IS NULL
-        )
-        SELECT
-          (SELECT total FROM cur) AS current_total,
-          (SELECT orders FROM cur) AS current_orders,
-          (SELECT total FROM prev) AS previous_total,
-          (SELECT orders FROM prev) AS previous_orders
-        """
+    else:  # revenue - use recent activity for labessentials
+        if brand == "labessentials":
+            q = f"""
+            WITH recent_orders AS (
+              SELECT DATE(created_at) as order_date, CAST(total_price AS FLOAT64) as price
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE cancelled_at IS NULL AND DATE(created_at) >= '2024-11-01'
+              ORDER BY created_at DESC
+            ),
+            periods AS (
+              SELECT 
+                SUM(CASE WHEN order_date >= '2025-01-01' THEN price ELSE 0 END) as current_total,
+                COUNT(CASE WHEN order_date >= '2025-01-01' THEN 1 END) as current_orders,
+                SUM(CASE WHEN order_date >= '2024-11-01' AND order_date < '2025-01-01' THEN price ELSE 0 END) as previous_total,
+                COUNT(CASE WHEN order_date >= '2024-11-01' AND order_date < '2025-01-01' THEN 1 END) as previous_orders
+              FROM recent_orders
+            )
+            SELECT current_total, current_orders, previous_total, previous_orders FROM periods
+            """
+        else:
+            q = f"""
+            WITH win AS (
+              SELECT
+                DATE_SUB(CURRENT_DATE(), INTERVAL {d-1} DAY) AS cur_start,
+                CURRENT_DATE() AS cur_end,
+                DATE_SUB(CURRENT_DATE(), INTERVAL {2*d} DAY) AS prev_start,
+                DATE_SUB(CURRENT_DATE(), INTERVAL {d} DAY) AS prev_end
+            ),
+            cur AS (
+              SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+              FROM `{bq.project}.{dataset}.shopify_orders`, win
+              WHERE DATE(created_at) BETWEEN win.cur_start AND win.cur_end
+                AND cancelled_at IS NULL
+            ),
+            prev AS (
+              SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+              FROM `{bq.project}.{dataset}.shopify_orders`, win
+              WHERE DATE(created_at) BETWEEN win.prev_start AND win.prev_end
+                AND cancelled_at IS NULL
+            )
+            SELECT
+              (SELECT total FROM cur) AS current_total,
+              (SELECT orders FROM cur) AS current_orders,
+              (SELECT total FROM prev) AS previous_total,
+              (SELECT orders FROM prev) AS previous_orders
+            """
     job = bq.query(q)
     rows = [dict(r) for r in job.result(timeout=15)]
     if not rows:
@@ -190,21 +209,40 @@ def mom_summary():
         SELECT (SELECT v FROM cur) AS current_total, (SELECT v FROM prev) AS previous_total
         """
     else:
-        q = f"""
-        WITH cur AS (
-          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-          FROM `{bq.project}.{dataset}.shopify_orders`
-          WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
-        ),
-        prev AS (
-          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-          FROM `{bq.project}.{dataset}.shopify_orders`
-          WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH)
-            AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
-        )
-        SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
-               (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
-        """
+        if brand == "labessentials":
+            q = f"""
+            WITH recent_orders AS (
+              SELECT DATE(created_at) as order_date, CAST(total_price AS FLOAT64) as price
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE cancelled_at IS NULL AND DATE(created_at) >= '2024-09-01'
+              ORDER BY created_at DESC
+            ),
+            periods AS (
+              SELECT 
+                SUM(CASE WHEN order_date >= '2025-01-01' THEN price ELSE 0 END) as current_total,
+                COUNT(CASE WHEN order_date >= '2025-01-01' THEN 1 END) as current_orders,
+                SUM(CASE WHEN order_date >= '2024-11-01' AND order_date < '2025-01-01' THEN price ELSE 0 END) as previous_total,
+                COUNT(CASE WHEN order_date >= '2024-11-01' AND order_date < '2025-01-01' THEN 1 END) as previous_orders
+              FROM recent_orders
+            )
+            SELECT current_total, current_orders, previous_total, previous_orders FROM periods
+            """
+        else:
+            q = f"""
+            WITH cur AS (
+              SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
+            ),
+            prev AS (
+              SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH)
+                AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
+            )
+            SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
+                   (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
+            """
     
     job = bq.query(q)
     rows = [dict(r) for r in job.result(timeout=15)]
@@ -246,21 +284,40 @@ def qoq_summary():
         SELECT (SELECT v FROM cur) AS current_total, (SELECT v FROM prev) AS previous_total
         """
     else:
-        q = f"""
-        WITH cur AS (
-          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-          FROM `{bq.project}.{dataset}.shopify_orders`
-          WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), QUARTER) AND cancelled_at IS NULL
-        ),
-        prev AS (
-          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-          FROM `{bq.project}.{dataset}.shopify_orders`
-          WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 QUARTER), QUARTER)
-            AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), QUARTER) AND cancelled_at IS NULL
-        )
-        SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
-               (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
-        """
+        if brand == "labessentials":
+            q = f"""
+            WITH recent_orders AS (
+              SELECT DATE(created_at) as order_date, CAST(total_price AS FLOAT64) as price
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE cancelled_at IS NULL AND DATE(created_at) >= '2024-05-01'
+              ORDER BY created_at DESC
+            ),
+            periods AS (
+              SELECT 
+                SUM(CASE WHEN order_date >= '2024-11-01' THEN price ELSE 0 END) as current_total,
+                COUNT(CASE WHEN order_date >= '2024-11-01' THEN 1 END) as current_orders,
+                SUM(CASE WHEN order_date >= '2024-05-01' AND order_date < '2024-11-01' THEN price ELSE 0 END) as previous_total,
+                COUNT(CASE WHEN order_date >= '2024-05-01' AND order_date < '2024-11-01' THEN 1 END) as previous_orders
+              FROM recent_orders
+            )
+            SELECT current_total, current_orders, previous_total, previous_orders FROM periods
+            """
+        else:
+            q = f"""
+            WITH cur AS (
+              SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), QUARTER) AND cancelled_at IS NULL
+            ),
+            prev AS (
+              SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+              FROM `{bq.project}.{dataset}.shopify_orders`
+              WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 QUARTER), QUARTER)
+                AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), QUARTER) AND cancelled_at IS NULL
+            )
+            SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
+                   (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
+            """
     
     job = bq.query(q)
     rows = [dict(r) for r in job.result(timeout=15)]
