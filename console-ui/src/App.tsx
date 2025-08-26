@@ -43,7 +43,7 @@ function App() {
   const [mom, setMom] = useState<MoMData | null>(null)
   const [hotspots, setHotspots] = useState<HotspotData[]>([])
   const [autoRefresh, setAutoRefresh] = useState<number | null>(null)
-  const [dateRange, setDateRange] = useState('last_30_days')
+  const [dateRange, setDateRange] = useState('')
   const [customStartDate, setCustomStartDate] = useState('')
   const [customEndDate, setCustomEndDate] = useState('')
 
@@ -58,7 +58,16 @@ function App() {
         setAutoRefresh(seconds)
       }
     }
+    // Set brand-specific defaults
+    const defaultRange = brand === 'labessentials' ? 'last_7_days' : 'last_30_days'
+    setDateRange(defaultRange)
   }, [])
+
+  useEffect(() => {
+    // Update date range when brand changes
+    const defaultRange = brand === 'labessentials' ? 'last_7_days' : 'last_30_days'
+    setDateRange(defaultRange)
+  }, [brand])
 
   useEffect(() => {
     if (autoRefresh) {
@@ -72,6 +81,8 @@ function App() {
   }, [brand, dateRange, customStartDate, customEndDate])
 
   const fetchData = async () => {
+    if (!dateRange) return // Wait for brand-specific default to be set
+    
     setLoading(true)
     try {
       await Promise.all([
@@ -177,34 +188,51 @@ function App() {
     <div className="min-h-screen bg-marketing-charcoal text-marketing-text-light font-sans p-6">
       <div className="max-w-7xl mx-auto">
         <header className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-marketing-cyan rounded-lg flex items-center justify-center">
-              <span className="text-marketing-charcoal font-bold text-sm">HL</span>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-marketing-cyan rounded-lg flex items-center justify-center">
+                <span className="text-marketing-charcoal font-bold text-sm">HL</span>
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-marketing-text-light">Marketing Console</h1>
+                <p className="text-marketing-gray-light text-sm">Internal team dashboard • {brand === 'labessentials' ? 'Lab Essentials' : 'Hot Ash'}</p>
+              </div>
             </div>
-            <h1 className="text-3xl font-bold text-marketing-text-light">Marketing Console</h1>
+            <div className="text-right">
+              <div className="text-sm text-marketing-gray-light">Last updated</div>
+              <div className="text-marketing-text-light font-mono text-sm">
+                {new Date().toLocaleTimeString()}
+              </div>
+            </div>
           </div>
           
           <div className="flex items-center gap-4 flex-wrap">
-            <select
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-              className="px-4 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
-            >
-              <option value="hotash">Hot Ash</option>
-              <option value="labessentials">Lab Essentials</option>
-            </select>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-marketing-gray-light">Brand:</span>
+              <select
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+                className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+              >
+                <option value="hotash">Hot Ash</option>
+                <option value="labessentials">Lab Essentials</option>
+              </select>
+            </div>
             
-            <select
-              value={dateRange}
-              onChange={(e) => setDateRange(e.target.value)}
-              className="px-4 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
-            >
-              <option value="last_7_days">Last 7 Days</option>
-              <option value="last_14_days">Last 14 Days</option>
-              <option value="last_30_days">Last 30 Days</option>
-              <option value="last_90_days">Last 90 Days</option>
-              <option value="custom">Custom Range</option>
-            </select>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-marketing-gray-light">Period:</span>
+              <select
+                value={dateRange}
+                onChange={(e) => setDateRange(e.target.value)}
+                className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+              >
+                <option value="last_7_days">Last 7 Days {brand === 'labessentials' ? '(default)' : ''}</option>
+                <option value="last_14_days">Last 14 Days</option>
+                <option value="last_30_days">Last 30 Days {brand === 'hotash' ? '(default)' : ''}</option>
+                <option value="last_90_days">Last 90 Days</option>
+                <option value="custom">Custom Range</option>
+              </select>
+            </div>
             
             {dateRange === 'custom' && (
               <>
