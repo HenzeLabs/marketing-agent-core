@@ -11,6 +11,78 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "marketing-navy": {
+                DEFAULT: "#1B335E",
+                5: "#1B335E0D",
+                10: "#1B335E1A",
+                20: "#1B335E33",
+                30: "#1B335E4D",
+                40: "#1B335E66",
+                50: "#1B335E80",
+                60: "#1B335E99",
+                80: "#1B335ECC",
+              },
+              "marketing-slate": {
+                DEFAULT: "#4A6C9B",
+                5: "#4A6C9B0D",
+                10: "#4A6C9B1A",
+                20: "#4A6C9B33",
+                30: "#4A6C9B4D",
+                40: "#4A6C9B66",
+                50: "#4A6C9B80",
+                60: "#4A6C9B99",
+                80: "#4A6C9BCC",
+              },
+              "marketing-cyan": {
+                DEFAULT: "#00C7C7",
+                5: "#00C7C70D",
+                10: "#00C7C71A",
+                20: "#00C7C733",
+                30: "#00C7C74D",
+                40: "#00C7C766",
+                50: "#00C7C780",
+                60: "#00C7C799",
+                80: "#00C7C7CC",
+              },
+              "marketing-off-white": "#F8F9FA",
+              "marketing-gray-light": {
+                DEFAULT: "#E0E7FF",
+                5: "#E0E7FF0D",
+                10: "#E0E7FF1A",
+                20: "#E0E7FF33",
+                30: "#E0E7FF4D",
+                40: "#E0E7FF66",
+                50: "#E0E7FF80",
+                60: "#E0E7FF99",
+                80: "#E0E7FFCC",
+              },
+              "marketing-charcoal": {
+                DEFAULT: "#0D1B2A",
+                5: "#0D1B2A0D",
+                10: "#0D1B2A1A",
+                20: "#0D1B2A33",
+                30: "#0D1B2A4D",
+                40: "#0D1B2A66",
+                50: "#0D1B2A80",
+                60: "#0D1B2A99",
+                80: "#0D1B2ACC",
+              },
+              "marketing-text-light": "#F0F4F8",
+              "marketing-orange": "#FF8C42",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
