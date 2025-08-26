@@ -83,6 +83,31 @@
         },
       };
     </script>
+    <style>
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.5s ease-out forwards;
+        opacity: 0;
+      }
+      .glow-cyan {
+        box-shadow: 0 0 20px rgba(0, 199, 199, 0.3), 0 0 40px rgba(0, 199, 199, 0.1);
+      }
+      .glow-orange {
+        box-shadow: 0 0 20px rgba(255, 140, 66, 0.3), 0 0 40px rgba(255, 140, 66, 0.1);
+      }
+      .glow-slate {
+        box-shadow: 0 0 20px rgba(74, 108, 155, 0.3), 0 0 40px rgba(74, 108, 155, 0.1);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
