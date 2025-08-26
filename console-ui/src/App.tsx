@@ -76,14 +76,14 @@ function App() {
         setAutoRefresh(seconds)
       }
     }
-    // Set brand-specific defaults - 2 years for comprehensive analysis
-    const defaultRange = 'last_2_years'
+    // Default to last 30 days for operational focus
+    const defaultRange = 'last_30_days'
     setDateRange(defaultRange)
   }, [])
 
   useEffect(() => {
-    // Update date range when brand changes - keep 2 years for comprehensive view
-    const defaultRange = 'last_2_years'
+    // Update date range when brand changes - default to 30 days
+    const defaultRange = 'last_30_days'
     setDateRange(defaultRange)
   }, [brand])
 
@@ -136,7 +136,7 @@ function App() {
       const end = new Date(customEndDate)
       return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))
     }
-    return 730
+    return 30
   }
 
   const fetchSessions = async () => {
@@ -343,10 +343,10 @@ function App() {
                 >
                   <option value="last_7_days">Last 7 Days</option>
                   <option value="last_14_days">Last 14 Days</option>
-                  <option value="last_30_days">Last 30 Days</option>
+                  <option value="last_30_days">Last 30 Days (default)</option>
                   <option value="last_90_days">Last 90 Days</option>
                   <option value="last_1_year">Last 1 Year</option>
-                  <option value="last_2_years">Last 2 Years (default)</option>
+                  <option value="last_2_years">Last 2 Years (full history)</option>
                   <option value="custom">Custom Range</option>
                 </select>
               </div>
