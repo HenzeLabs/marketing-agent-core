@@ -540,37 +540,9 @@ def check_admin():
         return False
     return True
 
-def run_ga4_pipeline(brand="labessentials"):
-    logging.info(f"GA4 ingest pipeline triggered for {brand} (noop)")
-    # TODO: Replace with actual pipeline call
-    return 0
-
-def run_clarity_pipeline(brand="labessentials"):
-    logging.info(f"Clarity ingest pipeline triggered for {brand} (noop)")
-    # TODO: Replace with actual pipeline call
-    return 0
-
-def run_shopify_pipeline(brand="labessentials", source="all"):
-    logging.info(f"Shopify ingest pipeline triggered for {brand}, source={source}")
-    try:
-        from src.load_secrets import load_env_vars_from_config
-        from src.shopify_pipeline import run_shopify_customers_pipeline, run_shopify_orders_pipeline
-        
-        # Load secrets into environment
-        load_env_vars_from_config(brand)
-        
-        rows_written = 0
-        if source == "all" or source == "customers":
-            run_shopify_customers_pipeline(brand)
-            rows_written += 1000  # Approximate
-        if source == "all" or source == "orders":
-            run_shopify_orders_pipeline(brand)
-            rows_written += 1000  # Approximate
-        
-        return rows_written
-    except Exception as e:
-        logging.error(f"Shopify pipeline failed for {brand}: {e}")
-        return 0
+from src.ga4_pipeline import run_ga4_pipeline
+from src.clarity_pipeline import run_clarity_pipeline
+from src.shopify_pipeline import run_shopify_pipeline
 
 @app.post("/admin/ingest/ga4")
 def admin_ingest_ga4():
