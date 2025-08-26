@@ -76,14 +76,14 @@ function App() {
         setAutoRefresh(seconds)
       }
     }
-    // Set brand-specific defaults
-    const defaultRange = brand === 'labessentials' ? 'last_7_days' : 'last_30_days'
+    // Set brand-specific defaults - 2 years for comprehensive analysis
+    const defaultRange = 'last_2_years'
     setDateRange(defaultRange)
   }, [])
 
   useEffect(() => {
-    // Update date range when brand changes
-    const defaultRange = brand === 'labessentials' ? 'last_7_days' : 'last_30_days'
+    // Update date range when brand changes - keep 2 years for comprehensive view
+    const defaultRange = 'last_2_years'
     setDateRange(defaultRange)
   }, [brand])
 
@@ -129,12 +129,14 @@ function App() {
     if (dateRange === 'last_14_days') return 14
     if (dateRange === 'last_30_days') return 30
     if (dateRange === 'last_90_days') return 90
+    if (dateRange === 'last_1_year') return 365
+    if (dateRange === 'last_2_years') return 730
     if (dateRange === 'custom' && customStartDate && customEndDate) {
       const start = new Date(customStartDate)
       const end = new Date(customEndDate)
       return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))
     }
-    return 30
+    return 730
   }
 
   const fetchSessions = async () => {
@@ -339,10 +341,12 @@ function App() {
                   onChange={(e) => setDateRange(e.target.value)}
                   className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
                 >
-                  <option value="last_7_days">Last 7 Days {brand === 'labessentials' ? '(default)' : ''}</option>
+                  <option value="last_7_days">Last 7 Days</option>
                   <option value="last_14_days">Last 14 Days</option>
-                  <option value="last_30_days">Last 30 Days {brand === 'hotash' ? '(default)' : ''}</option>
+                  <option value="last_30_days">Last 30 Days</option>
                   <option value="last_90_days">Last 90 Days</option>
+                  <option value="last_1_year">Last 1 Year</option>
+                  <option value="last_2_years">Last 2 Years (default)</option>
                   <option value="custom">Custom Range</option>
                 </select>
               </div>
