@@ -143,7 +143,12 @@ function App() {
     const days = getDaysFromRange()
     const response = await fetch(`${API_BASE}/api/metrics/ga4-daily?brand=${brand}&days=${days}`)
     const data = await response.json()
-    setSessions(data.series || [])
+    // Map API response format to expected format
+    const mappedSessions = (data.series || []).map((item: any) => ({
+      date: item.date,
+      sessions: item.value || item.sessions || 0
+    }))
+    setSessions(mappedSessions)
   }
 
   const fetchRevenue = async () => {
@@ -154,22 +159,44 @@ function App() {
   }
 
   const fetchWoW = async () => {
-    const response = await fetch(`${API_BASE}/api/summary/wow?brand=${brand}`)
-    const data = await response.json()
-    setWow(data)
+    try {
+      const response = await fetch(`${API_BASE}/api/summary/wow?brand=${brand}`)
+      if (response.ok) {
+        const data = await response.json()
+        if (data && typeof data.percent_change === 'number') {
+          setWow(data)
+        }
+      }
+    } catch (error) {
+      console.log('WoW data not available')
+    }
   }
 
   const fetchMoM = async () => {
-    const response = await fetch(`${API_BASE}/api/summary/mom?brand=${brand}`)
-    const data = await response.json()
-    setMom(data)
+    try {
+      const response = await fetch(`${API_BASE}/api/summary/mom?brand=${brand}`)
+      if (response.ok) {
+        const data = await response.json()
+        if (data && typeof data.percent_change === 'number') {
+          setMom(data)
+        }
+      }
+    } catch (error) {
+      console.log('MoM data not available')
+    }
   }
 
   const fetchHotspots = async () => {
-    const params = getDateRangeParams()
-    const response = await fetch(`${API_BASE}/api/clarity/hotspots?brand=${brand}&${params}`)
-    const data: HotspotsResponse = await response.json()
-    setHotspots(data.items || [])
+    try {
+      const params = getDateRangeParams()
+      const response = await fetch(`${API_BASE}/api/clarity/hotspots?brand=${brand}&${params}`)
+      if (response.ok) {
+        const data: HotspotsResponse = await response.json()
+        setHotspots(data.items || [])
+      }
+    } catch (error) {
+      console.log('Hotspots data not available')
+    }
   }
 
   const getScoreCards = (): ScoreCard[] => {
