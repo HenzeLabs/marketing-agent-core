@@ -1,0 +1,44 @@
+name: Clarity Hotspots Smoke
+
+on:
+  schedule:
+    - cron: "25 10 * * *"   # daily at 10:25 UTC
+  workflow_dispatch:
+
+jobs:
+  hotspots-smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      API_BASE: https://marketing-agent-core-hg4t45fswq-uc.a.run.app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: ">= 449.0.0"
+
+      - name: Auth with Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          project_id: henzelabs-gpt
+          export_environment_variables: true
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Run hotspots smoke (both brands)
+        run: |
+          chmod +x scripts/smoke_clarity_hotspots_both.sh
+          ./scripts/smoke_clarity_hotspots_both.sh
