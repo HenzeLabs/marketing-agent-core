@@ -288,7 +288,7 @@ function App() {
   }
 
   const renderSessionsChart = () => {
-    if (!sessions.length) return <div className="text-gray-500 text-center py-8">No data available</div>
+    if (!sessions.length) return <div className="text-marketing-gray-light text-center py-8">No data available</div>
     
     const maxSessions = Math.max(...sessions.map(s => s.sessions))
     const totalSessions = sessions.reduce((sum, s) => sum + s.sessions, 0)
@@ -306,14 +306,15 @@ function App() {
                   y1={200 - (ratio * 160)}
                   x2="100%"
                   y2={200 - (ratio * 160)}
-                  stroke="#f3f4f6"
+                  stroke="#4A6C9B"
                   strokeWidth="1"
+                  opacity="0.3"
                 />
                 <text
                   x="35"
                   y={205 - (ratio * 160)}
                   textAnchor="end"
-                  className="text-xs fill-gray-500"
+                  className="text-xs fill-marketing-gray-light"
                 >
                   {Math.round(maxSessions * ratio)}
                 </text>
@@ -376,8 +377,8 @@ function App() {
         
         {/* Summary stats */}
         <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-600">Total sessions: <span className="font-semibold text-gray-900">{totalSessions.toLocaleString()}</span></span>
-          <span className="text-gray-600">Avg per day: <span className="font-semibold text-gray-900">{Math.round(totalSessions / sessions.length)}</span></span>
+          <span className="text-marketing-gray-light">Total sessions: <span className="font-semibold text-marketing-text-light">{totalSessions.toLocaleString()}</span></span>
+          <span className="text-marketing-gray-light">Avg per day: <span className="font-semibold text-marketing-text-light">{Math.round(totalSessions / sessions.length)}</span></span>
         </div>
       </div>
     )
@@ -520,30 +521,30 @@ function App() {
               <div className="space-y-6">
                 {revenue && (
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                      <span className="text-sm font-medium text-gray-600">Total sales</span>
-                      <span className="text-lg font-semibold text-gray-900">${revenue.total.toLocaleString()}</span>
+                    <div className="flex items-center justify-between py-3 border-b border-marketing-slate/30">
+                      <span className="text-sm font-medium text-marketing-gray-light">Total sales</span>
+                      <span className="text-lg font-semibold text-marketing-cyan">${revenue.total.toLocaleString()}</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                      <span className="text-sm font-medium text-gray-600">Orders</span>
-                      <span className="text-lg font-semibold text-gray-900">{revenue.orders}</span>
+                    <div className="flex items-center justify-between py-3 border-b border-marketing-slate/30">
+                      <span className="text-sm font-medium text-marketing-gray-light">Orders</span>
+                      <span className="text-lg font-semibold text-marketing-orange">{revenue.orders}</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                      <span className="text-sm font-medium text-gray-600">Average order value</span>
-                      <span className="text-lg font-semibold text-gray-900">${revenue.aov.toFixed(2)}</span>
+                    <div className="flex items-center justify-between py-3 border-b border-marketing-slate/30">
+                      <span className="text-sm font-medium text-marketing-gray-light">Average order value</span>
+                      <span className="text-lg font-semibold text-marketing-text-light">${revenue.aov.toFixed(2)}</span>
                     </div>
                   </div>
                 )}
                 
                 {(wow || mom) && (
-                  <div className="pt-4 border-t border-gray-200">
-                    <div className="text-sm font-medium text-gray-600 mb-3">Growth metrics</div>
+                  <div className="pt-4 border-t border-marketing-slate/30">
+                    <div className="text-sm font-medium text-marketing-gray-light mb-3">Growth metrics</div>
                     <div className="space-y-2">
                       {wow && (
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">Week over week</span>
+                          <span className="text-sm text-marketing-gray-light">Week over week</span>
                           <span className={`text-sm font-medium ${
-                            wow.percent_change >= 0 ? 'text-green-600' : 'text-red-600'
+                            wow.percent_change >= 0 ? 'text-green-400' : 'text-red-400'
                           }`}>
                             {wow.percent_change >= 0 ? '+' : ''}{wow.percent_change}%
                           </span>
@@ -551,9 +552,9 @@ function App() {
                       )}
                       {mom && (
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">Month over month</span>
+                          <span className="text-sm text-marketing-gray-light">Month over month</span>
                           <span className={`text-sm font-medium ${
-                            mom.percent_change >= 0 ? 'text-green-600' : 'text-red-600'
+                            mom.percent_change >= 0 ? 'text-green-400' : 'text-red-400'
                           }`}>
                             {mom.percent_change >= 0 ? '+' : ''}{mom.percent_change}%
                           </span>
