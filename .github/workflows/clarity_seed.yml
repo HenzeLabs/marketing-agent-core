@@ -1,0 +1,43 @@
+name: Clarity Seed (both brands)
+
+on:
+  schedule:
+    - cron: "20 10 * * *"   # daily at 10:20 UTC (5 min before smoke at 10:25)
+  workflow_dispatch:
+
+jobs:
+  clarity-seed:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: ">= 449.0.0"
+
+      - name: Auth with Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          project_id: henzelabs-gpt
+          export_environment_variables: true
+
+      - name: Install BigQuery client
+        run: pip install --quiet google-cloud-bigquery
+
+      - name: Seed labessentials (14 days)
+        run: python scripts/seed_clarity_ai_summaries.py labessentials 14
+
+      - name: Seed hotash (14 days)
+        run: python scripts/seed_clarity_ai_summaries.py hotash 14
