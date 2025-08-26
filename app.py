@@ -79,6 +79,62 @@ def sessions_daily():
 bq = bigquery.Client()
 def ds(brand): return "labessentials_raw" if brand=="labessentials" else "hotash_raw"
 
+def _clarity_columns(dataset:str) -> set:
+    q = f"""
+      SELECT column_name
+      FROM `{bq.project}.{dataset}.INFORMATION_SCHEMA.COLUMNS`
+      WHERE table_name = 'clarity_ai_summaries'
+    """
+    try:
+        return {r["column_name"] for r in bq.query(q).result()}
+    except Exception:
+        return set()
+
+@app.get("/api/clarity/hotspots")
+def clarity_hotspots():
+    from flask import make_response, jsonify
+    brand = request.args.get("brand","labessentials")
+    rng   = request.args.get("range","last_7_days")
+    days  = 7
+    if "14" in rng: days = 14
+    if "28" in rng: days = 28
+    dataset = ds(brand)
+    cols = _clarity_columns(dataset)
+    if not cols:
+        return jsonify({"items": [], "summary": f"{brand}: no clarity_ai_summaries table"}), 200
+
+    # Preferred fields, will pick only those that exist
+    preferred = [
+      "date","page_url","title","summary","sessions","avg_engagement_time",
+      "rage_clicks","dead_clicks","scroll_depth","attention_score","heat_score"
+    ]
+    sel = [c for c in preferred if c in cols]
+    if not sel:
+        return jsonify({"items": [], "summary": f"{brand}: clarity_ai_summaries has no recognized columns"}), 200
+
+    has_date = "date" in sel
+    orderby  = "attention_score DESC" if "attention_score" in sel else \
+               "heat_score DESC"      if "heat_score" in sel else \
+               "sessions DESC"        if "sessions" in sel else \
+               "avg_engagement_time DESC" if "avg_engagement_time" in sel else "1"
+
+    where = f"WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL {days} DAY) AND CURRENT_DATE()" if has_date else ""
+    select_list = ", ".join(sel)
+    q = f"""
+      SELECT {select_list}
+      FROM `{bq.project}.{dataset}.clarity_ai_summaries`
+      {where}
+      ORDER BY {orderby}
+      LIMIT 20
+    """
+    job = bq.query(q)
+    rows = [dict(r) for r in job.result(timeout=15)]
+
+    payload = {"items": rows, "summary": f"{brand}: {len(rows)} hotspots (last {days} days)"}
+    resp = make_response(jsonify(payload))
+    resp.headers["Cache-Control"] = "public, max-age=600"  # 10 min cache
+    return resp
+
 @app.get("/api/metrics/revenue")
 def revenue():
     brand = request.args.get("brand","labessentials")

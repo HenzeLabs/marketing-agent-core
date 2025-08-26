@@ -4,6 +4,14 @@
   tool: ga4.sessions_daily
   defaults:
     range: last_28_days
+- intent: shopify.revenue_summary
+  patterns: ["revenue last *", "sales summary", "orders last *", "how much did we sell", "aov last *"]
+  tool: shopify.revenue_summary
+  defaults: {brand: "labessentials", range: "last_30_days"}
+- intent: clarity.hotspots
+  patterns: ["clarity hotspots", "top pages issues", "where do users rage click", "hot pages last *", "clarity summary"]
+  tool: clarity.hotspots
+  defaults: {brand: "labessentials", range: "last_7_days"}
 - intent: default
   patterns:
     - "*"
