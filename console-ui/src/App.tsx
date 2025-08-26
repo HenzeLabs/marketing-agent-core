@@ -508,29 +508,47 @@ function App() {
               Top Hotspots ({dateRange === 'custom' ? 'Custom Range' : dateRange.replace('last_', '').replace('_', ' ')})
             </h3>
             <div className="space-y-3">
-              {hotspots.slice(0, 10).map((hotspot, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-marketing-charcoal/30 border border-marketing-slate/20 rounded">
-                  <div className="flex-1">
-                    <div className="font-medium text-marketing-text-light">
-                      {hotspot.title || 'Untitled Page'}
+              {(() => {
+                // Check if data is synthetic/placeholder (all unknown URLs)
+                const isSyntheticData = hotspots.length > 0 && hotspots.every(h => h.page_url === 'unknown' || h.title === 'Page')
+                
+                if (isSyntheticData) {
+                  return (
+                    <div className="text-center py-8 text-marketing-gray-light">
+                      <div className="text-4xl mb-3">🔧</div>
+                      <p className="text-sm mb-2">Clarity Integration In Progress</p>
+                      <p className="text-xs opacity-70">Real page hotspots will appear here once Microsoft Clarity is fully connected.</p>
                     </div>
-                    <div className="text-sm text-marketing-gray-light truncate">
-                      {hotspot.page_url}
+                  )
+                }
+                
+                if (hotspots.length === 0) {
+                  return (
+                    <div className="text-marketing-gray-light text-center py-4">No hotspots data available</div>
+                  )
+                }
+                
+                return hotspots.slice(0, 10).map((hotspot, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 bg-marketing-charcoal/30 border border-marketing-slate/20 rounded">
+                    <div className="flex-1">
+                      <div className="font-medium text-marketing-text-light">
+                        {hotspot.title || 'Untitled Page'}
+                      </div>
+                      <div className="text-sm text-marketing-gray-light truncate">
+                        {hotspot.page_url}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-semibold text-marketing-orange">
+                        {hotspot.attention_score}
+                      </div>
+                      <div className="text-sm text-marketing-gray-light">
+                        {hotspot.sessions} sessions
+                      </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="font-semibold text-marketing-orange">
-                      {hotspot.attention_score}
-                    </div>
-                    <div className="text-sm text-marketing-gray-light">
-                      {hotspot.sessions} sessions
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {hotspots.length === 0 && (
-                <div className="text-marketing-gray-light text-center py-4">No hotspots data available</div>
-              )}
+                ))
+              })()}
             </div>
           </div>
         </div>
