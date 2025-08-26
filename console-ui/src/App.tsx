@@ -43,6 +43,9 @@ function App() {
   const [mom, setMom] = useState<MoMData | null>(null)
   const [hotspots, setHotspots] = useState<HotspotData[]>([])
   const [autoRefresh, setAutoRefresh] = useState<number | null>(null)
+  const [dateRange, setDateRange] = useState('last_30_days')
+  const [customStartDate, setCustomStartDate] = useState('')
+  const [customEndDate, setCustomEndDate] = useState('')
 
   const API_BASE = import.meta.env.VITE_API_BASE
 
@@ -66,7 +69,7 @@ function App() {
 
   useEffect(() => {
     fetchData()
-  }, [brand])
+  }, [brand, dateRange, customStartDate, customEndDate])
 
   const fetchData = async () => {
     setLoading(true)
@@ -85,14 +88,36 @@ function App() {
     }
   }
 
+  const getDateRangeParams = () => {
+    if (dateRange === 'custom' && customStartDate && customEndDate) {
+      return `start_date=${customStartDate}&end_date=${customEndDate}`
+    }
+    return `range=${dateRange}`
+  }
+
+  const getDaysFromRange = () => {
+    if (dateRange === 'last_7_days') return 7
+    if (dateRange === 'last_14_days') return 14
+    if (dateRange === 'last_30_days') return 30
+    if (dateRange === 'last_90_days') return 90
+    if (dateRange === 'custom' && customStartDate && customEndDate) {
+      const start = new Date(customStartDate)
+      const end = new Date(customEndDate)
+      return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))
+    }
+    return 30
+  }
+
   const fetchSessions = async () => {
-    const response = await fetch(`${API_BASE}/api/metrics/ga4-daily?brand=${brand}&days=28`)
+    const days = getDaysFromRange()
+    const response = await fetch(`${API_BASE}/api/metrics/ga4-daily?brand=${brand}&days=${days}`)
     const data = await response.json()
     setSessions(data.series || [])
   }
 
   const fetchRevenue = async () => {
-    const response = await fetch(`${API_BASE}/api/metrics/revenue?brand=${brand}&range=last_30_days`)
+    const params = getDateRangeParams()
+    const response = await fetch(`${API_BASE}/api/metrics/revenue?brand=${brand}&${params}`)
     const data = await response.json()
     setRevenue(data)
   }
@@ -110,7 +135,8 @@ function App() {
   }
 
   const fetchHotspots = async () => {
-    const response = await fetch(`${API_BASE}/api/clarity/hotspots?brand=${brand}&range=last_7_days`)
+    const params = getDateRangeParams()
+    const response = await fetch(`${API_BASE}/api/clarity/hotspots?brand=${brand}&${params}`)
     const data: HotspotsResponse = await response.json()
     setHotspots(data.items || [])
   }
@@ -158,7 +184,7 @@ function App() {
             <h1 className="text-3xl font-bold text-marketing-text-light">Marketing Console</h1>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <select
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
@@ -167,6 +193,37 @@ function App() {
               <option value="hotash">Hot Ash</option>
               <option value="labessentials">Lab Essentials</option>
             </select>
+            
+            <select
+              value={dateRange}
+              onChange={(e) => setDateRange(e.target.value)}
+              className="px-4 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+            >
+              <option value="last_7_days">Last 7 Days</option>
+              <option value="last_14_days">Last 14 Days</option>
+              <option value="last_30_days">Last 30 Days</option>
+              <option value="last_90_days">Last 90 Days</option>
+              <option value="custom">Custom Range</option>
+            </select>
+            
+            {dateRange === 'custom' && (
+              <>
+                <input
+                  type="date"
+                  value={customStartDate}
+                  onChange={(e) => setCustomStartDate(e.target.value)}
+                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+                  placeholder="Start Date"
+                />
+                <input
+                  type="date"
+                  value={customEndDate}
+                  onChange={(e) => setCustomEndDate(e.target.value)}
+                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+                  placeholder="End Date"
+                />
+              </>
+            )}
             
             <button
               onClick={fetchData}
@@ -187,7 +244,9 @@ function App() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Sessions Chart */}
           <div className="bg-marketing-navy/50 border border-marketing-slate/30 p-6 rounded-lg backdrop-blur-sm">
-            <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">Sessions (28d)</h2>
+            <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">
+              Sessions ({dateRange === 'custom' ? `${getDaysFromRange()}d` : dateRange.replace('last_', '').replace('_', ' ')})
+            </h2>
             {renderSessionsChart()}
           </div>
 
@@ -243,7 +302,9 @@ function App() {
 
         {/* Top Hotspots */}
         <div className="bg-marketing-navy/50 border border-marketing-slate/30 p-6 rounded-lg backdrop-blur-sm">
-          <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">Top Hotspots (Last 7 Days)</h2>
+          <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">
+            Top Hotspots ({dateRange === 'custom' ? 'Custom Range' : dateRange.replace('last_', '').replace('_', ' ')})
+          </h2>
           <div className="space-y-3">
             {hotspots.slice(0, 10).map((hotspot, index) => (
               <div key={index} className="flex items-center justify-between p-3 bg-marketing-charcoal/30 border border-marketing-slate/20 rounded">
