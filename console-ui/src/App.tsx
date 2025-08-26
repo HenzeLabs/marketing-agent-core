@@ -76,13 +76,11 @@ function App() {
         setAutoRefresh(seconds)
       }
     }
-    // Default to last 30 days for operational focus
     const defaultRange = 'last_30_days'
     setDateRange(defaultRange)
   }, [])
 
   useEffect(() => {
-    // Update date range when brand changes - default to 30 days
     const defaultRange = 'last_30_days'
     setDateRange(defaultRange)
   }, [brand])
@@ -99,7 +97,7 @@ function App() {
   }, [brand, dateRange, customStartDate, customEndDate])
 
   const fetchData = async () => {
-    if (!dateRange) return // Wait for brand-specific default to be set
+    if (!dateRange) return
     
     setLoading(true)
     try {
@@ -143,7 +141,6 @@ function App() {
     const days = getDaysFromRange()
     const response = await fetch(`${API_BASE}/api/metrics/ga4-daily?brand=${brand}&days=${days}`)
     const data = await response.json()
-    // Map API response format to expected format
     const mappedSessions = (data.series || []).map((item: any) => ({
       date: item.date,
       sessions: item.value || item.sessions || 0
@@ -256,7 +253,6 @@ function App() {
     setChatLoading(true)
     
     try {
-      // TODO: Replace with actual agent API call
       const response = await fetch(`${API_BASE}/api/agent/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -279,7 +275,6 @@ function App() {
       
       setChatMessages(prev => [...prev, agentMessage])
     } catch (error) {
-      // Fallback response for demo
       const agentMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'agent',
@@ -332,7 +327,7 @@ function App() {
           <header className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-marketing-cyan rounded-lg flex items-center justify-center glow-cyan">
+                <div className="w-8 h-8 bg-marketing-cyan rounded-lg flex items-center justify-center">
                   <span className="text-marketing-charcoal font-bold text-sm">HL</span>
                 </div>
                 <div>
@@ -400,7 +395,7 @@ function App() {
               <button
                 onClick={fetchData}
                 disabled={loading}
-                className="px-6 py-2 bg-marketing-cyan text-marketing-charcoal font-semibold rounded-md hover:bg-marketing-cyan/90 hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                className="px-6 py-2 bg-marketing-cyan text-marketing-charcoal font-semibold rounded-md hover:bg-marketing-cyan/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? 'Loading...' : 'Refresh'}
               </button>
@@ -413,201 +408,200 @@ function App() {
             </div>
           </header>
 
-          {/* Scorecards */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-            {getScoreCards().map((card, index) => {
-              const glowClass = card.color.includes('cyan') ? 'glow-cyan' : 
-                               card.color.includes('orange') ? 'glow-orange' : 'glow-slate'
-              return (
+          {/* Scorecards - Homepage Style */}
+          <div className="relative mb-12">
+            <div className="absolute -inset-8 bg-gradient-to-br from-marketing-navy/50 via-marketing-cyan/10 to-marketing-slate/30 rounded-3xl filter blur-2xl opacity-50"></div>
+            <div className="relative grid grid-cols-2 md:grid-cols-5 gap-4 border border-marketing-slate-50 bg-marketing-charcoal-50 rounded-2xl p-6 backdrop-blur-lg shadow-2xl">
+              {getScoreCards().map((card, index) => (
                 <div 
                   key={index} 
-                  className={`relative group animate-fade-in-up hover:${glowClass} transition-all duration-300`}
+                  className="bg-marketing-slate-20 p-4 rounded-lg animate-fade-in-up"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="absolute -inset-1 bg-gradient-to-br from-marketing-cyan/20 via-marketing-navy/10 to-marketing-slate/20 rounded-lg filter blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative bg-marketing-navy/50 border border-marketing-slate/30 p-4 rounded-lg backdrop-blur-sm">
-                    <div className="text-sm text-marketing-gray-light mb-1">{card.title}</div>
-                    <div className={`text-2xl font-bold ${card.color}`}>{card.value}</div>
+                  <p className="text-sm text-marketing-gray-light mb-1">{card.title}</p>
+                  <div className="flex items-center gap-2">
+                    <p className={`text-2xl font-bold ${card.color}`}>{card.value}</p>
                     {card.trend && (
-                      <div className={`text-xs ${card.color} flex items-center gap-1 mt-1`}>
-                        {card.trend === 'up' ? '↗' : '↘'} {card.trend}
-                      </div>
+                      <span className={`text-sm font-medium ${
+                        card.trend === 'up' ? 'text-green-400' : 'text-red-400'
+                      }`}>
+                        {card.trend === 'up' ? '↗' : '↘'}
+                      </span>
                     )}
                   </div>
                 </div>
-              )
-            })}
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             {/* Sessions Chart */}
-            <div className="relative group animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-br from-marketing-cyan/30 via-marketing-navy/20 to-marketing-slate/30 rounded-xl filter blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative bg-marketing-navy/50 border border-marketing-slate/30 p-6 rounded-lg backdrop-blur-lg shadow-2xl">
-                <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">
-                  Sessions ({dateRange === 'custom' ? `${getDaysFromRange()}d` : dateRange.replace('last_', '').replace('_', ' ')})
-                </h2>
-                {renderSessionsChart()}
+            <div className="bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+              <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
+                <span className="text-2xl">📊</span>
               </div>
+              <h3 className="text-xl font-bold mb-4 text-marketing-text-light">
+                Sessions ({dateRange === 'custom' ? `${getDaysFromRange()}d` : dateRange.replace('last_', '').replace('_', ' ')})
+              </h3>
+              {renderSessionsChart()}
             </div>
 
             {/* Revenue KPIs */}
-            <div className="relative group animate-fade-in-up" style={{ animationDelay: '700ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-br from-marketing-orange/30 via-marketing-navy/20 to-marketing-cyan/30 rounded-xl filter blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative bg-marketing-navy/50 border border-marketing-slate/30 p-6 rounded-lg backdrop-blur-lg shadow-2xl">
-                <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">Revenue KPIs</h2>
-                <div className="space-y-4">
-                  {revenue && (
-                    <div className="grid grid-cols-3 gap-4">
-                      <div>
-                        <div className="text-2xl font-bold text-marketing-cyan">
-                          ${revenue.total.toLocaleString()}
-                        </div>
-                        <div className="text-sm text-marketing-gray-light">Total Revenue</div>
+            <div className="bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '700ms' }}>
+              <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
+                <span className="text-2xl">💰</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-marketing-text-light">Revenue Analysis</h3>
+              <div className="space-y-4">
+                {revenue && (
+                  <div className="grid grid-cols-3 gap-4">
+                    <div>
+                      <div className="text-2xl font-bold text-marketing-cyan">
+                        ${revenue.total.toLocaleString()}
                       </div>
-                      <div>
-                        <div className="text-2xl font-bold text-marketing-orange">
-                          {revenue.orders}
-                        </div>
-                        <div className="text-sm text-marketing-gray-light">Orders</div>
+                      <div className="text-sm text-marketing-gray-light">Total Revenue</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-marketing-orange">
+                        {revenue.orders}
                       </div>
-                      <div>
-                        <div className="text-2xl font-bold text-marketing-slate">
-                          ${revenue.aov.toFixed(2)}
-                        </div>
-                        <div className="text-sm text-marketing-gray-light">AOV</div>
+                      <div className="text-sm text-marketing-gray-light">Orders</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-marketing-slate">
+                        ${revenue.aov.toFixed(2)}
                       </div>
+                      <div className="text-sm text-marketing-gray-light">AOV</div>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-marketing-slate/30">
+                  {wow && (
+                    <div>
+                      <div className={`text-lg font-semibold ${wow.percent_change >= 0 ? 'text-marketing-cyan' : 'text-marketing-orange'}`}>
+                        {wow.percent_change >= 0 ? '+' : ''}{wow.percent_change}%
+                      </div>
+                      <div className="text-sm text-marketing-gray-light">WoW Change</div>
                     </div>
                   )}
                   
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-marketing-slate/30">
-                    {wow && (
-                      <div>
-                        <div className={`text-lg font-semibold ${wow.percent_change >= 0 ? 'text-marketing-cyan' : 'text-marketing-orange'}`}>
-                          {wow.percent_change >= 0 ? '+' : ''}{wow.percent_change}%
-                        </div>
-                        <div className="text-sm text-marketing-gray-light">WoW Change</div>
+                  {mom && (
+                    <div>
+                      <div className={`text-lg font-semibold ${mom.percent_change >= 0 ? 'text-marketing-cyan' : 'text-marketing-orange'}`}>
+                        {mom.percent_change >= 0 ? '+' : ''}{mom.percent_change}%
                       </div>
-                    )}
-                    
-                    {mom && (
-                      <div>
-                        <div className={`text-lg font-semibold ${mom.percent_change >= 0 ? 'text-marketing-cyan' : 'text-marketing-orange'}`}>
-                          {mom.percent_change >= 0 ? '+' : ''}{mom.percent_change}%
-                        </div>
-                        <div className="text-sm text-marketing-gray-light">MoM Change</div>
-                      </div>
-                    )}
-                  </div>
+                      <div className="text-sm text-marketing-gray-light">MoM Change</div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
 
           {/* Top Hotspots */}
-          <div className="relative group animate-fade-in-up" style={{ animationDelay: '800ms' }}>
-            <div className="absolute -inset-2 bg-gradient-to-br from-marketing-slate/30 via-marketing-navy/20 to-marketing-orange/30 rounded-xl filter blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="relative bg-marketing-navy/50 border border-marketing-slate/30 p-6 rounded-lg backdrop-blur-lg shadow-2xl">
-              <h2 className="text-xl font-semibold mb-4 text-marketing-text-light">
-                Top Hotspots ({dateRange === 'custom' ? 'Custom Range' : dateRange.replace('last_', '').replace('_', ' ')})
-              </h2>
-              <div className="space-y-3">
-                {hotspots.slice(0, 10).map((hotspot, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-marketing-charcoal/30 border border-marketing-slate/20 rounded">
-                    <div className="flex-1">
-                      <div className="font-medium text-marketing-text-light">
-                        {hotspot.title || 'Untitled Page'}
-                      </div>
-                      <div className="text-sm text-marketing-gray-light truncate">
-                        {hotspot.page_url}
-                      </div>
+          <div className="bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '800ms' }}>
+            <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
+              <span className="text-2xl">🔥</span>
+            </div>
+            <h3 className="text-xl font-bold mb-4 text-marketing-text-light">
+              Top Hotspots ({dateRange === 'custom' ? 'Custom Range' : dateRange.replace('last_', '').replace('_', ' ')})
+            </h3>
+            <div className="space-y-3">
+              {hotspots.slice(0, 10).map((hotspot, index) => (
+                <div key={index} className="flex items-center justify-between p-3 bg-marketing-charcoal/30 border border-marketing-slate/20 rounded">
+                  <div className="flex-1">
+                    <div className="font-medium text-marketing-text-light">
+                      {hotspot.title || 'Untitled Page'}
                     </div>
-                    <div className="text-right">
-                      <div className="font-semibold text-marketing-orange">
-                        {hotspot.attention_score}
-                      </div>
-                      <div className="text-sm text-marketing-gray-light">
-                        {hotspot.sessions} sessions
-                      </div>
+                    <div className="text-sm text-marketing-gray-light truncate">
+                      {hotspot.page_url}
                     </div>
                   </div>
-                ))}
-                {hotspots.length === 0 && (
-                  <div className="text-marketing-gray-light text-center py-4">No hotspots data available</div>
-                )}
-              </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-marketing-orange">
+                      {hotspot.attention_score}
+                    </div>
+                    <div className="text-sm text-marketing-gray-light">
+                      {hotspot.sessions} sessions
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {hotspots.length === 0 && (
+                <div className="text-marketing-gray-light text-center py-4">No hotspots data available</div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Agent Chat Sidebar */}
-        <div className="relative w-80 flex flex-col">
-          <div className="absolute -inset-1 bg-gradient-to-b from-marketing-cyan/20 via-marketing-navy/10 to-marketing-slate/20 filter blur-sm"></div>
-          <div className="relative bg-marketing-navy/30 border-l border-marketing-slate/30 flex flex-col backdrop-blur-lg h-full">
-            <div className="p-4 border-b border-marketing-slate/30 bg-gradient-to-r from-marketing-navy/50 to-marketing-slate/30">
-              <h3 className="text-lg font-semibold text-marketing-text-light flex items-center gap-2">
-                <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-pulse glow-cyan"></div>
-                Marketing Agent
-              </h3>
-              <p className="text-sm text-marketing-gray-light mt-1">Ask me about your data</p>
+        <div className="w-80 bg-marketing-slate-10 border-l border-marketing-slate-30 flex flex-col">
+          <div className="p-6 border-b border-marketing-slate-30">
+            <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-4">
+              <span className="text-2xl">🤖</span>
             </div>
-            
-            <div className="flex-1 p-4 overflow-y-auto space-y-4">
-              {chatMessages.length === 0 && (
-                <div className="text-center text-marketing-gray-light py-8">
-                  <div className="text-4xl mb-2">🤖</div>
-                  <p className="text-sm">Hi! I'm ready to help you analyze your {brand} data.</p>
-                  <p className="text-xs mt-2">Try asking: "What's driving our revenue growth?"</p>
-                </div>
-              )}
-              
-              {chatMessages.map((message) => (
-                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] p-3 rounded-lg transition-all duration-300 ${
-                    message.type === 'user' 
-                      ? 'bg-marketing-cyan text-marketing-charcoal glow-cyan' 
-                      : 'bg-marketing-charcoal/50 border border-marketing-slate/30 text-marketing-text-light backdrop-blur-sm'
-                  }`}>
-                    <p className="text-sm">{message.content}</p>
-                    <p className="text-xs opacity-70 mt-1">
-                      {message.timestamp.toLocaleTimeString()}
-                    </p>
-                  </div>
-                </div>
-              ))}
-              
-              {chatLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-marketing-charcoal/50 border border-marketing-slate/30 p-3 rounded-lg">
-                    <div className="flex items-center gap-2 text-marketing-gray-light">
-                      <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                      <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-            
-            <div className="p-4 border-t border-marketing-slate/30 bg-gradient-to-r from-marketing-navy/30 to-marketing-slate/20">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
-                  placeholder="Ask about your data..."
-                  className="flex-1 px-3 py-2 bg-marketing-charcoal/50 border border-marketing-slate/30 rounded-md text-marketing-text-light placeholder-marketing-gray-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan focus:glow-cyan text-sm backdrop-blur-sm transition-all duration-300"
-                  disabled={chatLoading}
-                />
-                <button
-                  onClick={sendChatMessage}
-                  disabled={chatLoading || !chatInput.trim()}
-                  className="px-3 py-2 bg-marketing-cyan text-marketing-charcoal rounded-md hover:bg-marketing-cyan/90 hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-                >
-                  →
-                </button>
+            <h3 className="text-xl font-bold text-marketing-text-light mb-2">
+              AI Agent Mode
+            </h3>
+            <p className="text-marketing-gray-light">Ask natural-language questions about your data and get instant answers with insights.</p>
+          </div>
+          
+          <div className="flex-1 p-4 overflow-y-auto space-y-4">
+            {chatMessages.length === 0 && (
+              <div className="text-center text-marketing-gray-light py-8">
+                <div className="text-4xl mb-2">🤖</div>
+                <p className="text-sm">Hi! I'm ready to help you analyze your {brand} data.</p>
+                <p className="text-xs mt-2">Try asking: "What's driving our revenue growth?"</p>
               </div>
+            )}
+            
+            {chatMessages.map((message) => (
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[80%] p-3 rounded-lg transition-all duration-300 ${
+                  message.type === 'user' 
+                    ? 'bg-marketing-cyan text-marketing-charcoal' 
+                    : 'bg-marketing-charcoal/50 border border-marketing-slate/30 text-marketing-text-light backdrop-blur-sm'
+                }`}>
+                  <p className="text-sm">{message.content}</p>
+                  <p className="text-xs opacity-70 mt-1">
+                    {message.timestamp.toLocaleTimeString()}
+                  </p>
+                </div>
+              </div>
+            ))}
+            
+            {chatLoading && (
+              <div className="flex justify-start">
+                <div className="bg-marketing-charcoal/50 border border-marketing-slate/30 p-3 rounded-lg">
+                  <div className="flex items-center gap-2 text-marketing-gray-light">
+                    <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                    <div className="w-2 h-2 bg-marketing-cyan rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <div className="p-6 border-t border-marketing-slate-30">
+            <div className="flex gap-3">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
+                placeholder="Why did AOV drop last week?"
+                className="flex-1 px-4 py-3 bg-marketing-charcoal/50 border border-marketing-slate/30 rounded-lg text-marketing-text-light placeholder-marketing-gray-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan text-sm"
+                disabled={chatLoading}
+              />
+              <button
+                onClick={sendChatMessage}
+                disabled={chatLoading || !chatInput.trim()}
+                className="px-4 py-3 bg-marketing-cyan text-marketing-charcoal font-semibold rounded-lg hover:bg-marketing-cyan/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                →
+              </button>
             </div>
           </div>
         </div>
