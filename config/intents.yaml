@@ -16,6 +16,14 @@
   patterns: ["week over week", "wow summary", "compare last week", "weekly comparison", "how did we do vs last week"]
   tool: summary.wow
   defaults: {brand: "labessentials", metric: "sessions", window: "7"}
+- intent: summary.mom
+  patterns: ["month over month", "mom summary", "compare last month", "monthly comparison", "how did we do vs last month"]
+  tool: summary.mom
+  defaults: {brand: "labessentials", metric: "sessions"}
+- intent: summary.qoq
+  patterns: ["quarter over quarter", "qoq summary", "compare last quarter", "quarterly comparison", "how did we do vs last quarter"]
+  tool: summary.qoq
+  defaults: {brand: "labessentials", metric: "sessions"}
 - intent: default
   patterns:
     - "*"

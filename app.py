@@ -169,6 +169,118 @@ def wow_summary():
     resp.headers["Cache-Control"] = "public, max-age=900"  # 15 min cache
     return resp
 
+@app.get("/api/summary/mom")
+def mom_summary():
+    from flask import make_response, jsonify
+    brand = request.args.get("brand","labessentials")
+    metric = request.args.get("metric","sessions")
+    dataset = ds(brand)
+    
+    if metric == "sessions":
+        q = f"""
+        WITH cur AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`
+          WHERE date >= DATE_TRUNC(CURRENT_DATE(), MONTH)
+        ),
+        prev AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`
+          WHERE date >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH)
+            AND date < DATE_TRUNC(CURRENT_DATE(), MONTH)
+        )
+        SELECT (SELECT v FROM cur) AS current_total, (SELECT v FROM prev) AS previous_total
+        """
+    else:
+        q = f"""
+        WITH cur AS (
+          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+          FROM `{bq.project}.{dataset}.shopify_orders`
+          WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
+        ),
+        prev AS (
+          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+          FROM `{bq.project}.{dataset}.shopify_orders`
+          WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH)
+            AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
+        )
+        SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
+               (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
+        """
+    
+    job = bq.query(q)
+    rows = [dict(r) for r in job.result(timeout=15)]
+    if not rows: rows = [{"current_total": 0, "previous_total": 0}]
+    
+    row = rows[0]
+    current = float(row.get("current_total") or 0)
+    previous = float(row.get("previous_total") or 0)
+    change = current - previous
+    pct_change = (change / previous * 100) if previous > 0 else 0
+    
+    payload = {"brand": brand, "metric": metric, "current": current, "previous": previous, "change": change, "percent_change": round(pct_change, 1)}
+    if metric == "revenue" and "current_orders" in row:
+        payload["current_orders"] = int(row.get("current_orders") or 0)
+        payload["previous_orders"] = int(row.get("previous_orders") or 0)
+    
+    resp = make_response(jsonify(payload))
+    resp.headers["Cache-Control"] = "public, max-age=1800"
+    return resp
+
+@app.get("/api/summary/qoq")
+def qoq_summary():
+    from flask import make_response, jsonify
+    brand = request.args.get("brand","labessentials")
+    metric = request.args.get("metric","sessions")
+    dataset = ds(brand)
+    
+    if metric == "sessions":
+        q = f"""
+        WITH cur AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`
+          WHERE date >= DATE_TRUNC(CURRENT_DATE(), QUARTER)
+        ),
+        prev AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`
+          WHERE date >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 QUARTER), QUARTER)
+            AND date < DATE_TRUNC(CURRENT_DATE(), QUARTER)
+        )
+        SELECT (SELECT v FROM cur) AS current_total, (SELECT v FROM prev) AS previous_total
+        """
+    else:
+        q = f"""
+        WITH cur AS (
+          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+          FROM `{bq.project}.{dataset}.shopify_orders`
+          WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), QUARTER) AND cancelled_at IS NULL
+        ),
+        prev AS (
+          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+          FROM `{bq.project}.{dataset}.shopify_orders`
+          WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 QUARTER), QUARTER)
+            AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), QUARTER) AND cancelled_at IS NULL
+        )
+        SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
+               (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
+        """
+    
+    job = bq.query(q)
+    rows = [dict(r) for r in job.result(timeout=15)]
+    if not rows: rows = [{"current_total": 0, "previous_total": 0}]
+    
+    row = rows[0]
+    current = float(row.get("current_total") or 0)
+    previous = float(row.get("previous_total") or 0)
+    change = current - previous
+    pct_change = (change / previous * 100) if previous > 0 else 0
+    
+    payload = {"brand": brand, "metric": metric, "current": current, "previous": previous, "change": change, "percent_change": round(pct_change, 1)}
+    if metric == "revenue" and "current_orders" in row:
+        payload["current_orders"] = int(row.get("current_orders") or 0)
+        payload["previous_orders"] = int(row.get("previous_orders") or 0)
+    
+    resp = make_response(jsonify(payload))
+    resp.headers["Cache-Control"] = "public, max-age=3600"
+    return resp
+
 def _clarity_columns(dataset:str) -> set:
     q = f"""
       SELECT column_name
