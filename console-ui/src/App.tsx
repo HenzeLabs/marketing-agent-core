@@ -288,32 +288,96 @@ function App() {
   }
 
   const renderSessionsChart = () => {
-    if (!sessions.length) return <div className="text-marketing-gray-light">No data</div>
+    if (!sessions.length) return <div className="text-gray-500 text-center py-8">No data available</div>
     
     const maxSessions = Math.max(...sessions.map(s => s.sessions))
+    const totalSessions = sessions.reduce((sum, s) => sum + s.sessions, 0)
     
     return (
-      <div className="space-y-2">
-        <svg width="100%" height="200" className="border border-marketing-slate/30 rounded bg-marketing-charcoal/20">
-          {sessions.map((session, index) => {
-            const x = (index / (sessions.length - 1)) * 90 + 5
-            const height = (session.sessions / maxSessions) * 160
-            const y = 180 - height
+      <div className="space-y-4">
+        {/* Chart */}
+        <div className="relative">
+          <svg width="100%" height="240" className="overflow-visible">
+            {/* Grid lines */}
+            {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => (
+              <g key={i}>
+                <line
+                  x1="40"
+                  y1={200 - (ratio * 160)}
+                  x2="100%"
+                  y2={200 - (ratio * 160)}
+                  stroke="#f3f4f6"
+                  strokeWidth="1"
+                />
+                <text
+                  x="35"
+                  y={205 - (ratio * 160)}
+                  textAnchor="end"
+                  className="text-xs fill-gray-500"
+                >
+                  {Math.round(maxSessions * ratio)}
+                </text>
+              </g>
+            ))}
             
-            return (
-              <rect
-                key={index}
-                x={`${x}%`}
-                y={y}
-                width="2"
-                height={height}
-                fill="#00C7C7"
-              />
-            )
-          })}
-        </svg>
-        <div className="text-sm text-marketing-gray-light">
-          Total: {sessions.reduce((sum, s) => sum + s.sessions, 0)} sessions
+            {/* Area chart */}
+            <defs>
+              <linearGradient id="sessionGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#00C7C7" stopOpacity="0.3"/>
+                <stop offset="100%" stopColor="#00C7C7" stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            
+            {sessions.length > 1 && (
+              <>
+                {/* Area fill */}
+                <path
+                  d={`M 40 200 ${sessions.map((session, index) => {
+                    const x = 40 + (index / (sessions.length - 1)) * (100 - 40) + '%'
+                    const y = 200 - (session.sessions / maxSessions) * 160
+                    return `L ${x} ${y}`
+                  }).join(' ')} L ${40 + ((sessions.length - 1) / (sessions.length - 1)) * (100 - 40)}% 200 Z`}
+                  fill="url(#sessionGradient)"
+                />
+                
+                {/* Line */}
+                <path
+                  d={`M ${sessions.map((session, index) => {
+                    const x = 40 + (index / (sessions.length - 1)) * 60
+                    const y = 200 - (session.sessions / maxSessions) * 160
+                    return `${index === 0 ? 'M' : 'L'} ${x} ${y}`
+                  }).join(' ')}`}
+                  stroke="#00C7C7"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                
+                {/* Data points */}
+                {sessions.map((session, index) => {
+                  const x = 40 + (index / (sessions.length - 1)) * 60
+                  const y = 200 - (session.sessions / maxSessions) * 160
+                  return (
+                    <circle
+                      key={index}
+                      cx={x}
+                      cy={y}
+                      r="3"
+                      fill="#00C7C7"
+                      className="hover:r-4 transition-all cursor-pointer"
+                    >
+                      <title>{session.date}: {session.sessions} sessions</title>
+                    </circle>
+                  )
+                })}
+              </>
+            )}
+          </svg>
+        </div>
+        
+        {/* Summary stats */}
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-gray-600">Total sessions: <span className="font-semibold text-gray-900">{totalSessions.toLocaleString()}</span></span>
+          <span className="text-gray-600">Avg per day: <span className="font-semibold text-gray-900">{Math.round(totalSessions / sessions.length)}</span></span>
         </div>
       </div>
     )
@@ -327,29 +391,31 @@ function App() {
           <header className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-marketing-cyan rounded-lg flex items-center justify-center">
-                  <span className="text-marketing-charcoal font-bold text-sm">HL</span>
+                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">HL</span>
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-marketing-text-light">Marketing Console</h1>
-                  <p className="text-marketing-gray-light text-sm">Internal team dashboard • {brand === 'labessentials' ? 'Lab Essentials' : 'Hot Ash'}</p>
+                  <h1 className="text-2xl font-semibold text-gray-900">Analytics</h1>
+                  <p className="text-gray-600 text-sm">{brand === 'labessentials' ? 'Lab Essentials' : 'Hot Ash'} • Last updated {new Date().toLocaleTimeString()}</p>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="text-sm text-marketing-gray-light">Last updated</div>
-                <div className="text-marketing-text-light font-mono text-sm">
-                  {new Date().toLocaleTimeString()}
-                </div>
+              <div className="flex items-center gap-3">
+                <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                  Export
+                </button>
+                <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                  View reports
+                </button>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-4 flex-wrap bg-white p-4 rounded-lg border border-gray-200 mb-6">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-marketing-gray-light">Brand:</span>
+                <label className="text-sm font-medium text-gray-700">Store:</label>
                 <select
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
-                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+                  className="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                 >
                   <option value="hotash">Hot Ash</option>
                   <option value="labessentials">Lab Essentials</option>
@@ -357,19 +423,19 @@ function App() {
               </div>
               
               <div className="flex items-center gap-2">
-                <span className="text-sm text-marketing-gray-light">Period:</span>
+                <label className="text-sm font-medium text-gray-700">Date range:</label>
                 <select
                   value={dateRange}
                   onChange={(e) => setDateRange(e.target.value)}
-                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
+                  className="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                 >
-                  <option value="last_7_days">Last 7 Days</option>
-                  <option value="last_14_days">Last 14 Days</option>
-                  <option value="last_30_days">Last 30 Days (default)</option>
-                  <option value="last_90_days">Last 90 Days</option>
-                  <option value="last_1_year">Last 1 Year</option>
-                  <option value="last_2_years">Last 2 Years (full history)</option>
-                  <option value="custom">Custom Range</option>
+                  <option value="last_7_days">Last 7 days</option>
+                  <option value="last_14_days">Last 14 days</option>
+                  <option value="last_30_days">Last 30 days</option>
+                  <option value="last_90_days">Last 90 days</option>
+                  <option value="last_1_year">Last year</option>
+                  <option value="last_2_years">Last 2 years</option>
+                  <option value="custom">Custom range</option>
                 </select>
               </div>
               
@@ -395,118 +461,119 @@ function App() {
               <button
                 onClick={fetchData}
                 disabled={loading}
-                className="px-6 py-2 bg-marketing-cyan text-marketing-charcoal font-semibold rounded-md hover:bg-marketing-cyan/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? 'Loading...' : 'Refresh'}
               </button>
               
               {autoRefresh && (
-                <span className="text-sm text-marketing-gray-light">
+                <span className="text-sm text-gray-500">
                   Auto-refresh: {autoRefresh}s
                 </span>
               )}
             </div>
           </header>
 
-          {/* Scorecards - Homepage Style */}
-          <div className="relative mb-12">
-            <div className="absolute -inset-8 bg-gradient-to-br from-marketing-navy/50 via-marketing-cyan/10 to-marketing-slate/30 rounded-3xl filter blur-2xl opacity-50"></div>
-            <div className="relative grid grid-cols-2 md:grid-cols-5 gap-4 border border-marketing-slate-50 bg-marketing-charcoal-50 rounded-2xl p-6 backdrop-blur-lg shadow-2xl">
-              {getScoreCards().map((card, index) => (
-                <div 
-                  key={index} 
-                  className="bg-marketing-slate-20 p-4 rounded-lg animate-fade-in-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <p className="text-sm text-marketing-gray-light mb-1">{card.title}</p>
-                  <div className="flex items-center gap-2">
-                    <p className={`text-2xl font-bold ${card.color}`}>{card.value}</p>
-                    {card.trend && (
-                      <span className={`text-sm font-medium ${
-                        card.trend === 'up' ? 'text-green-400' : 'text-red-400'
-                      }`}>
-                        {card.trend === 'up' ? '↗' : '↘'}
-                      </span>
-                    )}
-                  </div>
+          {/* Key Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            {getScoreCards().map((card, index) => (
+              <div 
+                key={index} 
+                className="bg-marketing-navy/50 border border-marketing-slate/30 rounded-lg p-4 backdrop-blur-sm hover:bg-marketing-navy/60 transition-all animate-fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="text-xs font-medium text-marketing-gray-light uppercase tracking-wide mb-2">{card.title}</div>
+                <div className="flex items-baseline justify-between">
+                  <div className={`text-2xl font-semibold ${card.color}`}>{card.value}</div>
+                  {card.trend && (
+                    <div className={`flex items-center text-sm font-medium ${
+                      card.trend === 'up' ? 'text-green-400' : 'text-red-400'
+                    }`}>
+                      <span className="mr-1">{card.trend === 'up' ? '↗' : '↘'}</span>
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             {/* Sessions Chart */}
-            <div className="bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-              <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
-                <span className="text-2xl">📊</span>
+            <div className="bg-marketing-navy/50 border border-marketing-slate/30 rounded-lg p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-marketing-text-light">
+                  Sessions Overview
+                </h3>
+                <span className="text-sm text-marketing-gray-light">
+                  {dateRange === 'custom' ? `${getDaysFromRange()} days` : dateRange.replace('last_', '').replace('_', ' ')}
+                </span>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-marketing-text-light">
-                Sessions ({dateRange === 'custom' ? `${getDaysFromRange()}d` : dateRange.replace('last_', '').replace('_', ' ')})
-              </h3>
               {renderSessionsChart()}
             </div>
 
-            {/* Revenue KPIs */}
-            <div className="bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '700ms' }}>
-              <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
-                <span className="text-2xl">💰</span>
+            {/* Revenue Breakdown */}
+            <div className="bg-marketing-navy/50 border border-marketing-slate/30 rounded-lg p-6 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: '700ms' }}>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-marketing-text-light">Revenue Breakdown</h3>
+                <span className="text-sm text-marketing-gray-light">{dateRange.replace('last_', '').replace('_', ' ')}</span>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-marketing-text-light">Revenue Analysis</h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {revenue && (
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <div className="text-2xl font-bold text-marketing-cyan">
-                        ${revenue.total.toLocaleString()}
-                      </div>
-                      <div className="text-sm text-marketing-gray-light">Total Revenue</div>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                      <span className="text-sm font-medium text-gray-600">Total sales</span>
+                      <span className="text-lg font-semibold text-gray-900">${revenue.total.toLocaleString()}</span>
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-marketing-orange">
-                        {revenue.orders}
-                      </div>
-                      <div className="text-sm text-marketing-gray-light">Orders</div>
+                    <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                      <span className="text-sm font-medium text-gray-600">Orders</span>
+                      <span className="text-lg font-semibold text-gray-900">{revenue.orders}</span>
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-marketing-slate">
-                        ${revenue.aov.toFixed(2)}
-                      </div>
-                      <div className="text-sm text-marketing-gray-light">AOV</div>
+                    <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                      <span className="text-sm font-medium text-gray-600">Average order value</span>
+                      <span className="text-lg font-semibold text-gray-900">${revenue.aov.toFixed(2)}</span>
                     </div>
                   </div>
                 )}
                 
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-marketing-slate/30">
-                  {wow && (
-                    <div>
-                      <div className={`text-lg font-semibold ${wow.percent_change >= 0 ? 'text-marketing-cyan' : 'text-marketing-orange'}`}>
-                        {wow.percent_change >= 0 ? '+' : ''}{wow.percent_change}%
-                      </div>
-                      <div className="text-sm text-marketing-gray-light">WoW Change</div>
+                {(wow || mom) && (
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="text-sm font-medium text-gray-600 mb-3">Growth metrics</div>
+                    <div className="space-y-2">
+                      {wow && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">Week over week</span>
+                          <span className={`text-sm font-medium ${
+                            wow.percent_change >= 0 ? 'text-green-600' : 'text-red-600'
+                          }`}>
+                            {wow.percent_change >= 0 ? '+' : ''}{wow.percent_change}%
+                          </span>
+                        </div>
+                      )}
+                      {mom && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">Month over month</span>
+                          <span className={`text-sm font-medium ${
+                            mom.percent_change >= 0 ? 'text-green-600' : 'text-red-600'
+                          }`}>
+                            {mom.percent_change >= 0 ? '+' : ''}{mom.percent_change}%
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  )}
-                  
-                  {mom && (
-                    <div>
-                      <div className={`text-lg font-semibold ${mom.percent_change >= 0 ? 'text-marketing-cyan' : 'text-marketing-orange'}`}>
-                        {mom.percent_change >= 0 ? '+' : ''}{mom.percent_change}%
-                      </div>
-                      <div className="text-sm text-marketing-gray-light">MoM Change</div>
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Top Hotspots */}
-          <div className="bg-marketing-slate-10 border border-marketing-slate-30 p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '800ms' }}>
-            <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-6">
-              <span className="text-2xl">🔥</span>
+          {/* Page Analytics */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6 animate-fade-in-up" style={{ animationDelay: '800ms' }}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Page analytics</h3>
+              <span className="text-sm text-gray-500">
+                {dateRange === 'custom' ? 'Custom range' : dateRange.replace('last_', '').replace('_', ' ')}
+              </span>
             </div>
-            <h3 className="text-xl font-bold mb-4 text-marketing-text-light">
-              Top Hotspots ({dateRange === 'custom' ? 'Custom Range' : dateRange.replace('last_', '').replace('_', ' ')})
-            </h3>
             <div className="space-y-3">
               {(() => {
                 // Check if data is synthetic/placeholder (all unknown URLs)
@@ -553,16 +620,16 @@ function App() {
           </div>
         </div>
 
-        {/* Agent Chat Sidebar */}
-        <div className="w-80 bg-marketing-slate-10 border-l border-marketing-slate-30 flex flex-col">
-          <div className="p-6 border-b border-marketing-slate-30">
-            <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-4">
-              <span className="text-2xl">🤖</span>
+        {/* Analytics Assistant */}
+        <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
+          <div className="p-6 border-b border-gray-200">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <span className="text-blue-600 text-sm font-semibold">🤖</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">Analytics assistant</h3>
             </div>
-            <h3 className="text-xl font-bold text-marketing-text-light mb-2">
-              AI Agent Mode
-            </h3>
-            <p className="text-marketing-gray-light">Ask natural-language questions about your data and get instant answers with insights.</p>
+            <p className="text-sm text-gray-600">Ask questions about your store's performance and get instant insights.</p>
           </div>
           
           <div className="flex-1 p-4 overflow-y-auto space-y-4">
