@@ -111,7 +111,11 @@ def wow_summary():
         )
         SELECT
           (SELECT v FROM cur) AS current_total,
-          (SELECT v FROM prev) AS previous_total
+          (SELECT v FROM prev) AS previous_total,
+          (SELECT cur_start FROM win) AS cur_start,
+          (SELECT cur_end FROM win) AS cur_end,
+          (SELECT prev_start FROM win) AS prev_start,
+          (SELECT prev_end FROM win) AS prev_end
         """
     else:  # revenue - use recent activity for labessentials
         if brand == "labessentials":
@@ -157,7 +161,11 @@ def wow_summary():
               (SELECT total FROM cur) AS current_total,
               (SELECT orders FROM cur) AS current_orders,
               (SELECT total FROM prev) AS previous_total,
-              (SELECT orders FROM prev) AS previous_orders
+              (SELECT orders FROM prev) AS previous_orders,
+              (SELECT cur_start FROM win) AS cur_start,
+              (SELECT cur_end FROM win) AS cur_end,
+              (SELECT prev_start FROM win) AS prev_start,
+              (SELECT prev_end FROM win) AS prev_end
             """
     job = bq.query(q)
     rows = [dict(r) for r in job.result(timeout=15)]
@@ -180,6 +188,22 @@ def wow_summary():
         "percent_change": round(pct_change, 1)
     }
     
+    # Add window metadata if available
+    if brand != "labessentials" or metric != "revenue":
+        if "cur_start" in row:
+            payload["window"] = {
+                "type": "wow",
+                "current": {"start": str(row["cur_start"]), "end": str(row["cur_end"])},
+                "previous": {"start": str(row["prev_start"]), "end": str(row["prev_end"])}
+            }
+    else:
+        # Lab essentials revenue uses fixed periods
+        payload["window"] = {
+            "type": "wow:recent_activity",
+            "current": {"start": "2025-01-01", "end": "2025-01-31"},
+            "previous": {"start": "2024-11-01", "end": "2024-12-31"}
+        }
+    
     if metric == "revenue" and "current_orders" in row:
         payload["current_orders"] = int(row.get("current_orders") or 0)
         payload["previous_orders"] = int(row.get("previous_orders") or 0)
@@ -197,16 +221,24 @@ def mom_summary():
     
     if metric == "sessions":
         q = f"""
-        WITH cur AS (
-          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`
-          WHERE date >= DATE_TRUNC(CURRENT_DATE(), MONTH)
+        WITH win AS (
+          SELECT
+            DATE_TRUNC(CURRENT_DATE(), MONTH) AS cur_start,
+            CURRENT_DATE() AS cur_end,
+            DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH) AS prev_start,
+            DATE_SUB(DATE_TRUNC(CURRENT_DATE(), MONTH), INTERVAL 1 DAY) AS prev_end
+        ),
+        cur AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`, win
+          WHERE date BETWEEN win.cur_start AND win.cur_end
         ),
         prev AS (
-          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`
-          WHERE date >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH)
-            AND date < DATE_TRUNC(CURRENT_DATE(), MONTH)
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`, win
+          WHERE date BETWEEN win.prev_start AND win.prev_end
         )
-        SELECT (SELECT v FROM cur) AS current_total, (SELECT v FROM prev) AS previous_total
+        SELECT (SELECT v FROM cur) AS current_total, (SELECT v FROM prev) AS previous_total,
+               (SELECT cur_start FROM win) AS cur_start, (SELECT cur_end FROM win) AS cur_end,
+               (SELECT prev_start FROM win) AS prev_start, (SELECT prev_end FROM win) AS prev_end
         """
     else:
         if brand == "labessentials":
@@ -229,19 +261,27 @@ def mom_summary():
             """
         else:
             q = f"""
-            WITH cur AS (
+            WITH win AS (
+              SELECT
+                DATE_TRUNC(CURRENT_DATE(), MONTH) AS cur_start,
+                CURRENT_DATE() AS cur_end,
+                DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH) AS prev_start,
+                DATE_SUB(DATE_TRUNC(CURRENT_DATE(), MONTH), INTERVAL 1 DAY) AS prev_end
+            ),
+            cur AS (
               SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-              FROM `{bq.project}.{dataset}.shopify_orders`
-              WHERE DATE(created_at) >= DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
+              FROM `{bq.project}.{dataset}.shopify_orders`, win
+              WHERE DATE(created_at) BETWEEN win.cur_start AND win.cur_end AND cancelled_at IS NULL
             ),
             prev AS (
               SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
-              FROM `{bq.project}.{dataset}.shopify_orders`
-              WHERE DATE(created_at) >= DATE_TRUNC(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), MONTH)
-                AND DATE(created_at) < DATE_TRUNC(CURRENT_DATE(), MONTH) AND cancelled_at IS NULL
+              FROM `{bq.project}.{dataset}.shopify_orders`, win
+              WHERE DATE(created_at) BETWEEN win.prev_start AND win.prev_end AND cancelled_at IS NULL
             )
             SELECT (SELECT total FROM cur) AS current_total, (SELECT orders FROM cur) AS current_orders,
-                   (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders
+                   (SELECT total FROM prev) AS previous_total, (SELECT orders FROM prev) AS previous_orders,
+                   (SELECT cur_start FROM win) AS cur_start, (SELECT cur_end FROM win) AS cur_end,
+                   (SELECT prev_start FROM win) AS prev_start, (SELECT prev_end FROM win) AS prev_end
             """
     
     job = bq.query(q)
@@ -258,6 +298,21 @@ def mom_summary():
     if metric == "revenue" and "current_orders" in row:
         payload["current_orders"] = int(row.get("current_orders") or 0)
         payload["previous_orders"] = int(row.get("previous_orders") or 0)
+    
+    # Add window metadata
+    if brand != "labessentials" or metric != "revenue":
+        if "cur_start" in row:
+            payload["window"] = {
+                "type": "mom",
+                "current": {"start": str(row["cur_start"]), "end": str(row["cur_end"])},
+                "previous": {"start": str(row["prev_start"]), "end": str(row["prev_end"])}
+            }
+    else:
+        payload["window"] = {
+            "type": "mom:recent_activity",
+            "current": {"start": "2025-01-01", "end": "2025-01-31"},
+            "previous": {"start": "2024-11-01", "end": "2024-12-31"}
+        }
     
     resp = make_response(jsonify(payload))
     resp.headers["Cache-Control"] = "public, max-age=1800"
