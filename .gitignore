@@ -24,3 +24,5 @@ config.yaml
 
 # Local Netlify folder
 .netlify
+console-ui/.env
+console-ui/.env.local
