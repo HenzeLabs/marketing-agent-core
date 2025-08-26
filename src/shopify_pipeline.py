@@ -11,10 +11,10 @@ def fetch_all_shopify_customers(brand):
 
     customers = []
     from datetime import datetime, timedelta
-    three_years_ago = (datetime.utcnow() - timedelta(days=3*365)).strftime("%Y-%m-%dT%H:%M:%S")
+    one_year_ago = (datetime.utcnow() - timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%S")
     params = {
         "limit": 250,
-        "created_at_min": three_years_ago
+        "created_at_min": one_year_ago
     }
     first_page = True
     previous_page_info = None
@@ -36,7 +36,7 @@ def fetch_all_shopify_customers(brand):
             else:
                 response = requests.get(url, headers=headers, params=None)
             if response.status_code == 429:
-                retry_after = int(response.headers.get("Retry-After", 2))
+                retry_after = int(float(response.headers.get("Retry-After", 2)))
                 logger.warning(f"Rate limited, sleeping {retry_after} seconds...")
                 time.sleep(retry_after)
                 continue
@@ -121,11 +121,23 @@ def insert_customers_into_bigquery(transformed_customers, brand):
             ]
         )
 
-        errors = client.insert_rows_json(table_id, transformed_customers, row_ids=[None]*len(transformed_customers))
-        if errors:
-            logger.error(f"BigQuery insert failed: {errors}")
-            raise RuntimeError(f"BigQuery insert failed: {errors}")
-        logger.info(f"✅ Inserted {len(transformed_customers)} customers into BigQuery.")
+        # Process in batches to avoid 413 error
+        batch_size = 1000
+        total_inserted = 0
+        
+        for i in range(0, len(transformed_customers), batch_size):
+            batch = transformed_customers[i:i + batch_size]
+            logger.info(f"Inserting batch {i//batch_size + 1}: {len(batch)} records")
+            
+            errors = client.insert_rows_json(table_id, batch, row_ids=[None]*len(batch))
+            if errors:
+                logger.error(f"BigQuery insert failed for batch {i//batch_size + 1}: {errors}")
+                raise RuntimeError(f"BigQuery insert failed: {errors}")
+            
+            total_inserted += len(batch)
+            logger.info(f"✅ Batch {i//batch_size + 1} inserted successfully. Total: {total_inserted}/{len(transformed_customers)}")
+        
+        logger.info(f"✅ Inserted all {total_inserted} customers into BigQuery.")
     except Exception as e:
         logger.error(f"Error inserting into BigQuery: {e}", exc_info=True)
         raise
@@ -161,9 +173,9 @@ def fetch_all_shopify_orders(brand):
 
     orders = []
     from datetime import datetime, timedelta
-    # Calculate the date 3 years ago from today
-    three_years_ago = (datetime.utcnow() - timedelta(days=3*365)).strftime("%Y-%m-%dT%H:%M:%S")
-    params = {"limit": 250, "status": "any", "created_at_min": three_years_ago}
+    # Calculate the date 1 year ago from today
+    one_year_ago = (datetime.utcnow() - timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%S")
+    params = {"limit": 250, "status": "any", "created_at_min": one_year_ago}
     first_page = True
     while url:
         print(f"Fetching: {url}")
@@ -173,7 +185,7 @@ def fetch_all_shopify_orders(brand):
         else:
             response = requests.get(url, headers=headers, params=None)
         if response.status_code == 429:
-            retry_after = int(response.headers.get("Retry-After", 2))
+            retry_after = int(float(response.headers.get("Retry-After", 2)))
             print(f"Rate limited, sleeping {retry_after} seconds...")
             time.sleep(retry_after)
             continue
@@ -246,10 +258,23 @@ def insert_orders_into_bigquery(transformed_orders, brand):
         ]
     )
 
-    errors = client.insert_rows_json(table_id, transformed_orders, row_ids=[None]*len(transformed_orders))
-    if errors:
-        raise RuntimeError(f"BigQuery insert failed: {errors}")
-    print(f"✅ Inserted {len(transformed_orders)} orders into BigQuery.")
+    # Process in batches to avoid 413 error
+    batch_size = 1000
+    total_inserted = 0
+    
+    for i in range(0, len(transformed_orders), batch_size):
+        batch = transformed_orders[i:i + batch_size]
+        print(f"Inserting batch {i//batch_size + 1}: {len(batch)} orders")
+        
+        errors = client.insert_rows_json(table_id, batch, row_ids=[None]*len(batch))
+        if errors:
+            print(f"BigQuery insert failed for batch {i//batch_size + 1}: {errors}")
+            raise RuntimeError(f"BigQuery insert failed: {errors}")
+        
+        total_inserted += len(batch)
+        print(f"✅ Batch {i//batch_size + 1} inserted successfully. Total: {total_inserted}/{len(transformed_orders)}")
+    
+    print(f"✅ Inserted all {total_inserted} orders into BigQuery.")
 
 def run_shopify_orders_pipeline(brand):
     from shared.logging import setup_logging
