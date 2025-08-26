@@ -392,31 +392,29 @@ function App() {
           <header className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">HL</span>
+                <div className="w-8 h-8 bg-marketing-cyan rounded-lg flex items-center justify-center">
+                  <span className="text-marketing-charcoal font-bold text-sm">HL</span>
                 </div>
                 <div>
-                  <h1 className="text-2xl font-semibold text-gray-900">Analytics</h1>
-                  <p className="text-gray-600 text-sm">{brand === 'labessentials' ? 'Lab Essentials' : 'Hot Ash'} • Last updated {new Date().toLocaleTimeString()}</p>
+                  <h1 className="text-3xl font-bold text-marketing-text-light">Marketing Console</h1>
+                  <p className="text-marketing-gray-light text-sm">{brand === 'labessentials' ? 'Lab Essentials' : 'Hot Ash'} • Last updated {new Date().toLocaleTimeString()}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                  Export
-                </button>
-                <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
-                  View reports
-                </button>
+              <div className="text-right">
+                <div className="text-sm text-marketing-gray-light">Last updated</div>
+                <div className="text-marketing-text-light font-mono text-sm">
+                  {new Date().toLocaleTimeString()}
+                </div>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 flex-wrap bg-white p-4 rounded-lg border border-gray-200 mb-6">
+            <div className="flex items-center gap-4 flex-wrap">
               <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Store:</label>
+                <span className="text-sm text-marketing-gray-light">Brand:</span>
                 <select
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
-                  className="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
                 >
                   <option value="hotash">Hot Ash</option>
                   <option value="labessentials">Lab Essentials</option>
@@ -424,19 +422,19 @@ function App() {
               </div>
               
               <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Date range:</label>
+                <span className="text-sm text-marketing-gray-light">Period:</span>
                 <select
                   value={dateRange}
                   onChange={(e) => setDateRange(e.target.value)}
-                  className="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
                 >
-                  <option value="last_7_days">Last 7 days</option>
-                  <option value="last_14_days">Last 14 days</option>
-                  <option value="last_30_days">Last 30 days</option>
-                  <option value="last_90_days">Last 90 days</option>
-                  <option value="last_1_year">Last year</option>
-                  <option value="last_2_years">Last 2 years</option>
-                  <option value="custom">Custom range</option>
+                  <option value="last_7_days">Last 7 Days</option>
+                  <option value="last_14_days">Last 14 Days</option>
+                  <option value="last_30_days">Last 30 Days (default)</option>
+                  <option value="last_90_days">Last 90 Days</option>
+                  <option value="last_1_year">Last 1 Year</option>
+                  <option value="last_2_years">Last 2 Years (full history)</option>
+                  <option value="custom">Custom Range</option>
                 </select>
               </div>
               
@@ -462,13 +460,13 @@ function App() {
               <button
                 onClick={fetchData}
                 disabled={loading}
-                className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-6 py-2 bg-marketing-cyan text-marketing-charcoal font-semibold rounded-md hover:bg-marketing-cyan/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? 'Loading...' : 'Refresh'}
               </button>
               
               {autoRefresh && (
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-marketing-gray-light">
                   Auto-refresh: {autoRefresh}s
                 </span>
               )}
@@ -621,16 +619,16 @@ function App() {
           </div>
         </div>
 
-        {/* Analytics Assistant */}
-        <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
-          <div className="p-6 border-b border-gray-200">
-            <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                <span className="text-blue-600 text-sm font-semibold">🤖</span>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Analytics assistant</h3>
+        {/* Agent Chat Sidebar */}
+        <div className="w-80 bg-marketing-navy/30 border-l border-marketing-slate/30 flex flex-col backdrop-blur-lg">
+          <div className="p-6 border-b border-marketing-slate/30">
+            <div className="w-12 h-12 bg-marketing-cyan-10 text-marketing-cyan rounded-lg flex items-center justify-center mb-4">
+              <span className="text-2xl">🤖</span>
             </div>
-            <p className="text-sm text-gray-600">Ask questions about your store's performance and get instant insights.</p>
+            <h3 className="text-xl font-bold text-marketing-text-light mb-2">
+              AI Agent Mode
+            </h3>
+            <p className="text-marketing-gray-light">Ask natural-language questions about your data and get instant answers with insights.</p>
           </div>
           
           <div className="flex-1 p-4 overflow-y-auto space-y-4">
@@ -670,21 +668,21 @@ function App() {
             )}
           </div>
           
-          <div className="p-6 border-t border-marketing-slate-30">
-            <div className="flex gap-3">
+          <div className="p-4 border-t border-marketing-slate/30">
+            <div className="flex gap-2">
               <input
                 type="text"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
-                placeholder="Why did AOV drop last week?"
-                className="flex-1 px-4 py-3 bg-marketing-charcoal/50 border border-marketing-slate/30 rounded-lg text-marketing-text-light placeholder-marketing-gray-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan text-sm"
+                placeholder="Ask about your data..."
+                className="flex-1 px-3 py-2 bg-marketing-charcoal/50 border border-marketing-slate/30 rounded-md text-marketing-text-light placeholder-marketing-gray-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan text-sm"
                 disabled={chatLoading}
               />
               <button
                 onClick={sendChatMessage}
                 disabled={chatLoading || !chatInput.trim()}
-                className="px-4 py-3 bg-marketing-cyan text-marketing-charcoal font-semibold rounded-lg hover:bg-marketing-cyan/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-3 py-2 bg-marketing-cyan text-marketing-charcoal rounded-md hover:bg-marketing-cyan/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 →
               </button>
