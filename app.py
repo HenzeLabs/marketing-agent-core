@@ -79,12 +79,44 @@ def sessions_daily():
 bq = bigquery.Client()
 def ds(brand): return "labessentials_raw" if brand=="labessentials" else "hotash_raw"
 
+@app.get("/api/metrics/revenue")
+def revenue():
+    brand = request.args.get("brand","labessentials")
+    rng   = request.args.get("range","last_30_days")
+    days  = 30
+    if "7" in rng: days = 7
+    if "14" in rng: days = 14
+    if "28" in rng: days = 28
+    q = f"""
+      WITH win AS (
+        SELECT DATE_SUB(CURRENT_DATE(), INTERVAL {days} DAY) AS d0, CURRENT_DATE() AS d1
+      )
+      SELECT
+        SUM(CAST(total_price AS FLOAT64)) AS total_revenue,
+        COUNT(*)         AS orders_count
+      FROM `{bq.project}.{ds(brand)}.shopify_orders`, win
+      WHERE DATE(created_at) BETWEEN win.d0 AND win.d1
+        AND cancelled_at IS NULL
+    """
+    job = bq.query(q)
+    rows = [dict(r) for r in job.result(timeout=15)]
+    total = float(rows[0]["total_revenue"] or 0) if rows else 0.0
+    orders= int(rows[0]["orders_count"] or 0)     if rows else 0
+    aov   = (total / orders) if orders else 0.0
+    from flask import make_response, jsonify
+    payload = {"total": total, "orders": orders, "aov": aov, "range_days": days, "brand": brand}
+    resp = make_response(jsonify(payload))
+    resp.headers["Cache-Control"] = "public, max-age=300"
+    return resp
+
 
 
 @app.get("/api/metrics/ga4-daily")
 def ga4_daily():
     brand=request.args.get("brand","labessentials")
     days=28 if "28" in request.args.get("range","") else 30
+    # Cache for 5 minutes to keep the endpoint snappy
+    from flask import make_response
     q = f"""
       SELECT date, sessions, total_users, engaged_sessions, bounce_rate
       FROM `{bq.project}.{ds(brand)}.ga4_daily_metrics`
@@ -92,9 +124,12 @@ def ga4_daily():
       ORDER BY date
     """
     job = bq.query(q, job_config=bigquery.QueryJobConfig())
-    rows = [dict(r) for r in job.result(timeout=15)]  # short server-side timeout
-    return jsonify({"series":[{"date":str(r["date"]), "value":r["sessions"]} for r in rows],
-                    "summary": f"{brand}: {len(rows)} days"})
+    rows = [dict(r) for r in job.result(timeout=15)]
+    payload = {"series":[{"date":str(r["date"]), "value":r["sessions"]} for r in rows],
+               "summary": f"{brand}: {len(rows)} days"}
+    resp = make_response(jsonify(payload))
+    resp.headers["Cache-Control"] = "public, max-age=300"
+    return resp
 
 @app.get("/api/clarity/top-urls")
 def clarity_top_urls():
