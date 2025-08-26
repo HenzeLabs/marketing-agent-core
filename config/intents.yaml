@@ -12,6 +12,10 @@
   patterns: ["clarity hotspots", "top pages issues", "where do users rage click", "hot pages last *", "clarity summary"]
   tool: clarity.hotspots
   defaults: {brand: "labessentials", range: "last_7_days"}
+- intent: summary.wow
+  patterns: ["week over week", "wow summary", "compare last week", "weekly comparison", "how did we do vs last week"]
+  tool: summary.wow
+  defaults: {brand: "labessentials", metric: "sessions", window: "7"}
 - intent: default
   patterns:
     - "*"

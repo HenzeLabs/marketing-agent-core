@@ -79,6 +79,96 @@ def sessions_daily():
 bq = bigquery.Client()
 def ds(brand): return "labessentials_raw" if brand=="labessentials" else "hotash_raw"
 
+@app.get("/api/summary/wow")
+def wow_summary():
+    from flask import make_response, jsonify
+    brand = request.args.get("brand","labessentials")
+    metric = request.args.get("metric","sessions")  # sessions|revenue
+    window = request.args.get("window","7")
+    try:
+        days = int(''.join(ch for ch in window if ch.isdigit())) or 7
+    except Exception:
+        days = 7
+    d = days
+    dataset = ds(brand)
+
+    if metric == "sessions":
+        q = f"""
+        WITH win AS (
+          SELECT
+            DATE_SUB(CURRENT_DATE(), INTERVAL {d-1} DAY) AS cur_start,
+            CURRENT_DATE() AS cur_end,
+            DATE_SUB(CURRENT_DATE(), INTERVAL {2*d} DAY) AS prev_start,
+            DATE_SUB(CURRENT_DATE(), INTERVAL {d} DAY) AS prev_end
+        ),
+        cur AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`, win
+          WHERE date BETWEEN win.cur_start AND win.cur_end
+        ),
+        prev AS (
+          SELECT COALESCE(SUM(sessions),0) AS v FROM `{bq.project}.{dataset}.ga4_daily_metrics`, win
+          WHERE date BETWEEN win.prev_start AND win.prev_end
+        )
+        SELECT
+          (SELECT v FROM cur) AS current_total,
+          (SELECT v FROM prev) AS previous_total
+        """
+    else:  # revenue
+        q = f"""
+        WITH win AS (
+          SELECT
+            DATE_SUB(CURRENT_DATE(), INTERVAL {d-1} DAY) AS cur_start,
+            CURRENT_DATE() AS cur_end,
+            DATE_SUB(CURRENT_DATE(), INTERVAL {2*d} DAY) AS prev_start,
+            DATE_SUB(CURRENT_DATE(), INTERVAL {d} DAY) AS prev_end
+        ),
+        cur AS (
+          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+          FROM `{bq.project}.{dataset}.shopify_orders`, win
+          WHERE DATE(created_at) BETWEEN win.cur_start AND win.cur_end
+            AND cancelled_at IS NULL
+        ),
+        prev AS (
+          SELECT COALESCE(SUM(CAST(total_price AS FLOAT64)),0) AS total, COUNT(*) AS orders
+          FROM `{bq.project}.{dataset}.shopify_orders`, win
+          WHERE DATE(created_at) BETWEEN win.prev_start AND win.prev_end
+            AND cancelled_at IS NULL
+        )
+        SELECT
+          (SELECT total FROM cur) AS current_total,
+          (SELECT orders FROM cur) AS current_orders,
+          (SELECT total FROM prev) AS previous_total,
+          (SELECT orders FROM prev) AS previous_orders
+        """
+    job = bq.query(q)
+    rows = [dict(r) for r in job.result(timeout=15)]
+    if not rows:
+        rows = [{"current_total": 0, "previous_total": 0}]
+    
+    row = rows[0]
+    current = float(row.get("current_total") or 0)
+    previous = float(row.get("previous_total") or 0)
+    change = current - previous
+    pct_change = (change / previous * 100) if previous > 0 else 0
+    
+    payload = {
+        "brand": brand,
+        "metric": metric,
+        "window_days": days,
+        "current": current,
+        "previous": previous,
+        "change": change,
+        "percent_change": round(pct_change, 1)
+    }
+    
+    if metric == "revenue" and "current_orders" in row:
+        payload["current_orders"] = int(row.get("current_orders") or 0)
+        payload["previous_orders"] = int(row.get("previous_orders") or 0)
+    
+    resp = make_response(jsonify(payload))
+    resp.headers["Cache-Control"] = "public, max-age=900"  # 15 min cache
+    return resp
+
 def _clarity_columns(dataset:str) -> set:
     q = f"""
       SELECT column_name
