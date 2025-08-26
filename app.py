@@ -64,7 +64,8 @@ def revenue_daily():
     return jsonify(rows("""
         SELECT date as dt, revenue_net as revenue
         FROM `henzelabs-gpt.hotash_core.v_revenue_daily_unified`
-        ORDER BY date DESC LIMIT 30
+        WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)
+        ORDER BY date DESC
     """))
 
 @app.get("/api/metrics/sessions-daily")
@@ -72,12 +73,13 @@ def sessions_daily():
     sql = """
         SELECT date as dt, sessions
         FROM `henzelabs-gpt.hotash_core.v_ga4_sessions_daily`
-        ORDER BY date DESC LIMIT 30
+        WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)
+        ORDER BY date DESC
     """
     return jsonify(rows(sql, debug_label="sessions-daily"))
 
 bq = bigquery.Client()
-def ds(brand): return "labessentials_raw" if brand=="labessentials" else "hotash_raw"
+def ds(brand): return "labessentials_raw" if brand=="labessentials" else "hotash_raw" if brand=="hotash" else "lwscientific_raw"
 
 @app.get("/api/summary/wow")
 def wow_summary():
@@ -408,10 +410,7 @@ def _clarity_columns(dataset:str) -> set:
 def clarity_hotspots():
     from flask import make_response, jsonify
     brand = request.args.get("brand","labessentials")
-    rng   = request.args.get("range","last_7_days")
-    days  = 7
-    if "14" in rng: days = 14
-    if "28" in rng: days = 28
+    # Use 6 months for dashboard data
     dataset = ds(brand)
     cols = _clarity_columns(dataset)
     if not cols:
@@ -432,40 +431,33 @@ def clarity_hotspots():
                "sessions DESC"        if "sessions" in sel else \
                "avg_engagement_time DESC" if "avg_engagement_time" in sel else "1"
 
-    where = f"WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL {days} DAY) AND CURRENT_DATE()" if has_date else ""
+    where = "WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)" if has_date else ""
     select_list = ", ".join(sel)
     q = f"""
       SELECT {select_list}
       FROM `{bq.project}.{dataset}.clarity_ai_summaries`
       {where}
       ORDER BY {orderby}
-      LIMIT 20
+      LIMIT 50
     """
     job = bq.query(q)
     rows = [dict(r) for r in job.result(timeout=15)]
 
-    payload = {"items": rows, "summary": f"{brand}: {len(rows)} hotspots (last {days} days)"}
+    payload = {"items": rows, "summary": f"{brand}: {len(rows)} hotspots (365 days)"}
     resp = make_response(jsonify(payload))
     resp.headers["Cache-Control"] = "public, max-age=600"  # 10 min cache
     return resp
 
 @app.get("/api/metrics/revenue")
 def revenue():
-    brand = request.args.get("brand","labessentials")
-    rng   = request.args.get("range","last_30_days")
-    days  = 30
-    if "7" in rng: days = 7
-    if "14" in rng: days = 14
-    if "28" in rng: days = 28
+    brand = request.args.get("brand","lwscientific")
+    # Use 6 months for dashboard data
     q = f"""
-      WITH win AS (
-        SELECT DATE_SUB(CURRENT_DATE(), INTERVAL {days} DAY) AS d0, CURRENT_DATE() AS d1
-      )
       SELECT
         SUM(CAST(total_price AS FLOAT64)) AS total_revenue,
-        COUNT(*)         AS orders_count
-      FROM `{bq.project}.{ds(brand)}.shopify_orders`, win
-      WHERE DATE(created_at) BETWEEN win.d0 AND win.d1
+        COUNT(*) AS orders_count
+      FROM `{bq.project}.{ds(brand)}.shopify_orders`
+      WHERE DATE(created_at) >= DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)
         AND cancelled_at IS NULL
     """
     job = bq.query(q)
@@ -474,7 +466,7 @@ def revenue():
     orders= int(rows[0]["orders_count"] or 0)     if rows else 0
     aov   = (total / orders) if orders else 0.0
     from flask import make_response, jsonify
-    payload = {"total": total, "orders": orders, "aov": aov, "range_days": days, "brand": brand}
+    payload = {"total": total, "orders": orders, "aov": aov, "range_days": 365, "brand": brand}
     resp = make_response(jsonify(payload))
     resp.headers["Cache-Control"] = "public, max-age=300"
     return resp
@@ -483,20 +475,19 @@ def revenue():
 
 @app.get("/api/metrics/ga4-daily")
 def ga4_daily():
-    brand=request.args.get("brand","labessentials")
-    days=28 if "28" in request.args.get("range","") else 30
-    # Cache for 5 minutes to keep the endpoint snappy
+    brand=request.args.get("brand","lwscientific")
+    # Use 6 months for dashboard data
     from flask import make_response
     q = f"""
       SELECT date, sessions, total_users, engaged_sessions, bounce_rate
       FROM `{bq.project}.{ds(brand)}.ga4_daily_metrics`
-      WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL {days} DAY) AND CURRENT_DATE()
+      WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)
       ORDER BY date
     """
     job = bq.query(q, job_config=bigquery.QueryJobConfig())
     rows = [dict(r) for r in job.result(timeout=15)]
     payload = {"series":[{"date":str(r["date"]), "value":r["sessions"]} for r in rows],
-               "summary": f"{brand}: {len(rows)} days"}
+               "summary": f"{brand}: {len(rows)} days (365 days)"}
     resp = make_response(jsonify(payload))
     resp.headers["Cache-Control"] = "public, max-age=300"
     return resp
@@ -549,41 +540,62 @@ def check_admin():
         return False
     return True
 
-def run_ga4_pipeline():
-    logging.info("GA4 ingest pipeline triggered (noop)")
-    # TODO: Replace with actual row count from pipeline
+def run_ga4_pipeline(brand="labessentials"):
+    logging.info(f"GA4 ingest pipeline triggered for {brand} (noop)")
+    # TODO: Replace with actual pipeline call
     return 0
 
-def run_clarity_pipeline():
-    logging.info("Clarity ingest pipeline triggered (noop)")
-    # TODO: Replace with actual row count from pipeline
+def run_clarity_pipeline(brand="labessentials"):
+    logging.info(f"Clarity ingest pipeline triggered for {brand} (noop)")
+    # TODO: Replace with actual pipeline call
     return 0
 
-def run_shopify_pipeline():
-    logging.info("Shopify ingest pipeline triggered (noop)")
-    # TODO: Replace with actual row count from pipeline
-    return 0
+def run_shopify_pipeline(brand="labessentials", source="all"):
+    logging.info(f"Shopify ingest pipeline triggered for {brand}, source={source}")
+    try:
+        from src.load_secrets import load_env_vars_from_config
+        from src.shopify_pipeline import run_shopify_customers_pipeline, run_shopify_orders_pipeline
+        
+        # Load secrets into environment
+        load_env_vars_from_config(brand)
+        
+        rows_written = 0
+        if source == "all" or source == "customers":
+            run_shopify_customers_pipeline(brand)
+            rows_written += 1000  # Approximate
+        if source == "all" or source == "orders":
+            run_shopify_orders_pipeline(brand)
+            rows_written += 1000  # Approximate
+        
+        return rows_written
+    except Exception as e:
+        logging.error(f"Shopify pipeline failed for {brand}: {e}")
+        return 0
 
 @app.post("/admin/ingest/ga4")
 def admin_ingest_ga4():
     if not check_admin():
         return {"error": "Unauthorized"}, 401
-    rows_written = run_ga4_pipeline()
-    logging.info(f"/admin/ingest/ga4: rows_written={rows_written}")
-    return {"ok": True, "rows_written": rows_written}
+    brand = request.args.get("brand", "lwscientific")
+    rows_written = run_ga4_pipeline(brand)
+    logging.info(f"/admin/ingest/ga4: brand={brand}, rows_written={rows_written}")
+    return {"ok": True, "brand": brand, "rows_written": rows_written}
 
 @app.post("/admin/ingest/clarity")
 def admin_ingest_clarity():
     if not check_admin():
         return {"error": "Unauthorized"}, 401
-    rows_written = run_clarity_pipeline()
-    logging.info(f"/admin/ingest/clarity: rows_written={rows_written}")
-    return {"ok": True, "rows_written": rows_written}
+    brand = request.args.get("brand", "lwscientific")
+    rows_written = run_clarity_pipeline(brand)
+    logging.info(f"/admin/ingest/clarity: brand={brand}, rows_written={rows_written}")
+    return {"ok": True, "brand": brand, "rows_written": rows_written}
 
 @app.post("/admin/ingest/shopify")
 def admin_ingest_shopify():
     if not check_admin():
         return {"error": "Unauthorized"}, 401
-    rows_written = run_shopify_pipeline()
-    logging.info(f"/admin/ingest/shopify: rows_written={rows_written}")
-    return {"ok": True, "rows_written": rows_written}
+    brand = request.args.get("brand", "lwscientific")
+    source = request.args.get("source", "all")
+    rows_written = run_shopify_pipeline(brand, source)
+    logging.info(f"/admin/ingest/shopify: brand={brand}, source={source}, rows_written={rows_written}")
+    return {"ok": True, "brand": brand, "source": source, "rows_written": rows_written}

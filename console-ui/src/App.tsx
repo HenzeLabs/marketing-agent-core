@@ -50,7 +50,7 @@ interface ScoreCard {
 }
 
 function App() {
-  const [brand, setBrand] = useState('hotash')
+  const [brand] = useState('lwscientific')
   const [loading, setLoading] = useState(false)
   const [sessions, setSessions] = useState<SessionData[]>([])
   const [revenue, setRevenue] = useState<RevenueData | null>(null)
@@ -64,6 +64,7 @@ function App() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
   const [chatInput, setChatInput] = useState('')
   const [chatLoading, setChatLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState('overview')
 
   const API_BASE = import.meta.env.VITE_API_BASE
 
@@ -443,7 +444,7 @@ function App() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold text-marketing-text-light">Marketing Console</h1>
-                  <p className="text-marketing-gray-light text-sm">{brand === 'labessentials' ? 'Lab Essentials' : 'Hot Ash'} • Last updated {new Date().toLocaleTimeString()}</p>
+                  <p className="text-marketing-gray-light text-sm">LW Scientific • Last updated {new Date().toLocaleTimeString()}</p>
                 </div>
               </div>
               <div className="text-right">
@@ -455,18 +456,6 @@ function App() {
             </div>
             
             <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-marketing-gray-light">Brand:</span>
-                <select
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                  className="px-3 py-2 bg-marketing-navy border border-marketing-slate rounded-md text-marketing-text-light focus:ring-2 focus:ring-marketing-cyan focus:border-marketing-cyan"
-                >
-                  <option value="hotash">Hot Ash</option>
-                  <option value="labessentials">Lab Essentials</option>
-                </select>
-              </div>
-              
               <div className="flex items-center gap-2">
                 <span className="text-sm text-marketing-gray-light">Period:</span>
                 <select
@@ -519,7 +508,37 @@ function App() {
             </div>
           </header>
 
-          {/* KPI Cards - Dashboard Style */}
+          {/* Tab Navigation */}
+          <div className="mb-8">
+            <div className="border-b border-marketing-slate/30">
+              <nav className="flex space-x-8">
+                {[
+                  { id: 'overview', name: 'Overview', icon: '📊' },
+                  { id: 'analytics', name: 'Google Analytics', icon: '📈' },
+                  { id: 'shopify', name: 'Shopify', icon: '🛒' },
+                  { id: 'clarity', name: 'Clarity', icon: '🔍' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                      activeTab === tab.id
+                        ? 'border-marketing-cyan text-marketing-cyan'
+                        : 'border-transparent text-marketing-gray-light hover:text-marketing-text-light hover:border-marketing-slate'
+                    }`}
+                  >
+                    <span>{tab.icon}</span>
+                    {tab.name}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === 'overview' && (
+            <div>
+              {/* KPI Cards - Dashboard Style */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             {getScoreCards().map((card, index) => (
               <div 
@@ -627,7 +646,6 @@ function App() {
             </div>
             <div className="space-y-3">
               {(() => {
-                // Check if data is synthetic/placeholder (all unknown URLs)
                 const isSyntheticData = hotspots.length > 0 && hotspots.every(h => h.page_url === 'unknown' || h.title === 'Page')
                 
                 if (isSyntheticData) {
@@ -669,6 +687,177 @@ function App() {
               })()}
             </div>
           </div>
+            </div>
+          )}
+
+          {/* Google Analytics Tab */}
+          {activeTab === 'analytics' && (
+            <div>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-marketing-text-light mb-2">Google Analytics 4</h2>
+                <p className="text-marketing-gray-light">Website traffic and user behavior insights</p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div className="lg:col-span-2 bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6 backdrop-blur-sm">
+                  <h3 className="text-lg font-semibold text-marketing-text-light mb-4">Sessions Trend</h3>
+                  {renderSessionsChart()}
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-4">
+                  <div className="text-sm text-marketing-gray-light mb-2">Total Sessions</div>
+                  <div className="text-2xl font-bold text-marketing-cyan">{sessions.reduce((sum, s) => sum + s.sessions, 0)}</div>
+                </div>
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-4">
+                  <div className="text-sm text-marketing-gray-light mb-2">Avg Daily Sessions</div>
+                  <div className="text-2xl font-bold text-marketing-orange">{Math.round(sessions.reduce((sum, s) => sum + s.sessions, 0) / sessions.length)}</div>
+                </div>
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-4">
+                  <div className="text-sm text-marketing-gray-light mb-2">Peak Day</div>
+                  <div className="text-2xl font-bold text-marketing-slate">{Math.max(...sessions.map(s => s.sessions))}</div>
+                </div>
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-4">
+                  <div className="text-sm text-marketing-gray-light mb-2">Data Points</div>
+                  <div className="text-2xl font-bold text-marketing-text-light">{sessions.length}</div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Shopify Tab */}
+          {activeTab === 'shopify' && (
+            <div>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-marketing-text-light mb-2">Shopify Analytics</h2>
+                <p className="text-marketing-gray-light">E-commerce performance and sales data</p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-marketing-text-light mb-4">Revenue Breakdown</h3>
+                  {renderRevenueDonut()}
+                </div>
+                
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-marketing-text-light mb-4">Sales Metrics</h3>
+                  {revenue && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between py-3 border-b border-marketing-slate/30">
+                        <span className="text-marketing-gray-light">Total Revenue</span>
+                        <span className="text-2xl font-bold text-marketing-cyan">${revenue.total.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center justify-between py-3 border-b border-marketing-slate/30">
+                        <span className="text-marketing-gray-light">Total Orders</span>
+                        <span className="text-2xl font-bold text-marketing-orange">{revenue.orders}</span>
+                      </div>
+                      <div className="flex items-center justify-between py-3">
+                        <span className="text-marketing-gray-light">Average Order Value</span>
+                        <span className="text-2xl font-bold text-marketing-text-light">${revenue.aov.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              {(wow || mom) && (
+                <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-marketing-text-light mb-4">Growth Trends</h3>
+                  <div className="grid grid-cols-2 gap-6">
+                    {wow && (
+                      <div className="text-center">
+                        <div className={`text-3xl font-bold mb-2 ${
+                          wow.percent_change >= 0 ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          {wow.percent_change >= 0 ? '+' : ''}{wow.percent_change}%
+                        </div>
+                        <div className="text-marketing-gray-light">Week over Week</div>
+                      </div>
+                    )}
+                    {mom && (
+                      <div className="text-center">
+                        <div className={`text-3xl font-bold mb-2 ${
+                          mom.percent_change >= 0 ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          {mom.percent_change >= 0 ? '+' : ''}{mom.percent_change}%
+                        </div>
+                        <div className="text-marketing-gray-light">Month over Month</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Clarity Tab */}
+          {activeTab === 'clarity' && (
+            <div>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-marketing-text-light mb-2">Microsoft Clarity</h2>
+                <p className="text-marketing-gray-light">User behavior and page interaction analytics</p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-marketing-navy/60 to-marketing-slate/40 border border-marketing-slate/30 rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-marketing-text-light mb-4">Page Hotspots</h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const isSyntheticData = hotspots.length > 0 && hotspots.every(h => h.page_url === 'unknown' || h.title === 'Page')
+                    
+                    if (isSyntheticData) {
+                      return (
+                        <div className="text-center py-12">
+                          <div className="text-6xl mb-4">🔧</div>
+                          <h4 className="text-xl font-semibold text-marketing-text-light mb-2">Integration In Progress</h4>
+                          <p className="text-marketing-gray-light mb-4">Microsoft Clarity is being connected to your LW Scientific store.</p>
+                          <div className="bg-marketing-slate/20 rounded-lg p-4 max-w-md mx-auto">
+                            <p className="text-sm text-marketing-gray-light">Once connected, you'll see:</p>
+                            <ul className="text-sm text-marketing-text-light mt-2 space-y-1">
+                              <li>• Page interaction heatmaps</li>
+                              <li>• User scroll behavior</li>
+                              <li>• Click tracking and rage clicks</li>
+                              <li>• Session recordings</li>
+                            </ul>
+                          </div>
+                        </div>
+                      )
+                    }
+                    
+                    if (hotspots.length === 0) {
+                      return (
+                        <div className="text-center py-8 text-marketing-gray-light">
+                          <div className="text-4xl mb-2">📄</div>
+                          <p>No page data available</p>
+                        </div>
+                      )
+                    }
+                    
+                    return hotspots.slice(0, 10).map((hotspot, index) => (
+                      <div key={index} className="flex items-center justify-between p-4 bg-marketing-charcoal/30 border border-marketing-slate/20 rounded-lg">
+                        <div className="flex-1">
+                          <div className="font-medium text-marketing-text-light mb-1">
+                            {hotspot.title || 'Untitled Page'}
+                          </div>
+                          <div className="text-sm text-marketing-gray-light">
+                            {hotspot.page_url}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-marketing-orange mb-1">
+                            {hotspot.attention_score}
+                          </div>
+                          <div className="text-xs text-marketing-gray-light">
+                            {hotspot.sessions} sessions
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  })()}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Agent Chat Sidebar */}
@@ -687,7 +876,7 @@ function App() {
             {chatMessages.length === 0 && (
               <div className="text-center text-marketing-gray-light py-8">
                 <div className="text-4xl mb-2">🤖</div>
-                <p className="text-sm">Hi! I'm ready to help you analyze your {brand} data.</p>
+                <p className="text-sm">Hi! I'm ready to help you analyze your LW Scientific data.</p>
                 <p className="text-xs mt-2">Try asking: "What's driving our revenue growth?"</p>
               </div>
             )}
